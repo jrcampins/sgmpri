@@ -6,7 +6,9 @@
  */
 package meta.util;
 
+import adalid.commons.enums.LoggingLevel;
 import adalid.commons.sql.SqlReader;
+import meta.proyecto.comun.EntidadesComunes;
 
 /**
  * @author Jorge Campins
@@ -14,57 +16,7 @@ import adalid.commons.sql.SqlReader;
 public class SQLReader {
 
     // <editor-fold defaultstate="collapsed" desc="listas de tablas">
-    public static final String[] TABLAS_COMUNES = new String[]{
-        "aplicacion",
-        "clase_recurso",
-        "condicion_eje_fun",
-        "condicion_tarea",
-        "conjunto_segmento",
-        "dominio",
-        "dominio_parametro",
-        "elemento_segmento",
-        "filtro_funcion",
-        "filtro_funcion_par",
-        "funcion",
-        "funcion_parametro",
-        "grupo_proceso",
-        "nivel_opcion_menu",
-        "opcion_menu",
-        "operador_com",
-        "pagina",
-        "pagina_usuario",
-        "parametro",
-        "rastro_funcion",
-        "rastro_funcion_par",
-        "rastro_informe",
-        "rastro_proceso",
-        "recurso",
-        "recurso_valor",
-        "rol",
-        "rol_filtro_funcion",
-        "rol_funcion",
-        "rol_pagina",
-        "rol_usuario",
-        "segmento",
-        "tarea",
-        "tarea_usuario",
-        "tipo_clase_recurso",
-        "tipo_comparacion",
-        "tipo_dato_par",
-        "tipo_dominio",
-        "tipo_funcion",
-        "tipo_nodo",
-        "tipo_pagina",
-        "tipo_parametro",
-        "tipo_parametro_dom",
-        "tipo_rastro_fun",
-        "tipo_recurso",
-        "tipo_rol",
-        "tipo_valor",
-        "usuario"
-    };
-
-    public static final String[] OTRAS_TABLAS_COMUNES = new String[]{
+    private static final String[] TABLAS_EXCLUIDAS = new String[]{
         "aplicacion",
         "clase_recurso",
         "clase_recurso_parametro",
@@ -127,9 +79,15 @@ public class SQLReader {
 
     public static void main(String[] args) {
         SqlReader reader = new SqlReader(args);
-        reader.setTablesInheritSet(TABLAS_COMUNES);
-        reader.setTablesExcludeSet(OTRAS_TABLAS_COMUNES);
-        reader.generate();
+        if (reader.isInitialised()) {
+            EntidadesComunes.setAlertLoggingLevel(LoggingLevel.OFF);
+            EntidadesComunes entidadesComunes = new EntidadesComunes();
+            if (entidadesComunes.build()) {
+                reader.setTablesExcludeSet(TABLAS_EXCLUIDAS);
+                reader.setTablesInheritMap(entidadesComunes.getTablesMap());
+                reader.generate();
+            }
+        }
     }
 
 }
