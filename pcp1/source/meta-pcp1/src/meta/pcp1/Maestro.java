@@ -29,7 +29,6 @@ public class Maestro extends ProyectoBase {
         Maestro maestro = new Maestro();
         maestro.setDefaultLabel("Gestión de Recursos Empresariales");
         maestro.setDefaultDescription("Gestión de Recursos Empresariales");
-        maestro.setUserEntityClass(meta.entidad.comun.control.acceso.Usuario.class);
         if (maestro.build()) {
             maestro.setAlias("pcp1ap101");
             maestro.generate("jee1af101"); // jee1af101: netbeans, postgresql, glassfish
