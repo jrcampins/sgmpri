@@ -7,6 +7,7 @@
 package meta.proyecto.pcp1;
 
 import adalid.core.Project;
+import meta.entidad.pcp1.*;
 
 /**
  * @author Jorge Campins
@@ -14,9 +15,17 @@ import adalid.core.Project;
 public class Modulo1 extends Project {
 
     {
-        setAlias("Modulo1");
-        setDefaultLabel("Módulo 1");
-        setDefaultDescription("Módulo 1");
+        setAlias("Medicion");
+        setDefaultLabel("Medición");
+        setDefaultDescription("Medición");
     }
+
+    Variable variable;
+
+    VariableTangible variableTangible;
+
+    VariableIntangible variableIntangible;
+
+    RangoVariable rangoVariable;
 
 }
