@@ -27,8 +27,8 @@ public class Maestro extends ProyectoBase {
 //      Maestro.setDetailLoggingLevel(LoggingLevel.INFO);
 //      Maestro.setTrackingLoggingLevel(LoggingLevel.INFO);
         Maestro maestro = new Maestro();
-        maestro.setDefaultLabel("Gestión de Recursos Empresariales");
-        maestro.setDefaultDescription("Gestión de Recursos Empresariales");
+        maestro.setDefaultLabel("Gestión de Mantenimiento y Preservación de Recursos Industriales");
+        maestro.setDefaultDescription("Sistema de Gestión de Mantenimiento y Preservación de Recursos Industriales");
         if (maestro.build()) {
             maestro.setAlias("pcp1ap101");
             maestro.generate("jee1af101"); // jee1af101: netbeans, postgresql, glassfish

@@ -32,6 +32,19 @@ public class RangoVariable extends meta.entidad.base.PersistentEntityBase {
     }
     // </editor-fold>
 
+    @Override
+    protected void settleAttributes() {
+        super.settleAttributes();
+        setDefaultLabel("rango de variable");
+        setDefaultShortLabel("rango");
+        setDefaultCollectionLabel("Rangos de Variables");
+        setDefaultCollectionShortLabel("Rangos");
+        setDefaultLabel(variable, "rango por variable");
+        setDefaultShortLabel(variable, "rango");
+        setDefaultCollectionLabel(variable, "Rangos por Variable");
+        setDefaultCollectionShortLabel(variable, "Rangos");
+    }
+
     /**
      * many-to-one entity reference property field
      */
