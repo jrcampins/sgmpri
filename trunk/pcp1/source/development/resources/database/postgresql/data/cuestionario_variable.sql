@@ -1,4 +1,4 @@
-truncate table cuestionario_variable;
+truncate table cuestionario_variable cascade;
 insert into cuestionario_variable (id, cuestionario, variable)
 select bigintid() as id, c.id as cuestionario, v.id as variable
 from cuestionario c, variable v
