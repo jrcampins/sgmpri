@@ -28,4 +28,8 @@ public class Modulo1 extends Project {
 
     RangoVariable rangoVariable;
 
+    Cuestionario cuestionario;
+
+    CuestionarioVariable cuestionarioVariable;
+
 }
