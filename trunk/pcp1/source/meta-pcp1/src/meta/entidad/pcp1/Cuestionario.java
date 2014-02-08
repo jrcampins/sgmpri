@@ -18,6 +18,7 @@ import java.lang.reflect.Field;
  * @author Jorge Campins
  */
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.CONFIGURATION)
+@EntityDataGen(start = 1, stop = 10, step = 1)
 public class Cuestionario extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">

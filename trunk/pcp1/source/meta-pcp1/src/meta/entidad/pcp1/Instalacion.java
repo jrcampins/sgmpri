@@ -11,25 +11,24 @@ import adalid.core.enums.*;
 import adalid.core.interfaces.*;
 import adalid.core.properties.*;
 import java.lang.reflect.Field;
+import meta.entidad.comun.configuracion.basica.TipoNodo;
 
 /**
- * Variable Persistent Entity.
+ * Cuestionario Persistent Entity.
  *
  * @author Jorge Campins
  */
-@AbstractClass
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.CONFIGURATION)
-@EntityDataGen(start = 1, stop = 100, step = 1)
-@InheritanceMapping(strategy = InheritanceMappingStrategy.SINGLE_TABLE)
-public class Variable extends meta.entidad.base.PersistentEntityBase {
+@EntityDataGen(start = 1, stop = 10, step = 1)
+public class Instalacion extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
     @Deprecated()
-    private Variable() {
+    private Instalacion() {
         this(null, null);
     }
 
-    public Variable(Artifact declaringArtifact, Field declaringField) {
+    public Instalacion(Artifact declaringArtifact, Field declaringField) {
         super(declaringArtifact, declaringField);
     }
     // </editor-fold>
@@ -49,14 +48,40 @@ public class Variable extends meta.entidad.base.PersistentEntityBase {
     public StringProperty nombre;
 
     /**
-     * many-to-one entity reference property field
+     * parent entity reference property field
      */
-    @DiscriminatorColumn
+    @ParentProperty
     @Allocation(maxDepth = 1, maxRound = 0)
-    @ColumnField(nullable = Kleenean.FALSE)
+    @ColumnField(nullable = Kleenean.TRUE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE)
-    public TipoVariable tipoVariable;
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @EntityReferenceDataGen(nullable = 100)
+    public Instalacion superior;
+
+    @NumericDataGen(nullable = 100)
+    public IntegerProperty numero;
+
+    @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE)
+    @CharacterDataGen(nullable = 100)
+    public StringProperty clave;
+
+    /**
+     * many-to-one entity reference property field
+     */
+    @Allocation(maxDepth = 1, maxRound = 0)
+    @ColumnField(nullable = Kleenean.TRUE)
+    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
+    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE)
+    @EntityReferenceDataGen(nullable = 100)
+    public TipoNodo tipoNodo;
+
+    @Override
+    protected void settleProperties() {
+        super.settleProperties();
+        numero.setMinValue(1);
+        numero.setMaxValue(100);
+    }
 
 }
