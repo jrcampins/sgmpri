@@ -20,16 +20,20 @@ public class Modulo1 extends Project {
         setDefaultDescription("Medición");
     }
 
-    Variable variable;
+    Cuestionario cuestionario;
 
-    VariableTangible variableTangible;
+    CuestionarioInstalacion cuestionarioInstalacion;
 
-    VariableIntangible variableIntangible;
+    CuestionarioVariable cuestionarioVariable;
+
+    Instalacion instalacion;
 
     RangoVariable rangoVariable;
 
-    Cuestionario cuestionario;
+    Variable variable;
 
-    CuestionarioVariable cuestionarioVariable;
+    VariableIntangible variableIntangible;
+
+    VariableTangible variableTangible;
 
 }
