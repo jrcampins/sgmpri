@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
  */
 @AbstractClass
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.CONFIGURATION)
-@EntityDataGen(start = 1, stop = 100, step = 1)
+@EntityDataGen(start = 1, stop = 100, step = 0)
 @InheritanceMapping(strategy = InheritanceMappingStrategy.SINGLE_TABLE)
 public class Variable extends meta.entidad.base.PersistentEntityBase {
 

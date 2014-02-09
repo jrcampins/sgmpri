@@ -50,7 +50,7 @@ public class RangoVariable extends meta.entidad.base.PersistentEntityBase {
      */
     @Allocation(maxDepth = 1, maxRound = 0)
     @ColumnField(nullable = Kleenean.FALSE)
-    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
+    @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE)
     @PropertyField(required = Kleenean.TRUE)
     public VariableIntangible variable;
