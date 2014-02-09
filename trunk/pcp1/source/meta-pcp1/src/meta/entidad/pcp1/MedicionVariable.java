@@ -37,7 +37,7 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
      */
     @Allocation(maxDepth = 1, maxRound = 0)
     @ColumnField(nullable = Kleenean.FALSE)
-    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
+    @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE_AND_DETAIL)
     @PropertyField(update = Kleenean.FALSE)
     public Medicion medicion;
@@ -49,6 +49,7 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+//  @EntityReferenceSearch(searchType = SearchType.LIST, listStyle = ListStyle.NAME)
     @PropertyField(update = Kleenean.FALSE)
     public Variable variable;
 
@@ -77,7 +78,7 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
         super.settleExpressions();
 //      tangible = variable.tipoVariable.isEqualTo(variable.tipoVariable.TANGIBLE);
 //      intangible = variable.tipoVariable.isEqualTo(variable.tipoVariable.INTANGIBLE);
-        check01 = rango.variable.isEqualTo(variable);
+        check01 = rango.variable.isNullOrEqualTo(variable);
         check01.setDefaultErrorMessage(""
             + "el rango no corresponde a la variable"
             + "");
