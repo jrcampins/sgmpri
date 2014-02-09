@@ -59,7 +59,6 @@ public class Fuente extends meta.entidad.base.PersistentEntityBase {
      */
     @ParentProperty
     @Allocation(maxDepth = 1, maxRound = 0)
-    @ColumnField(nullable = Kleenean.TRUE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
