@@ -37,7 +37,6 @@ public class VariableIntangible extends Variable {
      */
     @ColumnField(nullable = Kleenean.FALSE)
     @PropertyField(required = Kleenean.TRUE)
-    @NumericDataGen(type = DataGenType.DEFAULT)
     public IntegerProperty rangoMinimo;
 
     /**
@@ -45,7 +44,6 @@ public class VariableIntangible extends Variable {
      */
     @ColumnField(nullable = Kleenean.FALSE)
     @PropertyField(required = Kleenean.TRUE)
-    @NumericDataGen(type = DataGenType.DEFAULT)
     public IntegerProperty rangoMaximo;
 
     @Override

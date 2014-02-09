@@ -18,7 +18,6 @@ import java.lang.reflect.Field;
  * @author Jorge Campins
  */
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.CONFIGURATION)
-@EntityDataGen(start = 1, stop = 10, step = 0)
 public class Cuestionario extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
@@ -36,14 +35,12 @@ public class Cuestionario extends meta.entidad.base.PersistentEntityBase {
      * business key property field
      */
     @BusinessKey
-    @CharacterDataGen(function = "util.string_codigo_entidad", nullable = 0)
     public StringProperty codigo;
 
     /**
      * name property field
      */
     @NameProperty
-    @CharacterDataGen(function = "util.string_nombre_entidad", nullable = 0)
     public StringProperty nombre;
 
 }

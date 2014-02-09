@@ -19,7 +19,6 @@ import meta.entidad.comun.configuracion.basica.TipoNodo;
  * @author Jorge Campins
  */
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.CONFIGURATION)
-@EntityDataGen(start = 1, stop = 10, step = 0)
 public class Fuente extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
@@ -37,14 +36,12 @@ public class Fuente extends meta.entidad.base.PersistentEntityBase {
      * business key property field
      */
     @BusinessKey
-    @CharacterDataGen(function = "util.string_codigo_entidad", nullable = 0)
     public StringProperty codigo;
 
     /**
      * name property field
      */
     @NameProperty
-    @CharacterDataGen(function = "util.string_nombre_entidad", nullable = 0)
     public StringProperty nombre;
 
     /**
@@ -55,7 +52,6 @@ public class Fuente extends meta.entidad.base.PersistentEntityBase {
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
-    @EntityReferenceDataGen(nullable = 100)
     public TipoNodo tipoNodo;
 
     /**
@@ -67,14 +63,11 @@ public class Fuente extends meta.entidad.base.PersistentEntityBase {
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
-    @EntityReferenceDataGen(nullable = 100)
     public Fuente superior;
 
-    @NumericDataGen(nullable = 100)
     public IntegerProperty numero;
 
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE)
-    @CharacterDataGen(nullable = 100)
     public StringProperty clave;
 
     @Override
