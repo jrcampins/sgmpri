@@ -173,7 +173,9 @@ where c.paquete = p.id and p.codigo = 'meta.entidad.comun.auditoria';
 -- -----------------------------------------------------------------------------------------------------------
 --  select paquete
 -- -----------------------------------------------------------------------------------------------------------
+/*
       select 1, 'caso_prueba',      p.codigo, count(*) from caso_prueba      x inner join paquete_prueba p on p.id = x.paquete group by p.codigo
 union select 2, 'programa_prueba',  p.codigo, count(*) from programa_prueba  x inner join paquete_prueba p on p.id = x.paquete group by p.codigo
 union select 3, 'ejecucion_prueba', p.codigo, count(*) from ejecucion_prueba x inner join paquete_prueba p on p.id = x.paquete group by p.codigo
 order by 1, 3;
+*/
