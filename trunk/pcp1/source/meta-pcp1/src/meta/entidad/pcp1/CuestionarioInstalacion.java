@@ -35,17 +35,17 @@ public class CuestionarioInstalacion extends meta.entidad.base.PersistentEntityB
     @Override
     protected void settleAttributes() {
         super.settleAttributes();
-        setDefaultLabel("asociación cuestionario/instalacion");
-        setDefaultShortLabel("cuestionario/instalacion");
-        setDefaultCollectionLabel("Asociaciones Cuestionario/Instalacion");
+        setDefaultLabel("asociación cuestionario/instalación");
+        setDefaultShortLabel("cuestionario/instalación");
+        setDefaultCollectionLabel("Asociaciones Cuestionario/Instalación");
         setDefaultCollectionShortLabel("Cuestionarios/Instalaciones");
-        setDefaultLabel(cuestionario, "instalacion por cuestionario");
-        setDefaultShortLabel(cuestionario, "instalacion");
+        setDefaultLabel(cuestionario, "instalación por cuestionario");
+        setDefaultShortLabel(cuestionario, "instalación");
         setDefaultCollectionLabel(cuestionario, "Instalaciones por Cuestionario");
         setDefaultCollectionShortLabel(cuestionario, "Instalaciones");
-        setDefaultLabel(instalacion, "cuestionario por instalacion");
+        setDefaultLabel(instalacion, "cuestionario por instalación");
         setDefaultShortLabel(instalacion, "cuestionario");
-        setDefaultCollectionLabel(instalacion, "Cuestionarios por Instalacion");
+        setDefaultCollectionLabel(instalacion, "Cuestionarios por Instalación");
         setDefaultCollectionShortLabel(instalacion, "Cuestionarios");
     }
 

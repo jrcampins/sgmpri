@@ -28,6 +28,10 @@ public class Modulo1 extends Project {
 
     Instalacion instalacion;
 
+    Medicion medicion;
+
+    MedicionVariable medicionVariable;
+
     RangoVariable rangoVariable;
 
     Variable variable;
