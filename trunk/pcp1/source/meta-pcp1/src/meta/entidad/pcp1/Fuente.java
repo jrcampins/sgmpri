@@ -14,21 +14,21 @@ import java.lang.reflect.Field;
 import meta.entidad.comun.configuracion.basica.TipoNodo;
 
 /**
- * Cuestionario Persistent Entity.
+ * Fuente Persistent Entity.
  *
  * @author Jorge Campins
  */
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.CONFIGURATION)
 @EntityDataGen(start = 1, stop = 10, step = 0)
-public class Instalacion extends meta.entidad.base.PersistentEntityBase {
+public class Fuente extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
     @Deprecated()
-    private Instalacion() {
+    private Fuente() {
         this(null, null);
     }
 
-    public Instalacion(Artifact declaringArtifact, Field declaringField) {
+    public Fuente(Artifact declaringArtifact, Field declaringField) {
         super(declaringArtifact, declaringField);
     }
     // </editor-fold>
@@ -48,6 +48,17 @@ public class Instalacion extends meta.entidad.base.PersistentEntityBase {
     public StringProperty nombre;
 
     /**
+     * many-to-one entity reference property field
+     */
+    @Allocation(maxDepth = 1, maxRound = 0)
+    @ColumnField(nullable = Kleenean.FALSE)
+    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
+    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @EntityReferenceDataGen(nullable = 100)
+    public TipoNodo tipoNodo;
+
+    /**
      * parent entity reference property field
      */
     @ParentProperty
@@ -57,7 +68,7 @@ public class Instalacion extends meta.entidad.base.PersistentEntityBase {
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
     @EntityReferenceDataGen(nullable = 100)
-    public Instalacion superior;
+    public Fuente superior;
 
     @NumericDataGen(nullable = 100)
     public IntegerProperty numero;
@@ -66,20 +77,11 @@ public class Instalacion extends meta.entidad.base.PersistentEntityBase {
     @CharacterDataGen(nullable = 100)
     public StringProperty clave;
 
-    /**
-     * many-to-one entity reference property field
-     */
-    @Allocation(maxDepth = 1, maxRound = 0)
-    @ColumnField(nullable = Kleenean.TRUE)
-    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
-    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE)
-    @EntityReferenceDataGen(nullable = 100)
-    public TipoNodo tipoNodo;
-
     @Override
     protected void settleProperties() {
         super.settleProperties();
+        tipoNodo.setInitialValue(tipoNodo.RAIZ);
+        tipoNodo.setDefaultValue(tipoNodo.RAIZ);
         numero.setMinValue(1);
         numero.setMaxValue(100);
     }

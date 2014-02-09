@@ -4,9 +4,9 @@ truncate table medicion cascade;
 -- -----------------------------------------------------------------------------------------------------------
 -- medicion
 -- -----------------------------------------------------------------------------------------------------------
-insert into medicion (id, cuestionario, instalacion)
-select bigintid() as id, cuestionario, instalacion
-from cuestionario_instalacion
+insert into medicion (id, cuestionario, fuente)
+select bigintid() as id, cuestionario, fuente
+from cuestionario_fuente
 order by 1;
 
 -- -----------------------------------------------------------------------------------------------------------

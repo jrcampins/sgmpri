@@ -1,9 +1,9 @@
-create or replace function instalacion$after_insert_row$100() returns trigger as $$
+create or replace function fuente$after_insert_row$100() returns trigger as $$
 declare
     _id_clase_recurso bigint;
     _id_conjunto_segmento bigint;
 begin
-    select id_clase_recurso into _id_clase_recurso from clase_recurso where codigo_clase_recurso='instalacion';
+    select id_clase_recurso into _id_clase_recurso from clase_recurso where codigo_clase_recurso='fuente';
     if found then
         _id_conjunto_segmento := bigintid();
         insert into conjunto_segmento (

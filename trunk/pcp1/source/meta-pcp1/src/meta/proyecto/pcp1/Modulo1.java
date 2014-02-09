@@ -22,11 +22,11 @@ public class Modulo1 extends Project {
 
     Cuestionario cuestionario;
 
-    CuestionarioInstalacion cuestionarioInstalacion;
+    CuestionarioFuente cuestionarioFuente;
 
     CuestionarioVariable cuestionarioVariable;
 
-    Instalacion instalacion;
+    Fuente fuente;
 
     Medicion medicion;
 

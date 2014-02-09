@@ -17,7 +17,7 @@ import meta.entidad.comun.auditoria.ArchivoAdjunto;
 import meta.entidad.comun.control.acceso.Usuario;
 
 /**
- * CuestionarioInstalacion Persistent Entity.
+ * Medicion Persistent Entity.
  *
  * @author Jorge Campins
  */
@@ -55,7 +55,7 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @PropertyField(sequence = 1, create = Kleenean.TRUE, update = Kleenean.FALSE)
-    public Instalacion instalacion;
+    public Fuente fuente;
 
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
@@ -124,7 +124,7 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
     @Override
     protected void settleProperties() {
         super.settleProperties();
-        codigo.setDefaultValue(instalacion.codigo.concat("-").concat(cuestionario.codigo).concat("-").concat(fechaProgramada.toCharString()));
+        codigo.setDefaultValue(fuente.codigo.concat("-").concat(cuestionario.codigo).concat("-").concat(fechaProgramada.toCharString()));
         programador.setInitialValue(SpecialEntityValue.CURRENT_USER);
         programador.setDefaultValue(SpecialEntityValue.CURRENT_USER);
         fechaProgramada.setInitialValue(SpecialTemporalValue.CURRENT_DATE);
@@ -141,7 +141,7 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
     protected void settleTabs() {
         super.settleTabs();
         tab1.setDefaultLabel("general");
-        tab1.newTabField(cuestionario, instalacion, fechaProgramada, condicion, fechaCondicion, observaciones);
+        tab1.newTabField(cuestionario, fuente, fechaProgramada, condicion, fechaCondicion, observaciones);
         tab2.setDefaultLabel("archivo");
         tab2.newTabField(archivo, adjunto);
         tab3.setDefaultLabel("historia");
