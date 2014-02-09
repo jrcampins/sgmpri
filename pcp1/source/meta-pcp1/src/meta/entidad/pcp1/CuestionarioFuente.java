@@ -14,20 +14,20 @@ import adalid.core.properties.DateProperty;
 import java.lang.reflect.Field;
 
 /**
- * CuestionarioInstalacion Persistent Entity.
+ * CuestionarioFuente Persistent Entity.
  *
  * @author Jorge Campins
  */
 @EntityClass(independent = Kleenean.FALSE, resourceType = ResourceType.CONFIGURATION)
-public class CuestionarioInstalacion extends meta.entidad.base.PersistentEntityBase {
+public class CuestionarioFuente extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
     @Deprecated()
-    private CuestionarioInstalacion() {
+    private CuestionarioFuente() {
         this(null, null);
     }
 
-    public CuestionarioInstalacion(Artifact declaringArtifact, Field declaringField) {
+    public CuestionarioFuente(Artifact declaringArtifact, Field declaringField) {
         super(declaringArtifact, declaringField);
     }
     // </editor-fold>
@@ -35,18 +35,18 @@ public class CuestionarioInstalacion extends meta.entidad.base.PersistentEntityB
     @Override
     protected void settleAttributes() {
         super.settleAttributes();
-        setDefaultLabel("asociación cuestionario/instalación");
-        setDefaultShortLabel("cuestionario/instalación");
-        setDefaultCollectionLabel("Asociaciones Cuestionario/Instalación");
-        setDefaultCollectionShortLabel("Cuestionarios/Instalaciones");
-        setDefaultLabel(cuestionario, "instalación por cuestionario");
-        setDefaultShortLabel(cuestionario, "instalación");
-        setDefaultCollectionLabel(cuestionario, "Instalaciones por Cuestionario");
-        setDefaultCollectionShortLabel(cuestionario, "Instalaciones");
-        setDefaultLabel(instalacion, "cuestionario por instalación");
-        setDefaultShortLabel(instalacion, "cuestionario");
-        setDefaultCollectionLabel(instalacion, "Cuestionarios por Instalación");
-        setDefaultCollectionShortLabel(instalacion, "Cuestionarios");
+        setDefaultLabel("asociación cuestionario/fuente");
+        setDefaultShortLabel("cuestionario/fuente");
+        setDefaultCollectionLabel("Asociaciones Cuestionario/Fuente");
+        setDefaultCollectionShortLabel("Cuestionarios/Fuentes");
+        setDefaultLabel(cuestionario, "fuente por cuestionario");
+        setDefaultShortLabel(cuestionario, "fuente");
+        setDefaultCollectionLabel(cuestionario, "Fuentes por Cuestionario");
+        setDefaultCollectionShortLabel(cuestionario, "Fuentes");
+        setDefaultLabel(fuente, "cuestionario por fuente");
+        setDefaultShortLabel(fuente, "cuestionario");
+        setDefaultCollectionLabel(fuente, "Cuestionarios por Fuente");
+        setDefaultCollectionShortLabel(fuente, "Cuestionarios");
     }
 
     /**
@@ -67,7 +67,7 @@ public class CuestionarioInstalacion extends meta.entidad.base.PersistentEntityB
     @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE_AND_DETAIL)
     @PropertyField(required = Kleenean.TRUE)
-    public Instalacion instalacion;
+    public Fuente fuente;
 
     /**
      * many-to-one entity reference property field
@@ -104,7 +104,7 @@ public class CuestionarioInstalacion extends meta.entidad.base.PersistentEntityB
     protected void settleKeys() {
         super.settleKeys();
         key01.setUnique(true);
-        key01.newKeyField(cuestionario, instalacion);
+        key01.newKeyField(cuestionario, fuente);
     }
 
 }

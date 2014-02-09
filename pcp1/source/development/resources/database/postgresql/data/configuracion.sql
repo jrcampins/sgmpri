@@ -2,42 +2,32 @@ truncate table medicion_variable cascade;
 truncate table medicion cascade;
 truncate table cuestionario_variable cascade;
 truncate table variable cascade;
-truncate table cuestionario_instalacion cascade;
-truncate table instalacion cascade;
+truncate table cuestionario_fuente cascade;
+truncate table fuente cascade;
 truncate table cuestionario cascade;
 
 -- -----------------------------------------------------------------------------------------------------------
 -- cuestionario
 -- -----------------------------------------------------------------------------------------------------------
 insert into cuestionario (id, codigo, nombre)
-select
-    id as id,
-    'C#'||id as codigo,
-    'Cuestionario #'||id as nombre
+select id as id, 'C#'||id as codigo, 'Cuestionario #'||id as nombre
 from generate_series(1001::bigint, 1010::bigint) as id
 order by 1;
 
 -- -----------------------------------------------------------------------------------------------------------
--- instalacion
+-- fuente
 -- -----------------------------------------------------------------------------------------------------------
-insert into instalacion (id, codigo, nombre, superior, numero, clave, tipo_nodo)
-select
-    id as id,
-    'J#'||id as codigo,
-    'Instalación #'||id as nombre,
-    null as superior,
-    null as numero,
-    null as clave,
-    null as tipo_nodo
+insert into fuente (id, codigo, nombre)
+select id as id, 'F#'||id as codigo, 'Fuente #'||id as nombre
 from generate_series(1001::bigint, 1010::bigint) as id
 order by 1;
 
 -- -----------------------------------------------------------------------------------------------------------
--- cuestionario_instalacion
+-- cuestionario_fuente
 -- -----------------------------------------------------------------------------------------------------------
-insert into cuestionario_instalacion (id, cuestionario, instalacion, periodo, fecha_primera_medicion)
-select bigintid() as id, c.id as cuestionario, v.id as instalacion, 3 as periodo, current_date as fecha_primera_medicion
-from cuestionario c, instalacion v
+insert into cuestionario_fuente (id, cuestionario, fuente, periodo, fecha_primera_medicion)
+select bigintid() as id, c.id as cuestionario, v.id as fuente, 3 as periodo, current_date as fecha_primera_medicion
+from cuestionario c, fuente v
 order by 1;
 
 -- -----------------------------------------------------------------------------------------------------------
