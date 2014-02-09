@@ -54,7 +54,7 @@ public class CuestionarioInstalacion extends meta.entidad.base.PersistentEntityB
      */
     @Allocation(maxDepth = 1, maxRound = 0)
     @ColumnField(nullable = Kleenean.FALSE)
-    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
+    @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @PropertyField(required = Kleenean.TRUE)
     public Cuestionario cuestionario;
@@ -64,7 +64,7 @@ public class CuestionarioInstalacion extends meta.entidad.base.PersistentEntityB
      */
     @Allocation(maxDepth = 1, maxRound = 0)
     @ColumnField(nullable = Kleenean.FALSE)
-    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
+    @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE_AND_DETAIL)
     @PropertyField(required = Kleenean.TRUE)
     public Instalacion instalacion;
