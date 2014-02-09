@@ -64,7 +64,7 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     @Allocation(maxDepth = 2, maxRound = 0)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-//  @EntityReferenceSearch(searchType = SearchType.LIST, listStyle = ListStyle.NAME)
+    @EntityReferenceSearch(searchType = SearchType.LIST, listStyle = ListStyle.NAME)
     @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
     public RangoVariable rango;
 
