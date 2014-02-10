@@ -65,7 +65,7 @@ where v.tipo_variable=2 and v.id%1000 between 10*(c.id%1000)-9 and 10*(c.id%1000
 order by 1;
 
 -- -----------------------------------------------------------------------------------------------------------
--- cuestionario_variable
+-- nodo_indice
 -- -----------------------------------------------------------------------------------------------------------
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente)
 select bigintid() as id, 'INS#'||id, 'Indice #'||id as nombre, 1 as tipo_nodo, id as fuente
