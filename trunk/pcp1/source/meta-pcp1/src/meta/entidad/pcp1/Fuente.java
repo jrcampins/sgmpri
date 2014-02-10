@@ -20,6 +20,9 @@ import meta.entidad.comun.configuracion.basica.TipoNodo;
  * @author Jorge Campins
  */
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.CONFIGURATION)
+@EntitySelectOperation(rowsLimit = 1500)
+@EntityTableView(inserts = Kleenean.FALSE)
+@EntityTreeView(enabled = Kleenean.TRUE)
 @EntityTriggers(afterCheck = Kleenean.TRUE)
 public class Fuente extends meta.entidad.base.PersistentEntityBase {
 
@@ -53,17 +56,17 @@ public class Fuente extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @PropertyField(create = Kleenean.TRUE, table = Kleenean.TRUE, report = Kleenean.TRUE, required = Kleenean.TRUE, submit = Kleenean.TRUE)
     public TipoNodo tipoNodo;
 
     /**
      * parent entity reference property field
      */
     @ParentProperty
-    @Allocation(maxDepth = 1, maxRound = 0)
+    @Allocation(maxDepth = 2, maxRound = 0)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @PropertyField(create = Kleenean.TRUE, table = Kleenean.TRUE, report = Kleenean.TRUE)
     public Fuente superior;
 
     @PropertyField(hidden = Kleenean.TRUE)
@@ -91,15 +94,23 @@ public class Fuente extends meta.entidad.base.PersistentEntityBase {
         setOrderBy(key01);
     }
 
-    protected Check check01, check02;
+    protected Check check01, check02, check03;
 
     @Override
     protected void settleExpressions() {
         super.settleExpressions();
         check01 = tipoNodo.isEqualTo(tipoNodo.RAIZ).xnor(superior.isNull());
         check01.setDefaultErrorMessage("la fuente superior se debe especificar si y solo si el tipo de nodo no es Raiz");
-        check02 = superior.isNullOrNotEqualTo(this);
+        check02 = this.isNull().or(superior.isNullOrNotEqualTo(this));
         check02.setDefaultErrorMessage("la fuente superior no puede ser esta misma fuente");
+        check03 = superior.isNotNull().implies(superior.tipoNodo.isNotEqualTo(tipoNodo.HOJA));
+        check03.setDefaultErrorMessage("la fuente superior no puede ser una fuente de tipo Hoja");
+    }
+
+    @Override
+    protected void settleFilters() {
+        super.settleFilters();
+        superior.setRequiringFilter(tipoNodo.isNotEqualTo(tipoNodo.RAIZ));
     }
 
 }

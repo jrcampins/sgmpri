@@ -9,6 +9,7 @@ package meta.entidad.pcp1;
 import adalid.core.*;
 import adalid.core.annotations.*;
 import adalid.core.enums.*;
+import adalid.core.expressions.*;
 import adalid.core.interfaces.*;
 import adalid.core.properties.*;
 import java.lang.reflect.Field;
@@ -21,6 +22,7 @@ import meta.entidad.comun.configuracion.basica.TipoNodo;
  */
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.CONFIGURATION)
 @EntitySelectOperation(rowsLimit = 1500)
+@EntityTableView(inserts = Kleenean.FALSE)
 @EntityTreeView(enabled = Kleenean.TRUE)
 @EntityTriggers(afterCheck = Kleenean.TRUE)
 public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
@@ -64,17 +66,17 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @PropertyField(create = Kleenean.TRUE, table = Kleenean.TRUE, report = Kleenean.TRUE, required = Kleenean.TRUE, submit = Kleenean.TRUE)
     public TipoNodo tipoNodo;
 
     /**
      * parent entity reference property field
      */
     @ParentProperty
-    @Allocation(maxDepth = 1, maxRound = 0)
+    @Allocation(maxDepth = 2, maxRound = 0)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @PropertyField(create = Kleenean.TRUE, table = Kleenean.TRUE, report = Kleenean.TRUE)
     public NodoIndice superior;
 
     @PropertyField(hidden = Kleenean.TRUE)
@@ -88,6 +90,7 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
      */
     @BigDecimalField(precision = 16, scale = 15)
     @ColumnField(nullable = Kleenean.FALSE)
+    @PropertyField(create = Kleenean.TRUE, required = Kleenean.TRUE)
     public BigDecimalProperty peso;
 
     /**
@@ -95,7 +98,8 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
      */
     @Allocation(maxDepth = 1, maxRound = 0)
     @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
-    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE_AND_DETAIL)
+    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(create = Kleenean.TRUE)
     public Fuente fuente;
 
     /**
@@ -104,22 +108,26 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     @Allocation(maxDepth = 1, maxRound = 0)
     @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(create = Kleenean.TRUE)
     public Variable variable;
 
     /**
      * boolean property field
      */
     @ColumnField(nullable = Kleenean.FALSE)
+    @PropertyField(create = Kleenean.TRUE)
     public BooleanProperty coagulador;
 
     /**
      * big decimal property field
      */
+    @PropertyField(create = Kleenean.TRUE)
     public IntegerProperty amarillo;
 
     /**
      * big decimal property field
      */
+    @PropertyField(create = Kleenean.TRUE)
     public IntegerProperty verde;
 
     /**
@@ -128,11 +136,13 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     @Allocation(maxDepth = 1, maxRound = 0)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(create = Kleenean.TRUE)
     public PeriodoCalculo periodo;
 
     /**
      * date property field
      */
+    @PropertyField(create = Kleenean.TRUE)
     public DateProperty fechaProximoCalculo;
 
     /**
@@ -152,10 +162,19 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         peso.setDefaultValue(1);
         coagulador.setInitialValue(false);
         coagulador.setDefaultValue(false);
+        /**/
+        NumericConditionalX nx1 = tipoNodo.isNotEqualTo(tipoNodo.HOJA).then(50);
+        NumericConditionalX nx2 = tipoNodo.isNotEqualTo(tipoNodo.HOJA).then(80);
+        /**/
         amarillo.setDefaultDescription("extremo inferior del intervalo Amarillo");
+        amarillo.setInitialValue(nx1);
+        amarillo.setDefaultValue(nx1);
         amarillo.setMinValue(0);
         amarillo.setMaxValue(100);
+        /**/
         verde.setDefaultDescription("extremo inferior del intervalo Verde");
+        verde.setInitialValue(nx2);
+        verde.setDefaultValue(nx2);
         verde.setMinValue(0);
         verde.setMaxValue(100);
     }
@@ -185,15 +204,17 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         tab4.newTabField(periodo, fechaProximoCalculo, fechaUltimoCalculo);
     }
 
-    protected Check check01, check02, check03, check04, check05, check06, check07, check08, check09, check10, check11, check12;
+    protected Check check01, check02, check03, check04, check05, check06, check07, check08, check09, check10, check11, check12, check13;
 
     @Override
     protected void settleExpressions() {
         super.settleExpressions();
         check01 = tipoNodo.isEqualTo(tipoNodo.RAIZ).xnor(superior.isNull());
         check01.setDefaultErrorMessage("el nodo superior se debe especificar si y solo si el tipo de nodo no es Raiz");
-        check02 = superior.isNullOrNotEqualTo(this);
+        check02 = this.isNull().or(superior.isNullOrNotEqualTo(this));
         check02.setDefaultErrorMessage("el nodo superior no puede ser este mismo nodo");
+        check13 = superior.isNotNull().implies(superior.tipoNodo.isNotEqualTo(tipoNodo.HOJA));
+        check13.setDefaultErrorMessage("el nodo superior no puede un nodo de tipo Hoja");
         check03 = tipoNodo.isEqualTo(tipoNodo.HOJA).xnor(fuente.isNotNull());
         check03.setDefaultErrorMessage("la fuente se debe especificar si y solo si el tipo de nodo es Hoja");
         check04 = tipoNodo.isEqualTo(tipoNodo.HOJA).xnor(variable.isNotNull());
@@ -222,7 +243,13 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         tab1.setRenderingFilter(tipoNodo.isEqualTo(tipoNodo.RAIZ));
         tab2.setRenderingFilter(tipoNodo.isEqualTo(tipoNodo.RAMA));
         tab3.setRenderingFilter(tipoNodo.isEqualTo(tipoNodo.HOJA));
-        tab4.setRenderingFilter(tipoNodo.isEqualTo(tipoNodo.RAIZ));
+        tab4.setRenderingFilter(tipoNodo.isNotEqualTo(tipoNodo.HOJA));
+        /**/
+        superior.setRequiringFilter(tipoNodo.isNotEqualTo(tipoNodo.RAIZ));
+        fuente.setRequiringFilter(tipoNodo.isEqualTo(tipoNodo.HOJA));
+        variable.setRequiringFilter(tipoNodo.isEqualTo(tipoNodo.HOJA));
+        amarillo.setRequiringFilter(tipoNodo.isNotEqualTo(tipoNodo.HOJA));
+        verde.setRequiringFilter(tipoNodo.isNotEqualTo(tipoNodo.HOJA));
     }
 
     protected Calcular calcular;
