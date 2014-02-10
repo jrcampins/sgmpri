@@ -79,9 +79,7 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
 //      tangible = variable.tipoVariable.isEqualTo(variable.tipoVariable.TANGIBLE);
 //      intangible = variable.tipoVariable.isEqualTo(variable.tipoVariable.INTANGIBLE);
         check01 = rango.variable.isNullOrEqualTo(variable);
-        check01.setDefaultErrorMessage(""
-            + "el rango no corresponde a la variable"
-            + "");
+        check01.setDefaultErrorMessage("el rango no corresponde a la variable");
     }
 
     @Override

@@ -26,8 +26,8 @@ order by 1;
 -- -----------------------------------------------------------------------------------------------------------
 -- cuestionario_fuente
 -- -----------------------------------------------------------------------------------------------------------
-insert into cuestionario_fuente (id, cuestionario, fuente, periodo, fecha_primera_medicion)
-select bigintid() as id, c.id as cuestionario, v.id as fuente, 3 as periodo, current_date as fecha_primera_medicion
+insert into cuestionario_fuente (id, cuestionario, fuente, periodo, fecha_proxima_medicion)
+select bigintid() as id, c.id as cuestionario, v.id as fuente, 3 as periodo, current_date as fecha_proxima_medicion
 from cuestionario c, fuente v
 order by 1;
 
@@ -67,24 +67,25 @@ order by 1;
 -- -----------------------------------------------------------------------------------------------------------
 -- nodo_indice
 -- -----------------------------------------------------------------------------------------------------------
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente)
-select bigintid() as id, 'INS#'||id, 'Indice #'||id as nombre, 1 as tipo_nodo, id as fuente
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, amarillo, verde)
+select bigintid() as id, 'INS#'||id, 'Indice del Nivel de Seguridad #'||id as nombre, 1 as tipo_nodo, 50 as amarillo, 80 as verde
 from fuente
 order by 1;
 
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, numero, superior, fuente)
-select bigintid() as id, n.codigo||'-COM#'||c.id, 'Componente #'||c.id as nombre, 2 as tipo_nodo, c.id as numero, n.id as superior, n.fuente
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, amarillo, verde, superior, numero)
+select bigintid() as id, n.codigo||'-C#'||c.id, 'Componente #'||c.id as nombre, 2 as tipo_nodo, 50 as amarillo, 80 as verde,
+    n.id as superior, c.id as numero
 from nodo_indice n
-inner join cuestionario_fuente cf on cf.fuente = n.fuente
-inner join cuestionario c on c.id = cf.cuestionario
+inner join cuestionario_fuente x on x.fuente = n.id
+inner join cuestionario c on c.id = x.cuestionario
 where n.tipo_nodo=1
 order by 1;
 
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, fuente, variable)
-select bigintid() as id, n.codigo||'-VAR'||v.id, v.nombre, 3 as tipo_nodo, n.id as superior, n.fuente, cv.variable
+select bigintid() as id, n.codigo||'-V#'||v.id, v.nombre, 3 as tipo_nodo, n.id as superior, n.superior as fuente, x.variable
 from nodo_indice n
-inner join cuestionario_variable cv on cv.cuestionario = n.numero
-inner join variable v on v.id = cv.variable
+inner join cuestionario_variable x on x.cuestionario = n.numero
+inner join variable v on v.id = x.variable
 where n.tipo_nodo=2
 order by 1;
 

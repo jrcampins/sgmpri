@@ -20,8 +20,9 @@ import meta.entidad.comun.configuracion.basica.TipoNodo;
  * @author Jorge Campins
  */
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.CONFIGURATION)
-@EntitySelectOperation(rowsLimit = 5000)
+@EntitySelectOperation(rowsLimit = 1500)
 @EntityTreeView(enabled = Kleenean.TRUE)
+@EntityTriggers(afterCheck = Kleenean.TRUE)
 public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
@@ -76,16 +77,11 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
     public NodoIndice superior;
 
+    @PropertyField(hidden = Kleenean.TRUE)
     public IntegerProperty numero;
 
-    @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE)
+    @PropertyField(hidden = Kleenean.TRUE)
     public StringProperty clave;
-
-    /**
-     * boolean property field
-     */
-    @ColumnField(nullable = Kleenean.FALSE)
-    public BooleanProperty coagulador;
 
     /**
      * big decimal property field
@@ -111,6 +107,12 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     public Variable variable;
 
     /**
+     * boolean property field
+     */
+    @ColumnField(nullable = Kleenean.FALSE)
+    public BooleanProperty coagulador;
+
+    /**
      * big decimal property field
      */
     public IntegerProperty amarillo;
@@ -120,6 +122,25 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
      */
     public IntegerProperty verde;
 
+    /**
+     * many-to-one entity reference property field
+     */
+    @Allocation(maxDepth = 1, maxRound = 0)
+    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
+    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    public PeriodoCalculo periodo;
+
+    /**
+     * date property field
+     */
+    public DateProperty fechaProximoCalculo;
+
+    /**
+     * date property field
+     */
+    @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE)
+    public DateProperty fechaUltimoCalculo;
+
     @Override
     protected void settleProperties() {
         super.settleProperties();
@@ -127,31 +148,95 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         tipoNodo.setDefaultValue(tipoNodo.RAIZ);
         numero.setMinValue(1);
         numero.setMaxValue(100);
-        coagulador.setInitialValue(false);
-        coagulador.setDefaultValue(false);
         peso.setInitialValue(1);
         peso.setDefaultValue(1);
+        coagulador.setInitialValue(false);
+        coagulador.setDefaultValue(false);
         amarillo.setDefaultDescription("extremo inferior del intervalo Amarillo");
-//      amarillo.setInitialValue(50);
-//      amarillo.setDefaultValue(50);
         amarillo.setMinValue(0);
         amarillo.setMaxValue(100);
         verde.setDefaultDescription("extremo inferior del intervalo Verde");
-//      verde.setInitialValue(80);
-//      verde.setDefaultValue(80);
         verde.setMinValue(0);
         verde.setMaxValue(100);
     }
 
-    protected Tab tab1, tab2;
+    protected Key key01;
+
+    @Override
+    protected void settleKeys() {
+        super.settleKeys();
+        key01.setUnique(true);
+        key01.newKeyField(codigo);
+        setOrderBy(key01);
+    }
+
+    protected Tab tab1, tab2, tab3, tab4;
 
     @Override
     protected void settleTabs() {
         super.settleTabs();
         tab1.setDefaultLabel("general");
-        tab1.newTabField(coagulador, peso, fuente, variable, amarillo, verde);
-        tab2.setDefaultLabel("jerarquía");
-        tab2.newTabField(tipoNodo, superior, numero, clave);
+        tab1.newTabField(tipoNodo, numero, clave, peso, coagulador, amarillo, verde);
+        tab2.setDefaultLabel("general");
+        tab2.newTabField(tipoNodo, numero, clave, peso, superior, coagulador, amarillo, verde);
+        tab3.setDefaultLabel("general");
+        tab3.newTabField(tipoNodo, numero, clave, peso, superior, fuente, variable);
+        tab4.setDefaultLabel("cálculo");
+        tab4.newTabField(periodo, fechaProximoCalculo, fechaUltimoCalculo);
+    }
+
+    protected Check check01, check02, check03, check04, check05, check06, check07, check08, check09, check10, check11, check12;
+
+    @Override
+    protected void settleExpressions() {
+        super.settleExpressions();
+        check01 = tipoNodo.isEqualTo(tipoNodo.RAIZ).xnor(superior.isNull());
+        check01.setDefaultErrorMessage("el nodo superior se debe especificar si y solo si el tipo de nodo no es Raiz");
+        check02 = superior.isNullOrNotEqualTo(this);
+        check02.setDefaultErrorMessage("el nodo superior no puede ser este mismo nodo");
+        check03 = tipoNodo.isEqualTo(tipoNodo.HOJA).xnor(fuente.isNotNull());
+        check03.setDefaultErrorMessage("la fuente se debe especificar si y solo si el tipo de nodo es Hoja");
+        check04 = tipoNodo.isEqualTo(tipoNodo.HOJA).xnor(variable.isNotNull());
+        check04.setDefaultErrorMessage("la variable se debe especificar si y solo si el tipo de nodo es Hoja");
+        check05 = tipoNodo.isEqualTo(tipoNodo.HOJA).implies(coagulador.isFalse());
+        check05.setDefaultErrorMessage("el nodo puede ser coagulador solo si el tipo de nodo es Hoja");
+        check06 = tipoNodo.isEqualTo(tipoNodo.HOJA).xnor(amarillo.isNull());
+        check06.setDefaultErrorMessage("el extremo inferior del intervalo Amarillo se debe especificar si y solo si el tipo de nodo no es Hoja");
+        check07 = tipoNodo.isEqualTo(tipoNodo.HOJA).xnor(verde.isNull());
+        check07.setDefaultErrorMessage("el extremo inferior del intervalo Verde se debe especificar si y solo si el tipo de nodo no es Hoja");
+        check08 = amarillo.isNullOrLessThan(verde);
+        check08.setDefaultErrorMessage("el extremo inferior del intervalo Amarillo debe ser menor que del intervalo Verde");
+        check09 = tipoNodo.isEqualTo(tipoNodo.HOJA).implies(periodo.isNull());
+        check09.setDefaultErrorMessage("el periodo de cálculo se debe especificar solo si el tipo de nodo es Hoja");
+        check10 = tipoNodo.isEqualTo(tipoNodo.HOJA).implies(fechaProximoCalculo.isNull());
+        check10.setDefaultErrorMessage("la fecha del próximo cálculo se debe especificar solo si el tipo de nodo es Hoja");
+        check11 = tipoNodo.isEqualTo(tipoNodo.HOJA).or(periodo.isNull().xnor(fechaProximoCalculo.isNull()));
+        check11.setDefaultErrorMessage("el periodo de cálculo y la fecha del próximo cálculo se deben especificar conjuntamente");
+        check12 = fechaUltimoCalculo.isNullOrLessThan(fechaProximoCalculo);
+        check12.setDefaultErrorMessage("la fecha de la próxima medición debe ser mayor que la de la última medición");
+    }
+
+    @Override
+    protected void settleFilters() {
+        super.settleFilters();
+        tab1.setRenderingFilter(tipoNodo.isEqualTo(tipoNodo.RAIZ));
+        tab2.setRenderingFilter(tipoNodo.isEqualTo(tipoNodo.RAMA));
+        tab3.setRenderingFilter(tipoNodo.isEqualTo(tipoNodo.HOJA));
+        tab4.setRenderingFilter(tipoNodo.isEqualTo(tipoNodo.RAIZ));
+    }
+
+    protected Calcular calcular;
+
+    @ProcessOperationClass(overloading = Kleenean.FALSE)
+    @OperationClass(access = OperationAccess.RESTRICTED)
+    public class Calcular extends ProcessOperation {
+
+        /**
+         * instance reference parameter field
+         */
+        @InstanceReference
+        protected NodoIndice nodo;
+
     }
 
 }

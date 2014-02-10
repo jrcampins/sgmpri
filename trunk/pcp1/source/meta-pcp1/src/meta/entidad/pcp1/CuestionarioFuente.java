@@ -83,20 +83,14 @@ public class CuestionarioFuente extends meta.entidad.base.PersistentEntityBase {
      * date property field
      */
     @ColumnField(nullable = Kleenean.FALSE)
-    @PropertyField(required = Kleenean.TRUE, update = Kleenean.FALSE)
-    public DateProperty fechaPrimeraMedicion;
+    @PropertyField(required = Kleenean.TRUE)
+    public DateProperty fechaProximaMedicion;
 
     /**
      * date property field
      */
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE)
     public DateProperty fechaUltimaMedicion;
-
-    /**
-     * date property field
-     */
-    @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE)
-    public DateProperty fechaProximaMedicion;
 
     protected Key key01;
 
@@ -105,6 +99,15 @@ public class CuestionarioFuente extends meta.entidad.base.PersistentEntityBase {
         super.settleKeys();
         key01.setUnique(true);
         key01.newKeyField(cuestionario, fuente);
+    }
+
+    protected Check check01;
+
+    @Override
+    protected void settleExpressions() {
+        super.settleExpressions();
+        check01 = fechaUltimaMedicion.isNullOrLessThan(fechaProximaMedicion);
+        check01.setDefaultErrorMessage("la fecha de la próxima medición debe ser mayor que la de la última medición");
     }
 
 }

@@ -11,7 +11,7 @@ import adalid.core.interfaces.*;
 import java.lang.reflect.Field;
 
 /**
- * PeriodicidadMedicion Persistent Entity.
+ * PeriodoMedicion Persistent Entity.
  *
  * @author Jorge Campins
  */
