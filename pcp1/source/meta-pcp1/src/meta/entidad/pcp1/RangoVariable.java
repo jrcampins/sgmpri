@@ -71,8 +71,10 @@ public class RangoVariable extends meta.entidad.base.PersistentEntityBase {
     @Override
     protected void settleProperties() {
         super.settleProperties();
+        numero.setDefaultDescription("numeral del Rango de Tendencia Dominante (RTD)");
         numero.setMinValue(0);
         numero.setMaxValue(9);
+        nombre.setDefaultDescription("forma lingüistica del Rango de Tendencia Dominante (RTD)");
     }
 
     protected Key key01;
@@ -91,9 +93,7 @@ public class RangoVariable extends meta.entidad.base.PersistentEntityBase {
     protected void settleExpressions() {
         super.settleExpressions();
         check01 = numero.isGreaterOrEqualTo(variable.rangoMinimo).and(numero.isLessOrEqualTo(variable.rangoMaximo));
-        check01.setDefaultErrorMessage(""
-            + "el número debe ser un número entero comprendido entre el rango mínimo y el rango máximo de la variable"
-            + "");
+        check01.setDefaultErrorMessage("el número debe ser un número entero comprendido entre el rango mínimo y el rango máximo de la variable");
     }
 
 }

@@ -6,6 +6,7 @@
  */
 package meta.entidad.pcp1;
 
+import adalid.core.*;
 import adalid.core.annotations.*;
 import adalid.core.enums.*;
 import adalid.core.interfaces.*;
@@ -19,6 +20,7 @@ import meta.entidad.comun.configuracion.basica.TipoNodo;
  * @author Jorge Campins
  */
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.CONFIGURATION)
+@EntityTriggers(afterCheck = Kleenean.TRUE)
 public class Fuente extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
@@ -64,9 +66,10 @@ public class Fuente extends meta.entidad.base.PersistentEntityBase {
     @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
     public Fuente superior;
 
+    @PropertyField(hidden = Kleenean.TRUE)
     public IntegerProperty numero;
 
-    @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE)
+    @PropertyField(hidden = Kleenean.TRUE)
     public StringProperty clave;
 
     @Override
@@ -76,6 +79,27 @@ public class Fuente extends meta.entidad.base.PersistentEntityBase {
         tipoNodo.setDefaultValue(tipoNodo.RAIZ);
         numero.setMinValue(1);
         numero.setMaxValue(100);
+    }
+
+    protected Key key01;
+
+    @Override
+    protected void settleKeys() {
+        super.settleKeys();
+        key01.setUnique(true);
+        key01.newKeyField(codigo);
+        setOrderBy(key01);
+    }
+
+    protected Check check01, check02;
+
+    @Override
+    protected void settleExpressions() {
+        super.settleExpressions();
+        check01 = tipoNodo.isEqualTo(tipoNodo.RAIZ).xnor(superior.isNull());
+        check01.setDefaultErrorMessage("la fuente superior se debe especificar si y solo si el tipo de nodo no es Raiz");
+        check02 = superior.isNullOrNotEqualTo(this);
+        check02.setDefaultErrorMessage("la fuente superior no puede ser esta misma fuente");
     }
 
 }
