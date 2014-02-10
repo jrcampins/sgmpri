@@ -32,7 +32,11 @@ public class Modulo1 extends Project {
 
     MedicionVariable medicionVariable;
 
+    NodoIndice nodoIndice;
+
     RangoVariable rangoVariable;
+
+    ValorNodoIndice valorNodoIndice;
 
     Variable variable;
 
