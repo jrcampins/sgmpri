@@ -1,5 +1,6 @@
 truncate table medicion_variable cascade;
 truncate table medicion cascade;
+truncate table nodo_indice cascade;
 truncate table cuestionario_variable cascade;
 truncate table variable cascade;
 truncate table cuestionario_fuente cascade;
@@ -62,3 +63,29 @@ select bigintid() as id, c.id as cuestionario, v.id as variable
 from cuestionario c, variable v
 where v.tipo_variable=2 and v.id%1000 between 10*(c.id%1000)-9 and 10*(c.id%1000)
 order by 1;
+
+-- -----------------------------------------------------------------------------------------------------------
+-- cuestionario_variable
+-- -----------------------------------------------------------------------------------------------------------
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente)
+select bigintid() as id, 'INS#'||id, 'Indice #'||id as nombre, 1 as tipo_nodo, id as fuente
+from fuente
+order by 1;
+
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, numero, superior, fuente)
+select bigintid() as id, n.codigo||'-COM#'||c.id, 'Componente #'||c.id as nombre, 2 as tipo_nodo, c.id as numero, n.id as superior, n.fuente
+from nodo_indice n
+inner join cuestionario_fuente cf on cf.fuente = n.fuente
+inner join cuestionario c on c.id = cf.cuestionario
+where n.tipo_nodo=1
+order by 1;
+
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, fuente, variable)
+select bigintid() as id, n.codigo||'-VAR'||v.id, v.nombre, 3 as tipo_nodo, n.id as superior, n.fuente, cv.variable
+from nodo_indice n
+inner join cuestionario_variable cv on cv.cuestionario = n.numero
+inner join variable v on v.id = cv.variable
+where n.tipo_nodo=2
+order by 1;
+
+update nodo_indice set numero = null;
