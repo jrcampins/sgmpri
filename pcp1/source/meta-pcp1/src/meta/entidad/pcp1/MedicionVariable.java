@@ -101,14 +101,16 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     protected void settleFilters() {
         super.settleFilters();
         /**/
-//      rango.setRenderingFilter(intangible);
+        rango.setRenderingFilter(intangible);
         rango.setRequiringFilter(intangible);
         rango.setModifyingFilter(intangible);
+        rango.setNullifyingFilter(tangible);
         rango.setSearchQueryFilter(check01);
         /**/
-//      valor.setRenderingFilter(tangible);
+        valor.setRenderingFilter(tangible);
         valor.setRequiringFilter(tangible);
         valor.setModifyingFilter(tangible);
+        valor.setNullifyingFilter(intangible);
     }
 
 }

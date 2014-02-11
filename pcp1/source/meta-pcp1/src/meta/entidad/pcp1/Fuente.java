@@ -103,12 +103,18 @@ public class Fuente extends meta.entidad.base.PersistentEntityBase {
         setOrderBy(key01);
     }
 
+    protected Segment raiz, rama, hoja;
+
     protected Check check01, check02, check03;
 
     @Override
     protected void settleExpressions() {
         super.settleExpressions();
-        check01 = tipoNodo.isEqualTo(tipoNodo.RAIZ).xnor(superior.isNull());
+        raiz = tipoNodo.isEqualTo(tipoNodo.RAIZ);
+        rama = tipoNodo.isEqualTo(tipoNodo.RAMA);
+        hoja = tipoNodo.isEqualTo(tipoNodo.HOJA);
+        /**/
+        check01 = raiz.xnor(superior.isNull());
         check01.setDefaultErrorMessage("la fuente superior se debe especificar si y solo si el tipo de nodo no es Raiz");
         check02 = this.isNull().or(superior.isNullOrNotEqualTo(this));
         check02.setDefaultErrorMessage("la fuente superior no puede ser esta misma fuente");
@@ -119,9 +125,10 @@ public class Fuente extends meta.entidad.base.PersistentEntityBase {
     @Override
     protected void settleFilters() {
         super.settleFilters();
-//      superior.setRenderingFilter(tipoNodo.isNotEqualTo(tipoNodo.RAIZ));
-        superior.setRequiringFilter(tipoNodo.isNotEqualTo(tipoNodo.RAIZ));
-//      superior.setModifyingFilter(tipoNodo.isNotEqualTo(tipoNodo.RAIZ));
+        superior.setRenderingFilter(not(raiz));
+        superior.setRequiringFilter(not(raiz));
+        superior.setModifyingFilter(not(raiz));
+        superior.setNullifyingFilter(raiz);
     }
 
 }

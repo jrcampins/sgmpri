@@ -9,7 +9,6 @@ package meta.entidad.pcp1;
 import adalid.core.*;
 import adalid.core.annotations.*;
 import adalid.core.enums.*;
-import adalid.core.expressions.*;
 import adalid.core.interfaces.*;
 import adalid.core.properties.*;
 import java.lang.reflect.Field;
@@ -160,21 +159,13 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         numero.setMaxValue(100);
         peso.setInitialValue(1);
         peso.setDefaultValue(1);
+        coagulador.setDefaultDescription("se requiere coagular (condensar en un solo valor) los índices de los nodos subordinados");
         coagulador.setInitialValue(false);
         coagulador.setDefaultValue(false);
-        /**/
-        NumericConditionalX nx1 = tipoNodo.isNotEqualTo(tipoNodo.HOJA).then(50);
-        NumericConditionalX nx2 = tipoNodo.isNotEqualTo(tipoNodo.HOJA).then(80);
-        /**/
         amarillo.setDefaultDescription("extremo inferior del intervalo Amarillo");
-        amarillo.setInitialValue(nx1);
-        amarillo.setDefaultValue(nx1);
         amarillo.setMinValue(0);
         amarillo.setMaxValue(100);
-        /**/
         verde.setDefaultDescription("extremo inferior del intervalo Verde");
-        verde.setInitialValue(nx2);
-        verde.setDefaultValue(nx2);
         verde.setMinValue(0);
         verde.setMaxValue(100);
     }
@@ -241,6 +232,9 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         check12.setDefaultErrorMessage("el periodo de cálculo y la fecha del próximo cálculo se deben especificar conjuntamente");
         check13 = fechaUltimoCalculo.isNullOrLessThan(fechaProximoCalculo);
         check13.setDefaultErrorMessage("la fecha de la próxima medición debe ser mayor que la de la última medición");
+        /**/
+        amarillo.setDefaultValue(not(hoja).then(50));
+        verde.setDefaultValue(not(hoja).then(80));
     }
 
     @Override
@@ -251,20 +245,30 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         tab3.setRenderingFilter(hoja);
         tab4.setRenderingFilter(not(hoja));
         /**/
+//      superior.setRenderingFilter(not(raiz));
         superior.setRequiringFilter(not(raiz));
-//      superior.setModifyingFilter(not(raiz));
+        superior.setModifyingFilter(not(raiz));
+        superior.setNullifyingFilter(raiz);
         /**/
+//      fuente.setRenderingFilter(hoja);
         fuente.setRequiringFilter(hoja);
-//      fuente.setModifyingFilter(hoja);
+        fuente.setModifyingFilter(hoja);
+        fuente.setNullifyingFilter(not(hoja));
         /**/
+//      variable.setRenderingFilter(hoja);
         variable.setRequiringFilter(hoja);
-//      variable.setModifyingFilter(hoja);
+        variable.setModifyingFilter(hoja);
+        variable.setNullifyingFilter(not(hoja));
         /**/
+//      amarillo.setRenderingFilter(not(hoja));
         amarillo.setRequiringFilter(not(hoja));
-//      amarillo.setModifyingFilter(not(hoja));
+        amarillo.setModifyingFilter(not(hoja));
+        amarillo.setNullifyingFilter(hoja);
         /**/
+//      verde.setRenderingFilter(not(hoja));
         verde.setRequiringFilter(not(hoja));
-//      verde.setModifyingFilter(not(hoja));
+        verde.setModifyingFilter(not(hoja));
+        verde.setNullifyingFilter(hoja);
     }
 
     protected Calcular calcular;
