@@ -110,7 +110,9 @@ public class Fuente extends meta.entidad.base.PersistentEntityBase {
     @Override
     protected void settleFilters() {
         super.settleFilters();
+//      superior.setRenderingFilter(tipoNodo.isNotEqualTo(tipoNodo.RAIZ));
         superior.setRequiringFilter(tipoNodo.isNotEqualTo(tipoNodo.RAIZ));
+//      superior.setModifyingFilter(tipoNodo.isNotEqualTo(tipoNodo.RAIZ));
     }
 
 }

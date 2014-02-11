@@ -204,52 +204,67 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         tab4.newTabField(periodo, fechaProximoCalculo, fechaUltimoCalculo);
     }
 
+    protected Segment raiz, rama, hoja;
+
     protected Check check01, check02, check03, check04, check05, check06, check07, check08, check09, check10, check11, check12, check13;
 
     @Override
     protected void settleExpressions() {
         super.settleExpressions();
-        check01 = tipoNodo.isEqualTo(tipoNodo.RAIZ).xnor(superior.isNull());
+        raiz = tipoNodo.isEqualTo(tipoNodo.RAIZ);
+        rama = tipoNodo.isEqualTo(tipoNodo.RAMA);
+        hoja = tipoNodo.isEqualTo(tipoNodo.HOJA);
+        /**/
+        check01 = raiz.xnor(superior.isNull());
         check01.setDefaultErrorMessage("el nodo superior se debe especificar si y solo si el tipo de nodo no es Raiz");
         check02 = this.isNull().or(superior.isNullOrNotEqualTo(this));
         check02.setDefaultErrorMessage("el nodo superior no puede ser este mismo nodo");
-        check13 = superior.isNotNull().implies(superior.tipoNodo.isNotEqualTo(tipoNodo.HOJA));
-        check13.setDefaultErrorMessage("el nodo superior no puede un nodo de tipo Hoja");
-        check03 = tipoNodo.isEqualTo(tipoNodo.HOJA).xnor(fuente.isNotNull());
-        check03.setDefaultErrorMessage("la fuente se debe especificar si y solo si el tipo de nodo es Hoja");
-        check04 = tipoNodo.isEqualTo(tipoNodo.HOJA).xnor(variable.isNotNull());
-        check04.setDefaultErrorMessage("la variable se debe especificar si y solo si el tipo de nodo es Hoja");
-        check05 = tipoNodo.isEqualTo(tipoNodo.HOJA).implies(coagulador.isFalse());
-        check05.setDefaultErrorMessage("el nodo puede ser coagulador solo si el tipo de nodo es Hoja");
-        check06 = tipoNodo.isEqualTo(tipoNodo.HOJA).xnor(amarillo.isNull());
-        check06.setDefaultErrorMessage("el extremo inferior del intervalo Amarillo se debe especificar si y solo si el tipo de nodo no es Hoja");
-        check07 = tipoNodo.isEqualTo(tipoNodo.HOJA).xnor(verde.isNull());
-        check07.setDefaultErrorMessage("el extremo inferior del intervalo Verde se debe especificar si y solo si el tipo de nodo no es Hoja");
-        check08 = amarillo.isNullOrLessThan(verde);
-        check08.setDefaultErrorMessage("el extremo inferior del intervalo Amarillo debe ser menor que del intervalo Verde");
-        check09 = tipoNodo.isEqualTo(tipoNodo.HOJA).implies(periodo.isNull());
-        check09.setDefaultErrorMessage("el periodo de cálculo se debe especificar solo si el tipo de nodo es Hoja");
-        check10 = tipoNodo.isEqualTo(tipoNodo.HOJA).implies(fechaProximoCalculo.isNull());
-        check10.setDefaultErrorMessage("la fecha del próximo cálculo se debe especificar solo si el tipo de nodo es Hoja");
-        check11 = tipoNodo.isEqualTo(tipoNodo.HOJA).or(periodo.isNull().xnor(fechaProximoCalculo.isNull()));
-        check11.setDefaultErrorMessage("el periodo de cálculo y la fecha del próximo cálculo se deben especificar conjuntamente");
-        check12 = fechaUltimoCalculo.isNullOrLessThan(fechaProximoCalculo);
-        check12.setDefaultErrorMessage("la fecha de la próxima medición debe ser mayor que la de la última medición");
+        check03 = superior.isNotNull().implies(superior.tipoNodo.isNotEqualTo(tipoNodo.HOJA));
+        check03.setDefaultErrorMessage("el nodo superior no puede un nodo de tipo Hoja");
+        check04 = hoja.xnor(fuente.isNotNull());
+        check04.setDefaultErrorMessage("la fuente se debe especificar si y solo si el tipo de nodo es Hoja");
+        check05 = hoja.xnor(variable.isNotNull());
+        check05.setDefaultErrorMessage("la variable se debe especificar si y solo si el tipo de nodo es Hoja");
+        check06 = hoja.implies(coagulador.isFalse());
+        check06.setDefaultErrorMessage("el nodo puede ser coagulador solo si el tipo de nodo es Hoja");
+        check07 = hoja.xnor(amarillo.isNull());
+        check07.setDefaultErrorMessage("el extremo inferior del intervalo Amarillo se debe especificar si y solo si el tipo de nodo no es Hoja");
+        check08 = hoja.xnor(verde.isNull());
+        check08.setDefaultErrorMessage("el extremo inferior del intervalo Verde se debe especificar si y solo si el tipo de nodo no es Hoja");
+        check09 = amarillo.isNullOrLessThan(verde);
+        check09.setDefaultErrorMessage("el extremo inferior del intervalo Amarillo debe ser menor que del intervalo Verde");
+        check10 = hoja.implies(periodo.isNull());
+        check10.setDefaultErrorMessage("el periodo de cálculo se debe especificar solo si el tipo de nodo es Hoja");
+        check11 = hoja.implies(fechaProximoCalculo.isNull());
+        check11.setDefaultErrorMessage("la fecha del próximo cálculo se debe especificar solo si el tipo de nodo es Hoja");
+        check12 = hoja.or(periodo.isNull().xnor(fechaProximoCalculo.isNull()));
+        check12.setDefaultErrorMessage("el periodo de cálculo y la fecha del próximo cálculo se deben especificar conjuntamente");
+        check13 = fechaUltimoCalculo.isNullOrLessThan(fechaProximoCalculo);
+        check13.setDefaultErrorMessage("la fecha de la próxima medición debe ser mayor que la de la última medición");
     }
 
     @Override
     protected void settleFilters() {
         super.settleFilters();
-        tab1.setRenderingFilter(tipoNodo.isEqualTo(tipoNodo.RAIZ));
-        tab2.setRenderingFilter(tipoNodo.isEqualTo(tipoNodo.RAMA));
-        tab3.setRenderingFilter(tipoNodo.isEqualTo(tipoNodo.HOJA));
-        tab4.setRenderingFilter(tipoNodo.isNotEqualTo(tipoNodo.HOJA));
+        tab1.setRenderingFilter(raiz);
+        tab2.setRenderingFilter(rama);
+        tab3.setRenderingFilter(hoja);
+        tab4.setRenderingFilter(not(hoja));
         /**/
-        superior.setRequiringFilter(tipoNodo.isNotEqualTo(tipoNodo.RAIZ));
-        fuente.setRequiringFilter(tipoNodo.isEqualTo(tipoNodo.HOJA));
-        variable.setRequiringFilter(tipoNodo.isEqualTo(tipoNodo.HOJA));
-        amarillo.setRequiringFilter(tipoNodo.isNotEqualTo(tipoNodo.HOJA));
-        verde.setRequiringFilter(tipoNodo.isNotEqualTo(tipoNodo.HOJA));
+        superior.setRequiringFilter(not(raiz));
+//      superior.setModifyingFilter(not(raiz));
+        /**/
+        fuente.setRequiringFilter(hoja);
+//      fuente.setModifyingFilter(hoja);
+        /**/
+        variable.setRequiringFilter(hoja);
+//      variable.setModifyingFilter(hoja);
+        /**/
+        amarillo.setRequiringFilter(not(hoja));
+//      amarillo.setModifyingFilter(not(hoja));
+        /**/
+        verde.setRequiringFilter(not(hoja));
+//      verde.setModifyingFilter(not(hoja));
     }
 
     protected Calcular calcular;

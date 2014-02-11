@@ -9,6 +9,7 @@ package meta.entidad.pcp1;
 import adalid.core.annotations.*;
 import adalid.core.enums.*;
 import adalid.core.interfaces.*;
+import adalid.core.properties.*;
 import java.lang.reflect.Field;
 
 /**
@@ -45,7 +46,7 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     /**
      * many-to-one entity reference property field
      */
-    @Allocation(maxDepth = 1, maxRound = 0)
+    @Allocation(maxDepth = 2, maxRound = 0)
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
@@ -53,12 +54,6 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     @PropertyField(update = Kleenean.FALSE)
     public Variable variable;
 
-//  /**
-//   * string property field
-//   */
-//  @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
-//  public StringProperty valor;
-//
     /**
      * many-to-one entity reference property field
      */
@@ -69,27 +64,38 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
     public RangoVariable rango;
 
-//  protected Segment tangible, intangible;
-//
+    /**
+     * string property field
+     */
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    public StringProperty valor;
+
+    protected Segment tangible, intangible;
+
     protected Check check01;
 
     @Override
     protected void settleExpressions() {
         super.settleExpressions();
-//      tangible = variable.tipoVariable.isEqualTo(variable.tipoVariable.TANGIBLE);
-//      intangible = variable.tipoVariable.isEqualTo(variable.tipoVariable.INTANGIBLE);
-        check01 = rango.variable.isNullOrEqualTo(variable);
+        tangible = variable.tipoVariable.isEqualTo(variable.tipoVariable.TANGIBLE);
+        intangible = variable.tipoVariable.isEqualTo(variable.tipoVariable.INTANGIBLE);
+        /**/
+        check01 = rango.isNull().or(rango.variable.isEqualTo(variable));
         check01.setDefaultErrorMessage("el rango no corresponde a la variable");
     }
 
     @Override
     protected void settleFilters() {
         super.settleFilters();
-//      valor.setRenderingFilter(tangible);
-//      valor.setRequiringFilter(tangible);
+        /**/
 //      rango.setRenderingFilter(intangible);
-//      rango.setRequiringFilter(intangible);
+        rango.setRequiringFilter(intangible);
+        rango.setModifyingFilter(intangible);
         rango.setSearchQueryFilter(check01);
+        /**/
+//      valor.setRenderingFilter(tangible);
+        valor.setRequiringFilter(tangible);
+        valor.setModifyingFilter(tangible);
     }
 
 }
