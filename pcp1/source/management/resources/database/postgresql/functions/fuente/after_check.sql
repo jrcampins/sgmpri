@@ -13,12 +13,25 @@ $$ language plpgsql;
 
 create or replace function fuente$after_check(_new$ fuente, _old$ fuente)
 returns boolean as $$
+declare
+    _enum_tipo_nodo RECORD;
+    _id bigint;
+    _msg character varying;
 begin
     raise notice 'fuente$after_check(new=%, old=%)', _new$, _old$;
+    _enum_tipo_nodo := tipo_nodo$enum();
     if _new$.superior is null or _new$.superior = _old$.superior then
         null;
     elsif fuente$references(_new$.id, _new$.superior) then
         perform fuente$raise$circular(_new$.id, _new$.superior);
+    end if;
+    if _new$.tipo_nodo <> _old$.tipo_nodo and _new$.tipo_nodo = _enum_tipo_nodo.HOJA then
+        select id into _id from fuente where superior = _new$.id;
+        if found then
+            _msg := gettext('la fuente %s no puede ser de tipo Hoja porque tiene fuentes subordinadas');
+            _msg := format(_msg, _new$.codigo);
+            raise exception using message = _msg;
+        end if;
     end if;
     return true;
 end;
