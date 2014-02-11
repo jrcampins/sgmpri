@@ -151,7 +151,7 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
         super.settleTabs();
         tab1.setDefaultLabel("general");
         tab1.newTabField(cuestionario, fuente, fechaProgramada, condicion, fechaCondicion);
-        tab2.setDefaultLabel("historia");
+        tab2.setDefaultLabel("cronologia");
         tab2.newTabField(fechaProgramada, programador, fechaRegistro, registrador, fechaVerificacion, verificador);
         tab3.setDefaultLabel("etc");
         tab3.newTabField(archivo, adjunto, observaciones);
