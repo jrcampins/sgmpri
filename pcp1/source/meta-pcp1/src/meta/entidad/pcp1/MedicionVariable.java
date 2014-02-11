@@ -33,6 +33,19 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     }
     // </editor-fold>
 
+    @Override
+    protected void settleAttributes() {
+        super.settleAttributes();
+        setDefaultLabel("medición de variable");
+        setDefaultShortLabel("medición de variable");
+        setDefaultCollectionLabel("Mediciones de Variables");
+        setDefaultCollectionShortLabel("Mediciones de Variables");
+        setDefaultLabel(medicion, "variable por medición");
+        setDefaultShortLabel(medicion, "variable");
+        setDefaultCollectionLabel(medicion, "Variables por Medición");
+        setDefaultCollectionShortLabel(medicion, "Variables");
+    }
+
     /**
      * many-to-one entity reference property field
      */

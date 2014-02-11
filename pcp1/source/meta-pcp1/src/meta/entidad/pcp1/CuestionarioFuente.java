@@ -39,10 +39,10 @@ public class CuestionarioFuente extends meta.entidad.base.PersistentEntityBase {
         setDefaultShortLabel("cuestionario/fuente");
         setDefaultCollectionLabel("Asociaciones Cuestionario/Fuente");
         setDefaultCollectionShortLabel("Cuestionarios/Fuentes");
-        setDefaultLabel(cuestionario, "fuente por cuestionario");
-        setDefaultShortLabel(cuestionario, "fuente");
-        setDefaultCollectionLabel(cuestionario, "Fuentes por Cuestionario");
-        setDefaultCollectionShortLabel(cuestionario, "Fuentes");
+//      setDefaultLabel(cuestionario, "fuente por cuestionario");
+//      setDefaultShortLabel(cuestionario, "fuente");
+//      setDefaultCollectionLabel(cuestionario, "Fuentes por Cuestionario");
+//      setDefaultCollectionShortLabel(cuestionario, "Fuentes");
         setDefaultLabel(fuente, "cuestionario por fuente");
         setDefaultShortLabel(fuente, "cuestionario");
         setDefaultCollectionLabel(fuente, "Cuestionarios por Fuente");

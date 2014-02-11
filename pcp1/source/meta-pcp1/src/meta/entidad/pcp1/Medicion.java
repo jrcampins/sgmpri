@@ -36,6 +36,15 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
     }
     // </editor-fold>
 
+    @Override
+    protected void settleAttributes() {
+        super.settleAttributes();
+        setDefaultLabel("medición");
+        setDefaultShortLabel("medición");
+        setDefaultCollectionLabel("Mediciones");
+        setDefaultCollectionShortLabel("Mediciones");
+    }
+
     /**
      * many-to-one entity reference property field
      */
@@ -141,11 +150,11 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
     protected void settleTabs() {
         super.settleTabs();
         tab1.setDefaultLabel("general");
-        tab1.newTabField(cuestionario, fuente, fechaProgramada, condicion, fechaCondicion, observaciones);
-        tab2.setDefaultLabel("archivo");
-        tab2.newTabField(archivo, adjunto);
-        tab3.setDefaultLabel("historia");
-        tab3.newTabField(programador, fechaProgramada, registrador, fechaRegistro, verificador, fechaVerificacion);
+        tab1.newTabField(cuestionario, fuente, fechaProgramada, condicion, fechaCondicion);
+        tab2.setDefaultLabel("historia");
+        tab2.newTabField(fechaProgramada, programador, fechaRegistro, registrador, fechaVerificacion, verificador);
+        tab3.setDefaultLabel("etc");
+        tab3.newTabField(archivo, adjunto, observaciones);
     }
 
     protected State programada, registrada, aceptada, rechazada;

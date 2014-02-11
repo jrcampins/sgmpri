@@ -28,6 +28,15 @@ public class ColorIndice extends meta.entidad.base.PersistentEnumerationEntityBa
     }
     // </editor-fold>
 
+    @Override
+    protected void settleAttributes() {
+        super.settleAttributes();
+        setDefaultLabel("color de índice");
+        setDefaultShortLabel("color");
+        setDefaultCollectionLabel("Colores de Indices");
+        setDefaultCollectionShortLabel("Colores");
+    }
+
     public Instance ROJO;
 
     public Instance AMARILLO;

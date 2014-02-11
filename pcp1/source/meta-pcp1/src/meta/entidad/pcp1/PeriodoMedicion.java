@@ -28,6 +28,15 @@ public class PeriodoMedicion extends meta.entidad.base.PersistentEnumerationEnti
     }
     // </editor-fold>
 
+    @Override
+    protected void settleAttributes() {
+        super.settleAttributes();
+        setDefaultLabel("período de medición");
+        setDefaultShortLabel("período de medición");
+        setDefaultCollectionLabel("Períodos de Medición");
+        setDefaultCollectionShortLabel("Períodos de Medición");
+    }
+
     public Instance DIARIO;
 
     public Instance SEMANAL;

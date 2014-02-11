@@ -42,10 +42,10 @@ public class CuestionarioVariable extends meta.entidad.base.PersistentEntityBase
         setDefaultShortLabel(cuestionario, "variable");
         setDefaultCollectionLabel(cuestionario, "Variables por Cuestionario");
         setDefaultCollectionShortLabel(cuestionario, "Variables");
-        setDefaultLabel(variable, "cuestionario por variable");
-        setDefaultShortLabel(variable, "cuestionario");
-        setDefaultCollectionLabel(variable, "Cuestionarios por Variable");
-        setDefaultCollectionShortLabel(variable, "Cuestionarios");
+//      setDefaultLabel(variable, "cuestionario por variable");
+//      setDefaultShortLabel(variable, "cuestionario");
+//      setDefaultCollectionLabel(variable, "Cuestionarios por Variable");
+//      setDefaultCollectionShortLabel(variable, "Cuestionarios");
     }
 
     /**

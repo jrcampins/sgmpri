@@ -28,6 +28,15 @@ public class TipoValorVariable extends meta.entidad.base.PersistentEnumerationEn
     }
     // </editor-fold>
 
+    @Override
+    protected void settleAttributes() {
+        super.settleAttributes();
+        setDefaultLabel("tipo de valor de variable");
+        setDefaultShortLabel("tipo de valor");
+        setDefaultCollectionLabel("Tipos de Valor de Variables");
+        setDefaultCollectionShortLabel("Tipos de Valor");
+    }
+
     public Instance CONTINUO;
 
     public Instance DISCRETO;

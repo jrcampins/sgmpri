@@ -28,6 +28,15 @@ public class CondicionMedicion extends meta.entidad.base.PersistentEnumerationEn
     }
     // </editor-fold>
 
+    @Override
+    protected void settleAttributes() {
+        super.settleAttributes();
+        setDefaultLabel("condición de medición");
+        setDefaultShortLabel("condición");
+        setDefaultCollectionLabel("Condiciones de Mediciones");
+        setDefaultCollectionShortLabel("Condiciones");
+    }
+
     public Instance PROGRAMADA;
 
     public Instance REGISTRADA;
