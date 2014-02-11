@@ -32,6 +32,15 @@ public class VariableIntangible extends Variable {
     }
     // </editor-fold>
 
+    @Override
+    protected void settleAttributes() {
+        super.settleAttributes();
+        setDefaultLabel("variable intangible");
+        setDefaultShortLabel("variable intangible");
+        setDefaultCollectionLabel("Variables Intangibles");
+        setDefaultCollectionShortLabel("Variables Intangibles");
+    }
+
     /**
      * integer property field
      */

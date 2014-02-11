@@ -42,9 +42,9 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     protected void settleAttributes() {
         super.settleAttributes();
         setDefaultLabel("nodo de índice");
-        setDefaultShortLabel("nodo de índice");
+        setDefaultShortLabel("nodo");
         setDefaultCollectionLabel("Nodos de Indices");
-        setDefaultCollectionShortLabel("Nodos de Indices");
+        setDefaultCollectionShortLabel("Nodos");
     }
 
     /**
@@ -90,7 +90,7 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
      */
     @BigDecimalField(precision = 16, scale = 15)
     @ColumnField(nullable = Kleenean.FALSE)
-    @PropertyField(create = Kleenean.TRUE, required = Kleenean.TRUE)
+    @PropertyField(create = Kleenean.TRUE, table = Kleenean.FALSE, report = Kleenean.FALSE, required = Kleenean.TRUE)
     public BigDecimalProperty peso;
 
     /**

@@ -37,6 +37,15 @@ public class Fuente extends meta.entidad.base.PersistentEntityBase {
     }
     // </editor-fold>
 
+    @Override
+    protected void settleAttributes() {
+        super.settleAttributes();
+        setDefaultLabel("fuente de información");
+        setDefaultShortLabel("fuente");
+        setDefaultCollectionLabel("Fuentes de Información");
+        setDefaultCollectionShortLabel("Fuentes");
+    }
+
     /**
      * business key property field
      */

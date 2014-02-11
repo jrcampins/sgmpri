@@ -41,9 +41,9 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     protected void settleAttributes() {
         super.settleAttributes();
         setDefaultLabel("valor de nodo de índice");
-        setDefaultShortLabel("valor de nodo de índice");
+        setDefaultShortLabel("valor de nodo");
         setDefaultCollectionLabel("Valores de Nodos de Indices");
-        setDefaultCollectionShortLabel("Valores de Nodos de Indices");
+        setDefaultCollectionShortLabel("Valores de Nodos");
     }
 
     /**

@@ -28,6 +28,15 @@ public class TipoVariable extends meta.entidad.base.PersistentEnumerationEntityB
     }
     // </editor-fold>
 
+    @Override
+    protected void settleAttributes() {
+        super.settleAttributes();
+        setDefaultLabel("tipo de variable");
+        setDefaultShortLabel("tipo de variable");
+        setDefaultCollectionLabel("Tipos de Variables");
+        setDefaultCollectionShortLabel("Tipos de Variables");
+    }
+
     static final String TIPO_TANGIBLE = "1";
 
     static final String TIPO_INTANGIBLE = "2";

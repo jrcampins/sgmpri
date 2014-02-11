@@ -31,6 +31,15 @@ public class VariableTangible extends Variable {
     }
     // </editor-fold>
 
+    @Override
+    protected void settleAttributes() {
+        super.settleAttributes();
+        setDefaultLabel("variable tangible");
+        setDefaultShortLabel("variable tangible");
+        setDefaultCollectionLabel("Variables Tangibles");
+        setDefaultCollectionShortLabel("Variables Tangibles");
+    }
+
     /**
      * many-to-one entity reference property field
      */

@@ -28,6 +28,15 @@ public class PeriodoCalculo extends meta.entidad.base.PersistentEnumerationEntit
     }
     // </editor-fold>
 
+    @Override
+    protected void settleAttributes() {
+        super.settleAttributes();
+        setDefaultLabel("período de cálculo");
+        setDefaultShortLabel("período de cálculo");
+        setDefaultCollectionLabel("Períodos de Cálculo");
+        setDefaultCollectionShortLabel("Períodos de Cálculo");
+    }
+
     public Instance DIARIO;
 
     public Instance SEMANAL;
