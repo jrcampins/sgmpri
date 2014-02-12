@@ -15,8 +15,8 @@ truncate pieza_ambiente_prueba cascade;
 -- pieza_ambiente_prueba
 -- -----------------------------------------------------------------------------------------------------------
 insert into pieza_ambiente_prueba (id, codigo, nombre) values (bigintid(), 'adalid', 'Adalid');
-insert into pieza_ambiente_prueba (id, codigo, nombre) values (bigintid(), 'meta-jee1', 'meta-jee1');
-insert into pieza_ambiente_prueba (id, codigo, nombre) values (bigintid(), 'jee1ap101', 'jee1ap101');
+insert into pieza_ambiente_prueba (id, codigo, nombre) values (bigintid(), 'meta-pcp1', 'meta-pcp1');
+insert into pieza_ambiente_prueba (id, codigo, nombre) values (bigintid(), 'pcp1ap101', 'pcp1ap101');
 insert into pieza_ambiente_prueba (id, codigo, nombre) values (bigintid(), 'java', 'Java Platform, Enterprise Edition');
 insert into pieza_ambiente_prueba (id, codigo, nombre) values (bigintid(), 'glassfish', 'GlassFish Application Server');
 insert into pieza_ambiente_prueba (id, codigo, nombre) values (bigintid(), 'postgresql', 'PostgreSQL Database Server');

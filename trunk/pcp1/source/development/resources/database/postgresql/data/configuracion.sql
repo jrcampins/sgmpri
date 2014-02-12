@@ -67,14 +67,14 @@ order by 1;
 -- -----------------------------------------------------------------------------------------------------------
 -- nodo_indice
 -- -----------------------------------------------------------------------------------------------------------
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, amarillo, verde)
-select id, 'INS#'||id, 'Indice del Nivel de Seguridad #'||id as nombre, 1 as tipo_nodo, 50 as amarillo, 80 as verde
+insert into nodo_indice (id, codigo, nombre, tipo_nodo)
+select id, 'INS#'||id, 'Indice del Nivel de Seguridad #'||id as nombre, 1 as tipo_nodo
 from fuente
 where tipo_nodo=1
 order by 1;
 
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, amarillo, verde, superior, numero)
-select bigintid() as id, n.codigo||'-C#'||c.id, 'Componente #'||c.id as nombre, 2 as tipo_nodo, 50 as amarillo, 80 as verde, n.id as superior,
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, numero)
+select bigintid() as id, n.codigo||'-C#'||c.id, 'Componente #'||c.id as nombre, 2 as tipo_nodo, n.id as superior,
     c.id as numero
 from nodo_indice n
 inner join cuestionario_fuente x on x.fuente = n.id
