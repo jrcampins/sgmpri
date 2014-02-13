@@ -61,6 +61,7 @@ set ok=true
 call:check-jar-file "%adalid_dir%\lib\adalid-jee1.jar"
 call:check-jar-file "%adalid_dir%\lib\adalid-core.jar"
 call:check-jar-file "%adalid_dir%\lib\adalid-commons.jar"
+call:check-jar-file "%adalid_dir%\lib\adalid-util.jar"
 call:check-jar-file "%adalid_dir%\lib\adalid-xmi.jar"
 if defined ok echo library "adalid-compile-meta-lib-1" checks OK
 echo.
