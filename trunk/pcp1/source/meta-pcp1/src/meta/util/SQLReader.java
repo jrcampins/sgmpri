@@ -7,7 +7,7 @@
 package meta.util;
 
 import adalid.commons.enums.LoggingLevel;
-import adalid.commons.sql.SqlReader;
+import adalid.util.sql.SqlReader;
 import meta.proyecto.comun.EntidadesComunes;
 
 /**
