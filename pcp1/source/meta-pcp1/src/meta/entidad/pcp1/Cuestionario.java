@@ -43,4 +43,10 @@ public class Cuestionario extends meta.entidad.base.PersistentEntityBase {
     @NameProperty
     public StringProperty nombre;
 
+    @Override
+    protected void settleProperties() {
+        super.settleProperties();
+        setOrderBy(codigo);
+    }
+
 }

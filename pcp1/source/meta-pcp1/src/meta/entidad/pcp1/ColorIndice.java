@@ -7,7 +7,10 @@
 package meta.entidad.pcp1;
 
 import adalid.core.*;
+import adalid.core.annotations.*;
+import adalid.core.enums.*;
 import adalid.core.interfaces.*;
+import adalid.core.properties.*;
 import java.lang.reflect.Field;
 
 /**
@@ -15,7 +18,8 @@ import java.lang.reflect.Field;
  *
  * @author Jorge Campins
  */
-public class ColorIndice extends meta.entidad.base.PersistentEnumerationEntityBase {
+@EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.CONFIGURATION)
+public class ColorIndice extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
     @Deprecated()
@@ -37,10 +41,33 @@ public class ColorIndice extends meta.entidad.base.PersistentEnumerationEntityBa
         setDefaultCollectionShortLabel("Colores");
     }
 
+    @BusinessKey
+    public StringProperty codigo;
+
+    @NumericKey
+    public IntegerProperty extremoInferior;
+
     public Instance ROJO;
 
     public Instance AMARILLO;
 
     public Instance VERDE;
+
+    @Override
+    protected void settleProperties() {
+        super.settleProperties();
+        setOrderBy(extremoInferior);
+    }
+
+    @Override
+    protected void settleInstances() {
+        super.settleInstances();
+        ROJO.newInstanceField(codigo, "Rojo");
+        ROJO.newInstanceField(extremoInferior, 0);
+        AMARILLO.newInstanceField(codigo, "Amarillo");
+        AMARILLO.newInstanceField(extremoInferior, 50);
+        VERDE.newInstanceField(codigo, "Verde");
+        VERDE.newInstanceField(extremoInferior, 80);
+    }
 
 }

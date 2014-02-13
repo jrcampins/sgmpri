@@ -56,4 +56,10 @@ public class Variable extends meta.entidad.base.PersistentEntityBase {
     @PropertyField(required = Kleenean.TRUE)
     public TipoVariable tipoVariable;
 
+    @Override
+    protected void settleProperties() {
+        super.settleProperties();
+        setOrderBy(codigo);
+    }
+
 }

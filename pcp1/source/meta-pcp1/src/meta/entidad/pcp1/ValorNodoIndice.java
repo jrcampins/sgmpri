@@ -9,10 +9,7 @@ package meta.entidad.pcp1;
 import adalid.core.annotations.*;
 import adalid.core.enums.*;
 import adalid.core.interfaces.*;
-import adalid.core.properties.BigDecimalProperty;
-import adalid.core.properties.DateProperty;
-import adalid.core.properties.IntegerProperty;
-import adalid.core.properties.StringProperty;
+import adalid.core.properties.*;
 import java.lang.reflect.Field;
 
 /**
@@ -80,6 +77,7 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @Allocation(maxDepth = 1, maxRound = 0)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @EntityReferenceSearch(searchType = SearchType.LIST, listStyle = ListStyle.CHARACTER_KEY)
     public ColorIndice colorNorma1;
 
     /**
@@ -100,6 +98,7 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @Allocation(maxDepth = 1, maxRound = 0)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @EntityReferenceSearch(searchType = SearchType.LIST, listStyle = ListStyle.CHARACTER_KEY)
     public ColorIndice colorNorma2;
 
     @Override

@@ -83,7 +83,7 @@ public class RangoVariable extends meta.entidad.base.PersistentEntityBase {
     protected void settleKeys() {
         super.settleKeys();
         key01.setUnique(true);
-        key01.newKeyField(numero, variable);
+        key01.newKeyField(variable, numero);
         setOrderBy(key01);
     }
 

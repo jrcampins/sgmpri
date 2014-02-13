@@ -75,6 +75,7 @@ public class CuestionarioVariable extends meta.entidad.base.PersistentEntityBase
         super.settleKeys();
         key01.setUnique(true);
         key01.newKeyField(cuestionario, variable);
+        setOrderBy(key01);
     }
 
 }

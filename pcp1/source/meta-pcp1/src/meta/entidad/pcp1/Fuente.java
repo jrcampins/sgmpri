@@ -6,7 +6,6 @@
  */
 package meta.entidad.pcp1;
 
-import adalid.core.*;
 import adalid.core.annotations.*;
 import adalid.core.enums.*;
 import adalid.core.interfaces.*;
@@ -91,16 +90,7 @@ public class Fuente extends meta.entidad.base.PersistentEntityBase {
         tipoNodo.setDefaultValue(tipoNodo.RAIZ);
         numero.setMinValue(1);
         numero.setMaxValue(100);
-    }
-
-    protected Key key01;
-
-    @Override
-    protected void settleKeys() {
-        super.settleKeys();
-        key01.setUnique(true);
-        key01.newKeyField(codigo);
-        setOrderBy(key01);
+        setOrderBy(codigo);
     }
 
     protected Segment raiz, rama, hoja;

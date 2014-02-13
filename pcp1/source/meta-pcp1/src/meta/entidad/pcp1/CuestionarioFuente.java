@@ -10,7 +10,7 @@ import adalid.core.*;
 import adalid.core.annotations.*;
 import adalid.core.enums.*;
 import adalid.core.interfaces.*;
-import adalid.core.properties.DateProperty;
+import adalid.core.properties.*;
 import java.lang.reflect.Field;
 
 /**
@@ -65,7 +65,7 @@ public class CuestionarioFuente extends meta.entidad.base.PersistentEntityBase {
     @Allocation(maxDepth = 1, maxRound = 0)
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
-    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE_AND_DETAIL)
+    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE)
     @PropertyField(required = Kleenean.TRUE)
     public Fuente fuente;
 
@@ -89,7 +89,7 @@ public class CuestionarioFuente extends meta.entidad.base.PersistentEntityBase {
     /**
      * date property field
      */
-    @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE)
+    @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.TRUE)
     public DateProperty fechaUltimaMedicion;
 
     protected Key key01;
@@ -99,6 +99,7 @@ public class CuestionarioFuente extends meta.entidad.base.PersistentEntityBase {
         super.settleKeys();
         key01.setUnique(true);
         key01.newKeyField(cuestionario, fuente);
+        setOrderBy(key01);
     }
 
     protected Check check01;
