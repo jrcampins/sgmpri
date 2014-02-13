@@ -107,7 +107,7 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
     public CondicionMedicion condicion;
 
     @ColumnField(nullable = Kleenean.FALSE)
-    @PropertyField(sequence = 1, create = Kleenean.FALSE, update = Kleenean.FALSE)
+    @PropertyField(sequence = 1, create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.TRUE, report = Kleenean.TRUE)
     public DateProperty fechaCondicion;
 
     @PropertyField(sequence = 1, create = Kleenean.FALSE, update = Kleenean.FALSE)
@@ -127,7 +127,7 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
      */
     @BusinessKey
     @StringField(maxLength = 100)
-    @PropertyField(sequence = 0, create = Kleenean.FALSE, update = Kleenean.FALSE)
+    @PropertyField(sequence = 0, create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.FALSE, report = Kleenean.FALSE)
     public StringProperty codigo;
 
     @Override
@@ -142,6 +142,7 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
         condicion.setDefaultValue(condicion.PROGRAMADA);
         fechaCondicion.setInitialValue(SpecialTemporalValue.CURRENT_DATE);
         fechaCondicion.setDefaultValue(SpecialTemporalValue.CURRENT_DATE);
+        setOrderBy(codigo);
     }
 
     protected Tab tab1, tab2, tab3;

@@ -88,8 +88,8 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
      * big decimal property field
      */
     @BigDecimalField(precision = 16, scale = 15)
-    @ColumnField(nullable = Kleenean.FALSE)
-    @PropertyField(create = Kleenean.TRUE, table = Kleenean.FALSE, report = Kleenean.FALSE, required = Kleenean.TRUE)
+    @ColumnField(nullable = Kleenean.TRUE)
+    @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.FALSE, report = Kleenean.FALSE)
     public BigDecimalProperty peso;
 
     /**
@@ -109,25 +109,6 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @PropertyField(create = Kleenean.TRUE)
     public Variable variable;
-
-    /**
-     * boolean property field
-     */
-    @ColumnField(nullable = Kleenean.FALSE)
-    @PropertyField(create = Kleenean.TRUE)
-    public BooleanProperty coagulador;
-
-    /**
-     * big decimal property field
-     */
-    @PropertyField(create = Kleenean.TRUE)
-    public IntegerProperty amarillo;
-
-    /**
-     * big decimal property field
-     */
-    @PropertyField(create = Kleenean.TRUE)
-    public IntegerProperty verde;
 
     /**
      * many-to-one entity reference property field
@@ -157,27 +138,7 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         tipoNodo.setDefaultValue(tipoNodo.RAIZ);
         numero.setMinValue(1);
         numero.setMaxValue(100);
-        peso.setInitialValue(1);
-        peso.setDefaultValue(1);
-        coagulador.setDefaultDescription("se requiere coagular (condensar en un solo valor) los índices de los nodos subordinados");
-        coagulador.setInitialValue(false);
-        coagulador.setDefaultValue(false);
-        amarillo.setDefaultDescription("extremo inferior del intervalo Amarillo");
-        amarillo.setMinValue(0);
-        amarillo.setMaxValue(100);
-        verde.setDefaultDescription("extremo inferior del intervalo Verde");
-        verde.setMinValue(0);
-        verde.setMaxValue(100);
-    }
-
-    protected Key key01;
-
-    @Override
-    protected void settleKeys() {
-        super.settleKeys();
-        key01.setUnique(true);
-        key01.newKeyField(codigo);
-        setOrderBy(key01);
+        setOrderBy(codigo);
     }
 
     protected Tab tab1, tab2, tab3, tab4;
@@ -186,9 +147,9 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     protected void settleTabs() {
         super.settleTabs();
         tab1.setDefaultLabel("general");
-        tab1.newTabField(tipoNodo, numero, clave, peso, coagulador, amarillo, verde);
+        tab1.newTabField(tipoNodo, numero, clave, peso);
         tab2.setDefaultLabel("general");
-        tab2.newTabField(tipoNodo, numero, clave, peso, superior, coagulador, amarillo, verde);
+        tab2.newTabField(tipoNodo, numero, clave, peso, superior);
         tab3.setDefaultLabel("general");
         tab3.newTabField(tipoNodo, numero, clave, peso, superior, fuente, variable);
         tab4.setDefaultLabel("cálculo");
@@ -197,7 +158,9 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
 
     protected Segment raiz, rama, hoja;
 
-    protected Check check01, check02, check03, check04, check05, check06, check07, check08, check09, check10, check11, check12, check13;
+    protected Check check01, check02, check03, check04, check05;
+
+    protected Check check10, check11, check12, check13;
 
     @Override
     protected void settleExpressions() {
@@ -211,19 +174,11 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         check02 = this.isNull().or(superior.isNullOrNotEqualTo(this));
         check02.setDefaultErrorMessage("el nodo superior no puede ser este mismo nodo");
         check03 = superior.isNotNull().implies(superior.tipoNodo.isNotEqualTo(tipoNodo.HOJA));
-        check03.setDefaultErrorMessage("el nodo superior no puede un nodo de tipo Hoja");
+        check03.setDefaultErrorMessage("el nodo superior no puede ser un nodo de tipo Hoja");
         check04 = hoja.xnor(fuente.isNotNull());
         check04.setDefaultErrorMessage("la fuente se debe especificar si y solo si el tipo de nodo es Hoja");
         check05 = hoja.xnor(variable.isNotNull());
         check05.setDefaultErrorMessage("la variable se debe especificar si y solo si el tipo de nodo es Hoja");
-        check06 = hoja.implies(coagulador.isFalse());
-        check06.setDefaultErrorMessage("el nodo puede ser coagulador solo si el tipo de nodo es Hoja");
-        check07 = hoja.xnor(amarillo.isNull());
-        check07.setDefaultErrorMessage("el extremo inferior del intervalo Amarillo se debe especificar si y solo si el tipo de nodo no es Hoja");
-        check08 = hoja.xnor(verde.isNull());
-        check08.setDefaultErrorMessage("el extremo inferior del intervalo Verde se debe especificar si y solo si el tipo de nodo no es Hoja");
-        check09 = amarillo.isNullOrLessThan(verde);
-        check09.setDefaultErrorMessage("el extremo inferior del intervalo Amarillo debe ser menor que del intervalo Verde");
         check10 = hoja.implies(periodo.isNull());
         check10.setDefaultErrorMessage("el periodo de cálculo se debe especificar solo si el tipo de nodo es Hoja");
         check11 = hoja.implies(fechaProximoCalculo.isNull());
@@ -232,9 +187,6 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         check12.setDefaultErrorMessage("el periodo de cálculo y la fecha del próximo cálculo se deben especificar conjuntamente");
         check13 = fechaUltimoCalculo.isNullOrLessThan(fechaProximoCalculo);
         check13.setDefaultErrorMessage("la fecha de la próxima medición debe ser mayor que la de la última medición");
-        /**/
-        amarillo.setDefaultValue(not(hoja).then(50));
-        verde.setDefaultValue(not(hoja).then(80));
     }
 
     @Override
@@ -259,16 +211,26 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         variable.setRequiringFilter(hoja);
         variable.setModifyingFilter(hoja);
         variable.setNullifyingFilter(not(hoja));
-        /**/
-//      amarillo.setRenderingFilter(not(hoja));
-        amarillo.setRequiringFilter(not(hoja));
-        amarillo.setModifyingFilter(not(hoja));
-        amarillo.setNullifyingFilter(hoja);
-        /**/
-//      verde.setRenderingFilter(not(hoja));
-        verde.setRequiringFilter(not(hoja));
-        verde.setModifyingFilter(not(hoja));
-        verde.setNullifyingFilter(hoja);
+    }
+
+    protected Programar programar;
+
+    @ProcessOperationClass(overloading = Kleenean.FALSE)
+    @OperationClass(access = OperationAccess.RESTRICTED)
+    public class Programar extends ProcessOperation {
+
+        @Override
+        protected void settleAttributes() {
+            super.settleAttributes();
+            setDefaultLabel("programar mediciones");
+        }
+
+        /**
+         * instance reference parameter field
+         */
+        @InstanceReference
+        protected NodoIndice nodo;
+
     }
 
     protected Calcular calcular;

@@ -20,6 +20,10 @@ public class Modulo1 extends Project {
         setDefaultDescription("Medición");
     }
 
+    ColorIndice colorIndice;
+
+    ColorNodoIndice colorNodoIndice;
+
     Cuestionario cuestionario;
 
     CuestionarioFuente cuestionarioFuente;
@@ -35,6 +39,8 @@ public class Modulo1 extends Project {
     NodoIndice nodoIndice;
 
     RangoVariable rangoVariable;
+
+    RazonNodoIndice razonNodoIndice;
 
     ValorNodoIndice valorNodoIndice;
 

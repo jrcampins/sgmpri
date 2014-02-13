@@ -6,6 +6,7 @@
  */
 package meta.entidad.pcp1;
 
+import adalid.core.*;
 import adalid.core.annotations.*;
 import adalid.core.enums.*;
 import adalid.core.interfaces.*;
@@ -82,6 +83,16 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
      */
     @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
     public StringProperty valor;
+
+    protected Key key01;
+
+    @Override
+    protected void settleKeys() {
+        super.settleKeys();
+        key01.setUnique(true);
+        key01.newKeyField(medicion, variable);
+        setOrderBy(key01);
+    }
 
     protected Segment tangible, intangible;
 
