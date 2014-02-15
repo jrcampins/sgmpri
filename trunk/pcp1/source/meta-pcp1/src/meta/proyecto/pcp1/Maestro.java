@@ -31,14 +31,8 @@ public class Maestro extends ProyectoBase {
         maestro.setDefaultDescription("Sistema de Gestión de Mantenimiento y Preservación de Recursos Industriales");
         if (maestro.build()) {
             maestro.setAlias("pcp1ap101");
-//          maestro.generate("jee1ap101");
+//          maestro.generate(PLATAFORMA_BASE);
             maestro.generate("jee1af101"); // jee1af101: netbeans, postgresql, glassfish
-//          maestro.setAlias("pcp1ap102");
-//          maestro.generate("jee1af102"); // jee1af102: netbeans, postgresql, jboss
-//          maestro.setAlias("pcp1ap201");
-//          maestro.generate("jee1af201"); // jee1af201: eclipse,  postgresql, glassfish
-//          maestro.setAlias("pcp1ap202");
-//          maestro.generate("jee1af202"); // jee1af202: eclipse,  postgresql, jboss
         }
     }
 
