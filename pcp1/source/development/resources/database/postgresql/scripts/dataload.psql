@@ -1,0 +1,22 @@
+\echo :ddlxdir
+\echo :joindir
+\cd :joindir
+\echo
+\encoding
+\encoding LATIN1
+\encoding UTF8
+\encoding
+\set AUTOCOMMIT off
+\echo --------------------------------------------------------------------------
+BEGIN TRANSACTION;
+\echo --------------------------------------------------------------------------
+SET client_min_messages TO WARNING;
+\echo
+\i acceso.sql
+\i configuracion.sql
+\i operacion.sql
+\i prueba.sql
+\echo --------------------------------------------------------------------------
+COMMIT TRANSACTION;
+\echo --------------------------------------------------------------------------
+\q
