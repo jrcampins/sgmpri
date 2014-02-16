@@ -1,8 +1,0 @@
-/*
-    $template
-    $StringEscapeUtils.unescapeJava($path)
-    $file
-    $StringEscapeUtils.unescapeJava($filePath)
-    $filePathFile
-*/
-#break
