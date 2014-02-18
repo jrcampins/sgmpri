@@ -195,30 +195,30 @@ if /i not "%old%" == "%new%" (
 goto:eof
 
 :replaceOldProjectCode
-call:replace-old-project-code-1 bat
-call:replace-old-project-code-1 cli
-call:replace-old-project-code-1 css
-call:replace-old-project-code-1 html
+rem :replace-old-project-code-1 bat
+rem :replace-old-project-code-1 classpath
+rem :replace-old-project-code-1 cli
+rem :replace-old-project-code-1 css
+rem :replace-old-project-code-1 html
 call:replace-old-project-code-1 java
-call:replace-old-project-code-1 jrtx
-call:replace-old-project-code-1 jrxml
-call:replace-old-project-code-1 jspf
-call:replace-old-project-code-1 jsp
-call:replace-old-project-code-1 js
-call:replace-old-project-code-1 osql
-call:replace-old-project-code-1 password
-call:replace-old-project-code-1 properties
-call:replace-old-project-code-1 psql
-call:replace-old-project-code-1 sh
-call:replace-old-project-code-1 sql
-call:replace-old-project-code-1 tld
-call:replace-old-project-code-1 txt
-call:replace-old-project-code-1 userlibraries
-call:replace-old-project-code-1 vm
-call:replace-old-project-code-1 xml
-call:replace-old-project-code-1 classpath
-call:replace-old-project-code-1 project
-call:replace-old-project-code-2 org.eclipse
+rem :replace-old-project-code-1 jrtx
+rem :replace-old-project-code-1 jrxml
+rem :replace-old-project-code-1 js
+rem :replace-old-project-code-1 jsp
+rem :replace-old-project-code-1 jspf
+rem :replace-old-project-code-1 osql
+rem :replace-old-project-code-1 password
+rem :replace-old-project-code-1 project
+rem :replace-old-project-code-1 properties
+rem :replace-old-project-code-1 psql
+rem :replace-old-project-code-1 sh
+rem :replace-old-project-code-1 sql
+rem :replace-old-project-code-1 tld
+rem :replace-old-project-code-1 txt
+rem :replace-old-project-code-1 userlibraries
+rem :replace-old-project-code-1 vm
+rem :replace-old-project-code-1 xml
+rem :replace-old-project-code-2 org.eclipse
 goto:eof
 
 :replace-old-project-code-1
