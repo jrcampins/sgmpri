@@ -1,28 +1,13 @@
-set project_source_dir=%CD%
-set project_source_dir
-if exist source call:set-project-source-dir
-if exist set-project-source-dir.bat call "%~dp0set-project-source-dir.bat"
-echo.
-pushd "%project_source_dir%"
-cd ..
-call:set-project-variables %CD%
+pushd "%~dp0"
+call:set-project-variables "%CD%"
 call:set-variables-date-time
-popd
-rem set workspace
-rem set project
-rem echo.
-goto:eof
-
-:set-project-source-dir
-pushd source
-set project_source_dir=%CD%
-set project_source_dir
 popd
 goto:eof
 
 :set-project-variables
 set project=%~n1
 set project_dir=%~f1
+set project_source_dir=%project_dir%\source
 set workspace=%~dp1
 set workspace=%workspace:~0,-1%
 set adalid_dir=%workspace%\adalid
