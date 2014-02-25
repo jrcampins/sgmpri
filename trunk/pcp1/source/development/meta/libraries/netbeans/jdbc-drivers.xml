@@ -17,5 +17,4 @@
     <volume>
         <type>maven-pom</type>
     </volume>
-    <properties/>
 </library>
