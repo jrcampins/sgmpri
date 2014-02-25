@@ -25,7 +25,6 @@ call:add-to-classpath "%third_party_dir%\lib\jasperreports-4.0.0.jar"
 call:add-to-classpath "%third_party_dir%\lib\joda-time-1.6.2.jar"
 call:add-to-classpath "%third_party_dir%\lib\log4j-1.2.16.jar"
 call:add-to-classpath "%third_party_dir%\lib\velocity-1.7.jar"
-call:add-to-classpath "%third_party_dir%\lib\xstream-1.3.1.jar"
 set JAVA_HOME 1>>%LOG_FILE%
 set JAVA_HOME
 if not defined JAVA_HOME echo. & pause & goto:eof

@@ -50,7 +50,6 @@ call:check-jar-file "%third_party_dir%\lib\jasperreports-4.0.0.jar"
 call:check-jar-file "%third_party_dir%\lib\joda-time-1.6.2.jar"
 call:check-jar-file "%third_party_dir%\lib\log4j-1.2.16.jar"
 call:check-jar-file "%third_party_dir%\lib\velocity-1.7.jar"
-call:check-jar-file "%third_party_dir%\lib\xstream-1.3.1.jar"
 if defined ok echo library "adalid-compile-lib-1" checks OK
 echo.
 goto:eof
@@ -158,7 +157,6 @@ call:check-jar-file "%third_party_dir%\lib\log4j-1.2.16.jar"
 call:check-jar-file "%third_party_dir%\lib\poi-3.6-20091214.jar"
 call:check-jar-file "%third_party_dir%\lib\spring.jar"
 call:check-jar-file "%third_party_dir%\lib\velocity-1.7.jar"
-call:check-jar-file "%third_party_dir%\lib\xstream-1.3.1.jar"
 if defined ok echo commons, jasperreports, joda-time, log4j, velocity ^& xstream jar files check OK
 echo.
 set ok=true
