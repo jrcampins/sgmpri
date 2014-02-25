@@ -3,19 +3,22 @@ cd /d "%~dp0"
 setlocal
 set does_not_exist=
 set already_exists=
-set junction=%HOMEDRIVE%%HOMEPATH%\workspace\third-party\tools\junction\junction.exe
-set source_workspace=%HOMEDRIVE%%HOMEPATH%\workspace
-set target_workspace=%CD%
-set source_workspace
-set target_workspace
+set junction=%USERPROFILE%\workspace\third-party\tools\junction\junction.exe
+set junction
 call:check-exist junction executable file "%junction%"
-call:check-exist source workspace "%source_workspace%"
+if defined does_not_exist goto:eof
+echo.
+set target_workspace=%CD%
+set target_workspace
 call:check-exist target workspace "%target_workspace%"
 if defined does_not_exist goto:eof
-call:junction adalid
+echo.
+set source_workspace=%USERPROFILE%\workspace
+call:junction third-party
 if defined does_not_exist goto:eof
 if defined already_exists goto:eof
-call:junction third-party
+set source_workspace=%USERPROFILE%\Projects\adalid\workspace
+call:junction adalid
 if defined does_not_exist goto:eof
 if defined already_exists goto:eof
 echo.
@@ -25,6 +28,9 @@ goto:eof
 :junction
 set does_not_exist=
 set already_exists=
+set source_workspace
+call:check-exist source workspace "%source_workspace%"
+if defined does_not_exist goto:eof
 set source="%source_workspace%\%1"
 set target="%target_workspace%\%1"
 call:check-junction %1
@@ -33,7 +39,6 @@ if not defined junction_token call:check-not-exist target directory %target%
 if defined does_not_exist goto:eof
 if defined already_exists goto:eof
 if defined junction_token "%junction%" -d %1
-echo.
 "%junction%" %1 %source%
 echo.
 goto:eof
