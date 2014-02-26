@@ -185,9 +185,9 @@ if defined ok echo visualweb2 jar files check OK
 echo.
 set ok=true
 echo checking fonts ^& drivers jar files
-call:check-jar-file "%third_party_dir%\jboss\modules\com\microsoft\core\fonts\main\microsoft-core-fonts-for-the-web.jar"
-call:check-jar-file "%third_party_dir%\jboss\modules\com\oracle\ojdbc6\main\ojdbc6.jar"
-call:check-jar-file "%third_party_dir%\jboss\modules\org\postgresql\pgjdbc4\main\postgresql-9.2-1002.jdbc4.jar"
+call:check-jar-file "%third_party_dir%\lib\fonts\microsoft\microsoft-core-fonts-for-the-web.jar"
+call:check-jar-file "%third_party_dir%\lib\jdbc\oracle\ojdbc6.jar"
+call:check-jar-file "%third_party_dir%\lib\jdbc\postgresql\postgresql-9.2-1002.jdbc4.jar"
 if defined ok echo fonts ^& drivers jar files check OK
 echo.
 goto:eof
