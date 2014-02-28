@@ -70,23 +70,6 @@ public class CuestionarioFuente extends meta.entidad.base.PersistentEntityBase {
     public Fuente fuente;
 
     /**
-     * many-to-one entity reference property field
-     */
-    @Allocation(maxDepth = 1, maxRound = 0)
-    @ColumnField(nullable = Kleenean.FALSE)
-    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
-    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE)
-    public PeriodoMedicion periodo;
-
-    /**
-     * date property field
-     */
-    @ColumnField(nullable = Kleenean.FALSE)
-    @PropertyField(required = Kleenean.TRUE)
-    public DateProperty fechaProximaMedicion;
-
-    /**
      * date property field
      */
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.TRUE)
@@ -100,15 +83,6 @@ public class CuestionarioFuente extends meta.entidad.base.PersistentEntityBase {
         key01.setUnique(true);
         key01.newKeyField(cuestionario, fuente);
         setOrderBy(key01);
-    }
-
-    protected Check check01;
-
-    @Override
-    protected void settleExpressions() {
-        super.settleExpressions();
-        check01 = fechaUltimaMedicion.isNullOrLessThan(fechaProximaMedicion);
-        check01.setDefaultErrorMessage("la fecha de la próxima medición debe ser mayor que la de la última medición");
     }
 
 }

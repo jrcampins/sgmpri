@@ -26,8 +26,8 @@ order by 1;
 -- -----------------------------------------------------------------------------------------------------------
 -- cuestionario_fuente
 -- -----------------------------------------------------------------------------------------------------------
-insert into cuestionario_fuente (id, cuestionario, fuente, periodo, fecha_proxima_medicion)
-select bigintid() as id, c.id as cuestionario, v.id as fuente, 3 as periodo, current_date as fecha_proxima_medicion
+insert into cuestionario_fuente (id, cuestionario, fuente)
+select bigintid() as id, c.id as cuestionario, v.id as fuente
 from cuestionario c, fuente v
 order by 1;
 
