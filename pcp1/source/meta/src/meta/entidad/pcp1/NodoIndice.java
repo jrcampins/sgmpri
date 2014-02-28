@@ -111,21 +111,6 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     public Variable variable;
 
     /**
-     * many-to-one entity reference property field
-     */
-    @Allocation(maxDepth = 1, maxRound = 0)
-    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
-    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(create = Kleenean.TRUE)
-    public PeriodoCalculo periodo;
-
-    /**
-     * date property field
-     */
-    @PropertyField(create = Kleenean.TRUE)
-    public DateProperty fechaProximoCalculo;
-
-    /**
      * date property field
      */
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE)
@@ -147,20 +132,16 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     protected void settleTabs() {
         super.settleTabs();
         tab1.setDefaultLabel("general");
-        tab1.newTabField(tipoNodo, numero, clave, peso);
+        tab1.newTabField(tipoNodo, numero, clave, peso, fechaUltimoCalculo);
         tab2.setDefaultLabel("general");
-        tab2.newTabField(tipoNodo, numero, clave, peso, superior);
+        tab2.newTabField(tipoNodo, numero, clave, peso, superior, fechaUltimoCalculo);
         tab3.setDefaultLabel("general");
-        tab3.newTabField(tipoNodo, numero, clave, peso, superior, fuente, variable);
-        tab4.setDefaultLabel("cálculo");
-        tab4.newTabField(periodo, fechaProximoCalculo, fechaUltimoCalculo);
+        tab3.newTabField(tipoNodo, numero, clave, peso, superior, fuente, variable, fechaUltimoCalculo);
     }
 
     protected Segment raiz, rama, hoja;
 
     protected Check check01, check02, check03, check04, check05;
-
-    protected Check check10, check11, check12, check13;
 
     @Override
     protected void settleExpressions() {
@@ -179,14 +160,6 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         check04.setDefaultErrorMessage("la fuente se debe especificar si y solo si el tipo de nodo es Hoja");
         check05 = hoja.xnor(variable.isNotNull());
         check05.setDefaultErrorMessage("la variable se debe especificar si y solo si el tipo de nodo es Hoja");
-        check10 = hoja.implies(periodo.isNull());
-        check10.setDefaultErrorMessage("el periodo de cálculo se debe especificar solo si el tipo de nodo es Hoja");
-        check11 = hoja.implies(fechaProximoCalculo.isNull());
-        check11.setDefaultErrorMessage("la fecha del próximo cálculo se debe especificar solo si el tipo de nodo es Hoja");
-        check12 = hoja.or(periodo.isNull().xnor(fechaProximoCalculo.isNull()));
-        check12.setDefaultErrorMessage("el periodo de cálculo y la fecha del próximo cálculo se deben especificar conjuntamente");
-        check13 = fechaUltimoCalculo.isNullOrLessThan(fechaProximoCalculo);
-        check13.setDefaultErrorMessage("la fecha de la próxima medición debe ser mayor que la de la última medición");
     }
 
     @Override
