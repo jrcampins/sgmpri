@@ -126,7 +126,7 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         setOrderBy(codigo);
     }
 
-    protected Tab tab1, tab2, tab3, tab4;
+    protected Tab tab1, tab2, tab3;
 
     @Override
     protected void settleTabs() {
@@ -168,7 +168,6 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         tab1.setRenderingFilter(raiz);
         tab2.setRenderingFilter(rama);
         tab3.setRenderingFilter(hoja);
-        tab4.setRenderingFilter(not(hoja));
         /**/
 //      superior.setRenderingFilter(not(raiz));
         superior.setRequiringFilter(not(raiz));
@@ -204,6 +203,20 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         @InstanceReference
         protected NodoIndice nodo;
 
+        Check check01;
+
+        @Override
+        protected void settleExpressions() {
+            super.settleExpressions();
+            check01 = nodo.tipoNodo.isNotEqualTo(nodo.tipoNodo.HOJA);
+        }
+
+        @Override
+        protected void settleFilters() {
+            super.settleFilters();
+            nodo.setSearchQueryFilter(check01);
+        }
+
     }
 
     protected Calcular calcular;
@@ -212,11 +225,31 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     @OperationClass(access = OperationAccess.RESTRICTED)
     public class Calcular extends ProcessOperation {
 
+        @Override
+        protected void settleAttributes() {
+            super.settleAttributes();
+            setDefaultLabel("calcular indices");
+        }
+
         /**
          * instance reference parameter field
          */
         @InstanceReference
         protected NodoIndice nodo;
+
+        Check check01;
+
+        @Override
+        protected void settleExpressions() {
+            super.settleExpressions();
+            check01 = nodo.tipoNodo.isNotEqualTo(nodo.tipoNodo.HOJA);
+        }
+
+        @Override
+        protected void settleFilters() {
+            super.settleFilters();
+            nodo.setSearchQueryFilter(check01);
+        }
 
     }
 

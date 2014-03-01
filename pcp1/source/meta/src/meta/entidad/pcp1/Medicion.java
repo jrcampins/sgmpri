@@ -22,6 +22,7 @@ import meta.entidad.comun.control.acceso.Usuario;
  * @author Jorge Campins
  */
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.OPERATION)
+@EntityInsertOperation(enabled = Kleenean.FALSE)
 @EntityUpdateOperation(enabled = Kleenean.FALSE)
 public class Medicion extends meta.entidad.base.PersistentEntityBase {
 
@@ -48,78 +49,58 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
     /**
      * many-to-one entity reference property field
      */
-    @Allocation(maxDepth = 1, maxRound = 0)
-    @ColumnField(nullable = Kleenean.FALSE)
-    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
-    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(sequence = 1, create = Kleenean.TRUE, update = Kleenean.FALSE)
-    public Cuestionario cuestionario;
-
-    /**
-     * many-to-one entity reference property field
-     */
     @SegmentProperty
     @Allocation(maxDepth = 1, maxRound = 0)
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(sequence = 1, create = Kleenean.TRUE, update = Kleenean.FALSE)
     public Fuente fuente;
 
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(sequence = 1, create = Kleenean.FALSE, update = Kleenean.FALSE)
     public Usuario programador;
 
     /**
      * date property field
      */
     @ColumnField(nullable = Kleenean.FALSE)
-    @PropertyField(sequence = 1, create = Kleenean.FALSE, update = Kleenean.FALSE)
     public DateProperty fechaProgramada;
 
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(sequence = 1, create = Kleenean.FALSE, update = Kleenean.FALSE)
     public Usuario registrador;
 
     /**
      * date property field
      */
-    @PropertyField(sequence = 1, create = Kleenean.FALSE, update = Kleenean.FALSE)
     public DateProperty fechaRegistro;
 
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(sequence = 1, create = Kleenean.FALSE, update = Kleenean.FALSE)
     public Usuario verificador;
 
     /**
      * date property field
      */
-    @PropertyField(sequence = 1, create = Kleenean.FALSE, update = Kleenean.FALSE)
     public DateProperty fechaVerificacion;
 
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(sequence = 1, create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
     public CondicionMedicion condicion;
 
     @ColumnField(nullable = Kleenean.FALSE)
-    @PropertyField(sequence = 1, create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
     public DateProperty fechaCondicion;
 
-    @PropertyField(sequence = 1, create = Kleenean.FALSE, update = Kleenean.FALSE)
     public StringProperty observaciones;
 
     @FileReference
-    @PropertyField(sequence = 1, create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.TRUE, report = Kleenean.TRUE)
     public StringProperty archivo;
 
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(sequence = 1, create = Kleenean.FALSE, update = Kleenean.FALSE)
     public ArchivoAdjunto adjunto;
 
     /**
@@ -127,13 +108,12 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
      */
     @BusinessKey
     @StringField(maxLength = 100)
-    @PropertyField(sequence = 0, create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.FALSE, report = Kleenean.FALSE)
+    @PropertyField(sequence = 1)
     public StringProperty codigo;
 
     @Override
     protected void settleProperties() {
         super.settleProperties();
-        codigo.setDefaultValue(fuente.codigo.concat("-").concat(cuestionario.codigo).concat("-").concat(fechaProgramada.toCharString()));
         programador.setInitialValue(SpecialEntityValue.CURRENT_USER);
         programador.setDefaultValue(SpecialEntityValue.CURRENT_USER);
         fechaProgramada.setInitialValue(SpecialTemporalValue.CURRENT_DATE);
@@ -151,7 +131,7 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
     protected void settleTabs() {
         super.settleTabs();
         tab1.setDefaultLabel("general");
-        tab1.newTabField(cuestionario, fuente, fechaProgramada, condicion, fechaCondicion);
+        tab1.newTabField(fuente, fechaProgramada, condicion, fechaCondicion);
         tab2.setDefaultLabel("cronologia");
         tab2.newTabField(fechaProgramada, programador, fechaRegistro, registrador, fechaVerificacion, verificador);
         tab3.setDefaultLabel("etc");

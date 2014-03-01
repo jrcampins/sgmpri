@@ -23,12 +23,12 @@ public class Modulo1 extends Project {
     ColorIndice colorIndice;
 
     ColorNodoIndice colorNodoIndice;
-
-    Cuestionario cuestionario;
-
-    CuestionarioFuente cuestionarioFuente;
-
-    CuestionarioVariable cuestionarioVariable;
+//
+//  Cuestionario cuestionario;
+//
+//  CuestionarioFuente cuestionarioFuente;
+//
+//  CuestionarioVariable cuestionarioVariable;
 
     Fuente fuente;
 
