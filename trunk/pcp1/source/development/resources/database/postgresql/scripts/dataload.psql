@@ -4,7 +4,6 @@
 \echo
 \encoding
 \encoding LATIN1
-\encoding UTF8
 \encoding
 \set AUTOCOMMIT off
 \echo --------------------------------------------------------------------------

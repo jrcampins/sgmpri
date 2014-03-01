@@ -1,34 +1,16 @@
+truncate table valor_nodo_indice cascade;
 truncate table medicion_variable cascade;
 truncate table medicion cascade;
 truncate table nodo_indice cascade;
-truncate table cuestionario_variable cascade;
 truncate table variable cascade;
-truncate table cuestionario_fuente cascade;
 truncate table fuente cascade;
-truncate table cuestionario cascade;
-
--- -----------------------------------------------------------------------------------------------------------
--- cuestionario
--- -----------------------------------------------------------------------------------------------------------
-insert into cuestionario (id, codigo, nombre)
-select id as id, 'C#'||id as codigo, 'Cuestionario #'||id as nombre
-from generate_series(1001::bigint, 1010::bigint) as id
-order by 1;
 
 -- -----------------------------------------------------------------------------------------------------------
 -- fuente
 -- -----------------------------------------------------------------------------------------------------------
 insert into fuente (id, codigo, nombre)
 select id as id, 'F#'||id as codigo, 'Fuente #'||id as nombre
-from generate_series(1001::bigint, 1010::bigint) as id
-order by 1;
-
--- -----------------------------------------------------------------------------------------------------------
--- cuestionario_fuente
--- -----------------------------------------------------------------------------------------------------------
-insert into cuestionario_fuente (id, cuestionario, fuente)
-select bigintid() as id, c.id as cuestionario, v.id as fuente
-from cuestionario c, fuente v
+from generate_series(1001::bigint, 1100::bigint) as id
 order by 1;
 
 -- -----------------------------------------------------------------------------------------------------------
@@ -56,38 +38,21 @@ from generate_series(2001::bigint, 2100::bigint) as id
 order by 1;
 
 -- -----------------------------------------------------------------------------------------------------------
--- cuestionario_variable
--- -----------------------------------------------------------------------------------------------------------
-insert into cuestionario_variable (id, cuestionario, variable)
-select bigintid() as id, c.id as cuestionario, v.id as variable
-from cuestionario c, variable v
-where v.tipo_variable=2 and v.id%1000 between 10*(c.id%1000)-9 and 10*(c.id%1000)
-order by 1;
-
--- -----------------------------------------------------------------------------------------------------------
 -- nodo_indice
 -- -----------------------------------------------------------------------------------------------------------
 insert into nodo_indice (id, codigo, nombre, tipo_nodo)
-select id, 'INS#'||id, 'Indice del Nivel de Seguridad #'||id as nombre, 1 as tipo_nodo
-from fuente
-where tipo_nodo=1
+select id, 'INS#'||id as codigo, 'Indice del Nivel de Seguridad #'||id as nombre, 1 as tipo_nodo
+from generate_series(1::bigint, 10::bigint) as id
 order by 1;
 
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, numero)
-select bigintid() as id, n.codigo||'-C#'||c.id, 'Componente #'||c.id as nombre, 2 as tipo_nodo, n.id as superior,
-    c.id as numero
-from nodo_indice n
-inner join cuestionario_fuente x on x.fuente = n.id
-inner join cuestionario c on c.id = x.cuestionario
-where n.tipo_nodo=1
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior)
+select f.id as id, n.codigo||'-'||f.codigo as codigo, 'Componente '||f.codigo as nombre, 2 as tipo_nodo, n.id as superior
+from nodo_indice n, fuente f
+where n.tipo_nodo=1 and f.id%1000 between 10*n.id-9 and 10*n.id
 order by 1;
 
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, fuente, variable)
-select bigintid() as id, n.codigo||'-V#'||v.id, v.nombre, 3 as tipo_nodo, n.id as superior, n.superior as fuente, x.variable
-from nodo_indice n
-inner join cuestionario_variable x on x.cuestionario = n.numero
-inner join variable v on v.id = x.variable
-where n.tipo_nodo=2
+select bigintid() as id, n.codigo||'-'||v.codigo as codigo, v.nombre, 3 as tipo_nodo, n.id as superior, n.id as fuente, v.id as variable
+from nodo_indice n, variable v
+where n.tipo_nodo=2 and v.tipo_variable=2 and v.id%1000 between 10*(n.superior%1000)-9 and 10*(n.superior%1000)
 order by 1;
-
-update nodo_indice set numero = null;

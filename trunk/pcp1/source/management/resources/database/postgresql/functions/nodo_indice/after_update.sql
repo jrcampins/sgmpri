@@ -4,7 +4,7 @@ declare
 begin
     _enum_tipo_nodo := tipo_nodo$enum();
     if new.tipo_nodo <> old.tipo_nodo then
-        if new.tipo_nodo <> _enum_tipo_nodo.HOJA then
+        if new.tipo_nodo <> _enum_tipo_nodo.HOJA and old.tipo_nodo = _enum_tipo_nodo.HOJA then
             insert into color_nodo_indice (id, nodo, color, extremo_inferior)
             select bigintid(), new.id, id, extremo_inferior
             from color_indice
