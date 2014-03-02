@@ -75,6 +75,7 @@ public class RangoVariable extends meta.entidad.base.PersistentEntityBase {
         numero.setMinValue(0);
         numero.setMaxValue(9);
         nombre.setDefaultDescription("forma lingüistica del Rango de Tendencia Dominante (RTD)");
+        setOrderBy(variable.codigo, numero);
     }
 
     protected Key key01;
@@ -84,7 +85,6 @@ public class RangoVariable extends meta.entidad.base.PersistentEntityBase {
         super.settleKeys();
         key01.setUnique(true);
         key01.newKeyField(variable, numero);
-        setOrderBy(key01);
     }
 
     protected Check check01;

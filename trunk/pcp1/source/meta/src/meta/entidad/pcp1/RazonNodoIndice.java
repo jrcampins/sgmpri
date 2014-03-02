@@ -19,6 +19,8 @@ import java.lang.reflect.Field;
  * @author Jorge Campins
  */
 @EntityClass(independent = Kleenean.FALSE, resourceType = ResourceType.CONFIGURATION)
+@EntityInsertOperation(enabled = Kleenean.FALSE)
+@EntityDeleteOperation(enabled = Kleenean.FALSE)
 public class RazonNodoIndice extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
@@ -48,6 +50,7 @@ public class RazonNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE)
+    @PropertyField(update = Kleenean.FALSE)
     public NodoIndice nodo;
 
     /**
@@ -57,6 +60,7 @@ public class RazonNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(update = Kleenean.FALSE)
     public NodoIndice numerador;
 
     /**
@@ -66,16 +70,25 @@ public class RazonNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(update = Kleenean.FALSE)
     public NodoIndice denominador;
 
     @ColumnField(nullable = Kleenean.TRUE)
+    @BigDecimalField(precision = 16, scale = 4)
     @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
     public BigDecimalProperty razon;
+
+    @ColumnField(nullable = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.TRUE)
+    BooleanProperty editable;
 
     @Override
     protected void settleProperties() {
         super.settleProperties();
         razon.setDefaultValue(numerador.isEqualTo(denominador).then(1));
+        editable.setDefaultValue(true);
+        setUpdateFilter(editable.and(numerador.isNotEqualTo(denominador)));
+        setOrderBy(nodo.codigo, numerador.codigo, denominador.codigo);
     }
 
     protected Key key01;
@@ -85,10 +98,9 @@ public class RazonNodoIndice extends meta.entidad.base.PersistentEntityBase {
         super.settleKeys();
         key01.setUnique(true);
         key01.newKeyField(nodo, numerador, denominador);
-        setOrderBy(key01);
     }
 
-    protected Check check01, check02, check03;
+    protected Check check01, check02, check03, check04;
 
     @Override
     protected void settleExpressions() {
@@ -97,8 +109,10 @@ public class RazonNodoIndice extends meta.entidad.base.PersistentEntityBase {
         check01.setDefaultErrorMessage("el numerador no es un subordinado del nodo");
         check02 = nodo.isEqualTo(denominador.superior);
         check02.setDefaultErrorMessage("el denominador no es un subordinado del nodo");
-        check03 = numerador.isNotEqualTo(denominador);
-        check03.setDefaultErrorMessage("el numerador es igual al denominador");
+        check03 = razon.isNullOrGreaterThan(0);
+        check03.setDefaultErrorMessage("la razón es menor o igual a 0");
+        check04 = numerador.isEqualTo(denominador).implies(razon.isEqualTo(1));
+        check04.setDefaultErrorMessage("el numerador y el denominador son iguales y la razón no es igual a 1");
     }
 
 }
