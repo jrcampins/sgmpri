@@ -68,6 +68,12 @@ public class CuestionarioVariable extends meta.entidad.base.PersistentEntityBase
     @PropertyField(required = Kleenean.TRUE)
     public Variable variable;
 
+    @Override
+    protected void settleProperties() {
+        super.settleProperties();
+        setOrderBy(cuestionario.codigo, variable.codigo);
+    }
+
     protected Key key01;
 
     @Override
@@ -75,7 +81,6 @@ public class CuestionarioVariable extends meta.entidad.base.PersistentEntityBase
         super.settleKeys();
         key01.setUnique(true);
         key01.newKeyField(cuestionario, variable);
-        setOrderBy(key01);
     }
 
 }

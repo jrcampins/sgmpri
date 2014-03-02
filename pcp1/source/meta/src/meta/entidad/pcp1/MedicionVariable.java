@@ -84,6 +84,12 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
     public StringProperty valor;
 
+    @Override
+    protected void settleProperties() {
+        super.settleProperties();
+        setOrderBy(medicion.codigo, variable.codigo);
+    }
+
     protected Key key01;
 
     @Override
@@ -91,7 +97,6 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
         super.settleKeys();
         key01.setUnique(true);
         key01.newKeyField(medicion, variable);
-        setOrderBy(key01);
     }
 
     protected Segment tangible, intangible;

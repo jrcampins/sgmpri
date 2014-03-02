@@ -75,6 +75,12 @@ public class CuestionarioFuente extends meta.entidad.base.PersistentEntityBase {
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.TRUE)
     public DateProperty fechaUltimaMedicion;
 
+    @Override
+    protected void settleProperties() {
+        super.settleProperties();
+        setOrderBy(cuestionario.codigo, fuente.codigo);
+    }
+
     protected Key key01;
 
     @Override
@@ -82,7 +88,6 @@ public class CuestionarioFuente extends meta.entidad.base.PersistentEntityBase {
         super.settleKeys();
         key01.setUnique(true);
         key01.newKeyField(cuestionario, fuente);
-        setOrderBy(key01);
     }
 
 }

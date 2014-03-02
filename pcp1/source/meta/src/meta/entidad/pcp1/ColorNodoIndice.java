@@ -68,6 +68,7 @@ public class ColorNodoIndice extends meta.entidad.base.PersistentEntityBase {
         super.settleProperties();
         extremoInferior.setMinValue(0);
         extremoInferior.setMaxValue(100);
+        setOrderBy(nodo.codigo, extremoInferior);
     }
 
     protected Key key01, key02;
@@ -79,7 +80,6 @@ public class ColorNodoIndice extends meta.entidad.base.PersistentEntityBase {
         key01.newKeyField(nodo, color);
         key02.setUnique(true);
         key02.newKeyField(nodo, extremoInferior);
-        setOrderBy(key02);
     }
 
 }

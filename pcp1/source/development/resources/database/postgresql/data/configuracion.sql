@@ -41,7 +41,7 @@ order by 1;
 -- nodo_indice
 -- -----------------------------------------------------------------------------------------------------------
 insert into nodo_indice (id, codigo, nombre, tipo_nodo)
-select id, 'INS#'||id as codigo, 'Indice del Nivel de Seguridad #'||id as nombre, 1 as tipo_nodo
+select id, 'INS#'||lpad(''||id, 4, '0') as codigo, 'Indice del Nivel de Seguridad #'||lpad(''||id, 4, '0') as nombre, 1 as tipo_nodo
 from generate_series(1::bigint, 10::bigint) as id
 order by 1;
 
