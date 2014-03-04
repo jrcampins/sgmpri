@@ -68,6 +68,8 @@ public class ColorNodoIndice extends meta.entidad.base.PersistentEntityBase {
         super.settleProperties();
         extremoInferior.setMinValue(0);
         extremoInferior.setMaxValue(100);
+        setInsertFilter(nodo.raizRama);
+        setMasterDetailFilter(nodo.raizRama);
         setOrderBy(nodo.codigo, extremoInferior);
     }
 
