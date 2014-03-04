@@ -7,8 +7,10 @@
 package meta.util;
 
 import adalid.commons.enums.LoggingLevel;
+import adalid.commons.properties.PropertiesGetter;
 import adalid.util.sql.SqlReader;
 import meta.proyecto.comun.EntidadesComunes;
+import org.apache.commons.collections.ExtendedProperties;
 
 /**
  * @author Jorge Campins
@@ -78,6 +80,10 @@ public class SQLReader {
     // </editor-fold>
 
     public static void main(String[] args) {
+        if (args.length == 0) {
+            ExtendedProperties properties = PropertiesGetter.getPrivateProperties();
+            args = properties.getStringArray(SQLReader.class.getName() + ".arg");
+        }
         SqlReader reader = new SqlReader(args);
         if (reader.isInitialised()) {
             EntidadesComunes.setAlertLoggingLevel(LoggingLevel.OFF);
