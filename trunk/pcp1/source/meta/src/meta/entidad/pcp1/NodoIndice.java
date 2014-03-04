@@ -141,14 +141,22 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
 
     protected Segment raiz, rama, hoja;
 
+    protected Segment raizRama;
+
     protected Check check01, check02, check03, check04, check05;
 
     @Override
     protected void settleExpressions() {
         super.settleExpressions();
         raiz = tipoNodo.isEqualTo(tipoNodo.RAIZ);
+        raiz.setDefaultErrorMessage("el nodo no es de tipo Raiz");
         rama = tipoNodo.isEqualTo(tipoNodo.RAMA);
+        rama.setDefaultErrorMessage("el nodo no es de tipo Rama");
         hoja = tipoNodo.isEqualTo(tipoNodo.HOJA);
+        hoja.setDefaultErrorMessage("el nodo no es de tipo Hoja");
+        /**/
+        raizRama = not(hoja);
+        raizRama.setDefaultErrorMessage("el nodo es de tipo Hoja");
         /**/
         check01 = raiz.xnor(superior.isNull());
         check01.setDefaultErrorMessage("el nodo superior se debe especificar si y solo si el tipo de nodo no es Raiz");

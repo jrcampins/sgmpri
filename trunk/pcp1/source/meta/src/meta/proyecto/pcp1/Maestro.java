@@ -31,6 +31,8 @@ public class Maestro extends ProyectoBase {
         maestro.setDefaultDescription("Sistema de Gestión de Mantenimiento y Preservación de Recursos Industriales");
         if (maestro.build()) {
             maestro.setAlias("pcp1ap101");
+//          maestro.setSecurityRealmType(SecurityRealmType.LDAP);
+//          maestro.setRoleBasedAccessControllerName("LDAP");
             maestro.generate(PLATAFORMA_BASE);
             maestro.generate(PLATAFORMA_NETBEANS_POSTGRESQL_GLASSFISH);
         }
