@@ -7,24 +7,22 @@
 package meta.util;
 
 import adalid.commons.properties.PropertiesGetter;
-import adalid.util.i18n.Merger;
+import adalid.util.sql.SqlMerger;
 import org.apache.commons.collections.ExtendedProperties;
 
 /**
  * @author Jorge Campins
  */
-public class I18NMerger {
+public class SQLMerger {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         if (args.length == 0) {
             ExtendedProperties properties = PropertiesGetter.getPrivateProperties();
-            args = properties.getStringArray(I18NMerger.class.getName() + ".args");
+            args = properties.getStringArray(SQLMerger.class.getName() + ".args");
         }
-        for (int i = 0; i < args.length; i++) {
-            Merger.merge(args[i]);
+        SqlMerger merger = new SqlMerger(args);
+        if (merger.isInitialised()) {
+            merger.merge();
         }
     }
 

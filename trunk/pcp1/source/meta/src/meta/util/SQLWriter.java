@@ -8,14 +8,14 @@ package meta.util;
 
 import adalid.commons.enums.LoggingLevel;
 import adalid.commons.properties.PropertiesGetter;
-import adalid.util.sql.SqlReader;
+import adalid.util.sql.SqlWriter;
 import meta.proyecto.comun.EntidadesComunes;
 import org.apache.commons.collections.ExtendedProperties;
 
 /**
  * @author Jorge Campins
  */
-public class SQLReader {
+public class SQLWriter {
 
     // <editor-fold defaultstate="collapsed" desc="listas de tablas">
     private static final String[] TABLAS_EXCLUIDAS = new String[]{
@@ -82,16 +82,16 @@ public class SQLReader {
     public static void main(String[] args) {
         if (args.length == 0) {
             ExtendedProperties properties = PropertiesGetter.getPrivateProperties();
-            args = properties.getStringArray(SQLReader.class.getName() + ".arg");
+            args = properties.getStringArray(SQLWriter.class.getName() + ".args");
         }
-        SqlReader reader = new SqlReader(args);
-        if (reader.isInitialised()) {
+        SqlWriter writer = new SqlWriter(args);
+        if (writer.isInitialised()) {
             EntidadesComunes.setAlertLoggingLevel(LoggingLevel.OFF);
             EntidadesComunes entidadesComunes = new EntidadesComunes();
             if (entidadesComunes.build()) {
-                reader.setTablesExcludeSet(TABLAS_EXCLUIDAS);
-                reader.setTablesInheritMap(entidadesComunes.getTablesMap());
-                reader.generate();
+                writer.setTablesExcludeSet(TABLAS_EXCLUIDAS);
+                writer.setTablesInheritMap(entidadesComunes.getTablesMap());
+                writer.write();
             }
         }
     }
