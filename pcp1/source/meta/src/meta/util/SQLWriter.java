@@ -91,6 +91,7 @@ public class SQLWriter {
             if (entidadesComunes.build()) {
                 writer.setTablesExcludeSet(TABLAS_EXCLUIDAS);
                 writer.setTablesInheritMap(entidadesComunes.getTablesMap());
+                writer.setLoadConfigurationTables(true);
                 writer.write();
             }
         }
