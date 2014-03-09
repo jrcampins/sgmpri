@@ -6,8 +6,10 @@
  */
 package meta.util;
 
+import adalid.commons.enums.LoggingLevel;
 import adalid.commons.properties.PropertiesGetter;
 import adalid.util.sql.SqlMerger;
+import meta.proyecto.comun.ConfiguracionBasica;
 import org.apache.commons.collections.ExtendedProperties;
 
 /**
@@ -22,7 +24,12 @@ public class SQLMerger {
         }
         SqlMerger merger = new SqlMerger(args);
         if (merger.isInitialised()) {
-            merger.merge();
+            ConfiguracionBasica.setAlertLoggingLevel(LoggingLevel.OFF);
+            ConfiguracionBasica configuracionBasica = new ConfiguracionBasica();
+            if (configuracionBasica.build()) {
+                merger.setTablesLoadMap(configuracionBasica.getTablesMap());
+                merger.merge();
+            }
         }
     }
 
