@@ -88,6 +88,7 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @EntityReferenceSearch(searchType = SearchType.LIST, listStyle = ListStyle.CHARACTER_KEY)
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
     public ColorIndice colorNorma1;
 
     /**
@@ -109,6 +110,7 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @EntityReferenceSearch(searchType = SearchType.LIST, listStyle = ListStyle.CHARACTER_KEY)
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
     public ColorIndice colorNorma2;
 
     @Override
