@@ -1,21 +1,4 @@
-/*
-create or replace function nodo_indice$programar$biz(_super$ bigint, _nodo$ bigint) returns integer as $$
-declare
-    _msg character varying;
-    _log rastro_proceso%ROWTYPE;
-begin
-    raise notice 'nodo_indice$programar$biz(%, %)', _super$, _nodo$;
-    select * into _log from rastro_proceso_temporal;
-    if not found then
-        _msg := format(gettext('no existe %s con %s = %s'), 'rastro de proceso temporal', 'id', pg_backend_pid());
-        raise exception using message = _msg;
-    end if;
-    perform nodo_indice$programar$biz$sub(_nodo$, _super$, _log.id_usuario, current_date);
-    return 0;
-end;
-$$ language plpgsql;
-
-create or replace function nodo_indice$programar$biz$sub(_nodo$ bigint, _lote$ bigint, _programador$ bigint, _fecha$ date)
+create or replace function medicion_fuente$insert(_medicion_nodo$ bigint, _nodo$ bigint, _programador$ bigint, _fecha_programada$ date)
 returns void as $$
 declare
     _msg character varying;
@@ -25,13 +8,13 @@ declare
     _id2 bigint;
     _codigo character varying;
 begin
-    raise notice 'nodo_indice$programar$biz$sub(nodo=%, lote=%, programador=%, fecha=%)', _nodo$, _lote$, _programador$, _fecha$;
+    raise notice 'medicion_fuente$insert(medicion=%, nodo=%, programador=%, fecha=%)', _medicion_nodo$, _nodo$, _programador$, _fecha_programada$;
     _enum_tipo_nodo := tipo_nodo$enum();
     for _sub in select * from nodo_indice where superior = _nodo$
     loop
         if _sub.tipo_nodo = _enum_tipo_nodo.HOJA then
-            select id into _id1 from medicion
-            where version = _lote$ and fuente = _sub.fuente and programador = _programador$ and fecha_programada = _fecha$;
+            select id into _id1 from medicion_fuente
+            where medicion = _medicion_nodo$ and fuente = _sub.fuente;
             if not found then
                 _id1 := bigintid();
                 select codigo into _codigo from fuente where id = _sub.fuente;
@@ -40,8 +23,8 @@ begin
                     raise exception using message = _msg;
                 end if;
                 insert
-                into medicion (id, version, fuente, programador, fecha_programada, codigo)
-                values (_id1, _lote$, _sub.fuente, _programador$, _fecha$, _lote$||'-'||_codigo);
+                into medicion_fuente (id, codigo, medicion, fuente, programador, fecha_programada)
+                values (_id1, _codigo||'-'||_medicion_nodo$, _medicion_nodo$, _sub.fuente, _programador$, _fecha_programada$);
                 insert
                 into medicion_variable (id, medicion, variable)
                 values (bigintid(), _id1, _sub.variable);
@@ -55,9 +38,8 @@ begin
                 end if;
             end if;
         else
-            perform nodo_indice$programar$biz$sub(_sub.id, _lote$, _programador$, _fecha$);
+            perform medicion_fuente$insert(_medicion_nodo$, _sub.id, _programador$, _fecha_programada$);
         end if;
     end loop;
 end;
 $$ language plpgsql;
-*/

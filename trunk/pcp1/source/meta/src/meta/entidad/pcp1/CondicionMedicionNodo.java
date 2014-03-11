@@ -11,19 +11,19 @@ import adalid.core.interfaces.*;
 import java.lang.reflect.Field;
 
 /**
- * CondicionMedicion Persistent Entity.
+ * CondicionMedicionNodo Persistent Entity.
  *
  * @author Jorge Campins
  */
-public class CondicionMedicion extends meta.entidad.base.PersistentEnumerationEntityBase {
+public class CondicionMedicionNodo extends meta.entidad.base.PersistentEnumerationEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
     @Deprecated()
-    private CondicionMedicion() {
+    private CondicionMedicionNodo() {
         this(null, null);
     }
 
-    public CondicionMedicion(Artifact declaringArtifact, Field declaringField) {
+    public CondicionMedicionNodo(Artifact declaringArtifact, Field declaringField) {
         super(declaringArtifact, declaringField);
     }
     // </editor-fold>
@@ -31,18 +31,18 @@ public class CondicionMedicion extends meta.entidad.base.PersistentEnumerationEn
     @Override
     protected void settleAttributes() {
         super.settleAttributes();
-        setDefaultLabel("condición de medición");
+        setDefaultLabel("condición de medición por nodo");
         setDefaultShortLabel("condición");
-        setDefaultCollectionLabel("Condiciones de Mediciones");
+        setDefaultCollectionLabel("Condiciones de Mediciones por Nodo");
         setDefaultCollectionShortLabel("Condiciones");
     }
 
     public Instance PROGRAMADA;
 
-    public Instance REGISTRADA;
+    public Instance EMPEZADA;
 
-    public Instance ACEPTADA;
+    public Instance TERMINADA;
 
-    public Instance RECHAZADA;
+    public Instance CANCELADA;
 
 }

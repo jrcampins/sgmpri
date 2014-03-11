@@ -87,7 +87,7 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     /**
      * big decimal property field
      */
-    @BigDecimalField(precision = 16, scale = 15)
+    @BigDecimalField(precision = 7, scale = 4)
     @ColumnField(nullable = Kleenean.TRUE)
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.FALSE, report = Kleenean.FALSE)
     public BigDecimalProperty peso;
@@ -191,74 +191,6 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         variable.setRequiringFilter(hoja);
         variable.setModifyingFilter(hoja);
         variable.setNullifyingFilter(not(hoja));
-    }
-
-    protected Programar programar;
-
-    @ProcessOperationClass(overloading = Kleenean.FALSE)
-    @OperationClass(access = OperationAccess.RESTRICTED)
-    public class Programar extends ProcessOperation {
-
-        @Override
-        protected void settleAttributes() {
-            super.settleAttributes();
-            setDefaultLabel("programar mediciones");
-        }
-
-        /**
-         * instance reference parameter field
-         */
-        @InstanceReference
-        protected NodoIndice nodo;
-
-        Check check01;
-
-        @Override
-        protected void settleExpressions() {
-            super.settleExpressions();
-            check01 = nodo.tipoNodo.isNotEqualTo(nodo.tipoNodo.HOJA);
-        }
-
-        @Override
-        protected void settleFilters() {
-            super.settleFilters();
-            nodo.setSearchQueryFilter(check01);
-        }
-
-    }
-
-    protected Calcular calcular;
-
-    @ProcessOperationClass(overloading = Kleenean.FALSE)
-    @OperationClass(access = OperationAccess.RESTRICTED)
-    public class Calcular extends ProcessOperation {
-
-        @Override
-        protected void settleAttributes() {
-            super.settleAttributes();
-            setDefaultLabel("calcular indices");
-        }
-
-        /**
-         * instance reference parameter field
-         */
-        @InstanceReference
-        protected NodoIndice nodo;
-
-        Check check01;
-
-        @Override
-        protected void settleExpressions() {
-            super.settleExpressions();
-            check01 = nodo.tipoNodo.isNotEqualTo(nodo.tipoNodo.HOJA);
-        }
-
-        @Override
-        protected void settleFilters() {
-            super.settleFilters();
-            nodo.setSearchQueryFilter(check01);
-        }
-
     }
 
 }
