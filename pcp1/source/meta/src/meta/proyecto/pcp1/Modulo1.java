@@ -32,7 +32,9 @@ public class Modulo1 extends Project {
 
     Fuente fuente;
 
-    Medicion medicion;
+    MedicionFuente medicionFuente;
+
+    MedicionNodo medicionNodo;
 
     MedicionVariable medicionVariable;
 

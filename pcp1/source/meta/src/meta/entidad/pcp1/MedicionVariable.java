@@ -55,7 +55,7 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE)
     @PropertyField(update = Kleenean.FALSE)
-    public Medicion medicion;
+    public MedicionFuente medicion;
 
     /**
      * many-to-one entity reference property field

@@ -17,22 +17,22 @@ import meta.entidad.comun.auditoria.ArchivoAdjunto;
 import meta.entidad.comun.control.acceso.Usuario;
 
 /**
- * Medicion Persistent Entity.
+ * MedicionFuente Persistent Entity.
  *
  * @author Jorge Campins
  */
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.OPERATION)
 @EntityInsertOperation(enabled = Kleenean.FALSE)
 @EntityUpdateOperation(enabled = Kleenean.FALSE)
-public class Medicion extends meta.entidad.base.PersistentEntityBase {
+public class MedicionFuente extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
     @Deprecated()
-    private Medicion() {
+    private MedicionFuente() {
         this(null, null);
     }
 
-    public Medicion(Artifact declaringArtifact, Field declaringField) {
+    public MedicionFuente(Artifact declaringArtifact, Field declaringField) {
         super(declaringArtifact, declaringField);
     }
     // </editor-fold>
@@ -40,11 +40,32 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
     @Override
     protected void settleAttributes() {
         super.settleAttributes();
-        setDefaultLabel("medición");
-        setDefaultShortLabel("medición");
-        setDefaultCollectionLabel("Mediciones");
-        setDefaultCollectionShortLabel("Mediciones");
+        setDefaultLabel("medición por fuente");
+        setDefaultShortLabel("medición por fuente");
+        setDefaultCollectionLabel("Mediciones por Fuente");
+        setDefaultCollectionShortLabel("Mediciones por Fuente");
+        setDefaultLabel(medicion, "fuente por medición");
+        setDefaultShortLabel(medicion, "fuente");
+        setDefaultCollectionLabel(medicion, "Fuentes por Medición");
+        setDefaultCollectionShortLabel(medicion, "Fuentes");
     }
+
+    /**
+     * business key property field
+     */
+    @BusinessKey
+    @StringField(maxLength = 100)
+    public StringProperty codigo;
+
+    /**
+     * many-to-one entity reference property field
+     */
+    @Allocation(maxDepth = 1, maxRound = 0)
+    @ColumnField(nullable = Kleenean.FALSE)
+    @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
+    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE)
+    @PropertyField(update = Kleenean.FALSE)
+    public MedicionNodo medicion;
 
     /**
      * many-to-one entity reference property field
@@ -88,7 +109,7 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
-    public CondicionMedicion condicion;
+    public CondicionMedicionFuente condicion;
 
     @ColumnField(nullable = Kleenean.FALSE)
     @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
@@ -102,14 +123,6 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     public ArchivoAdjunto adjunto;
-
-    /**
-     * business key property field
-     */
-    @BusinessKey
-    @StringField(maxLength = 100)
-    @PropertyField(sequence = 1)
-    public StringProperty codigo;
 
     @Override
     protected void settleProperties() {
@@ -131,7 +144,7 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
     protected void settleTabs() {
         super.settleTabs();
         tab1.setDefaultLabel("general");
-        tab1.newTabField(fuente, fechaProgramada, condicion, fechaCondicion);
+        tab1.newTabField(medicion, fuente, fechaProgramada, condicion, fechaCondicion);
         tab2.setDefaultLabel("cronologia");
         tab2.newTabField(fechaProgramada, programador, fechaRegistro, registrador, fechaVerificacion, verificador);
         tab3.setDefaultLabel("etc");
@@ -144,13 +157,13 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
     protected void settleExpressions() {
         super.settleExpressions();
         programada = condicion.isEqualTo(condicion.PROGRAMADA);
-        programada.setDefaultErrorMessage("el registro no se encuentra en condición Programada");
+        programada.setDefaultErrorMessage("la medición no se encuentra en condición Programada");
         registrada = condicion.isEqualTo(condicion.REGISTRADA);
-        registrada.setDefaultErrorMessage("el registro no se encuentra en condición Registrada");
+        registrada.setDefaultErrorMessage("la medición no se encuentra en condición Registrada");
         aceptada = condicion.isEqualTo(condicion.ACEPTADA);
-        aceptada.setDefaultErrorMessage("el registro no se encuentra en condición Aceptada");
+        aceptada.setDefaultErrorMessage("la medición no se encuentra en condición Aceptada");
         rechazada = condicion.isEqualTo(condicion.RECHAZADA);
-        rechazada.setDefaultErrorMessage("el registro no se encuentra en condición Rechazada");
+        rechazada.setDefaultErrorMessage("la medición no se encuentra en condición Rechazada");
     }
 
     @Override
@@ -184,7 +197,7 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
 
         @InstanceReference
         @Allocation(maxDepth = 1, maxRound = 0)
-        protected Medicion medicion;
+        protected MedicionFuente medicion;
 
         @FileReference(joinField = "adjunto")
         @ParameterField(required = Kleenean.TRUE, linkedField = "archivo")
@@ -214,7 +227,7 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
 
         @InstanceReference
         @Allocation(maxDepth = 1, maxRound = 0)
-        protected Medicion medicion;
+        protected MedicionFuente medicion;
 
         @Override
         protected void settleParameters() {
@@ -235,7 +248,7 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
 
         @InstanceReference
         @Allocation(maxDepth = 1, maxRound = 0)
-        protected Medicion medicion;
+        protected MedicionFuente medicion;
 
         @ParameterField(required = Kleenean.FALSE, linkedField = "observaciones")
         protected StringParameter observaciones;
@@ -259,7 +272,7 @@ public class Medicion extends meta.entidad.base.PersistentEntityBase {
 
         @InstanceReference
         @Allocation(maxDepth = 1, maxRound = 0)
-        protected Medicion medicion;
+        protected MedicionFuente medicion;
 
         @ParameterField(required = Kleenean.FALSE, linkedField = "observaciones")
         protected StringParameter observaciones;
