@@ -59,7 +59,7 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @Allocation(maxDepth = 1, maxRound = 0)
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
-    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE)
+    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     public NodoIndice nodo;
 
     @ColumnField(nullable = Kleenean.FALSE)
