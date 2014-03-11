@@ -1,3 +1,4 @@
+/*
 create or replace function nodo_indice$rangos(_nodo$ bigint) returns SETOF RECORD as $$
 declare
     _enum_tipo_nodo RECORD;
@@ -47,3 +48,4 @@ begin
     end loop;
 end;
 $$ language plpgsql;
+*/
