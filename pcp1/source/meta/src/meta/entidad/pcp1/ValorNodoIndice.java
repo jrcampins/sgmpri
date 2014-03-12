@@ -11,6 +11,7 @@ import adalid.core.enums.*;
 import adalid.core.interfaces.*;
 import adalid.core.properties.*;
 import java.lang.reflect.Field;
+import meta.entidad.comun.configuracion.basica.TipoNodo;
 
 /**
  * ValorNodoIndice Persistent Entity.
@@ -61,6 +62,25 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     public NodoIndice nodo;
+
+    /**
+     * many-to-one entity reference property field
+     */
+    @Allocation(maxDepth = 1, maxRound = 0)
+    @ColumnField(nullable = Kleenean.FALSE)
+    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
+    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(hidden = Kleenean.TRUE)
+    public TipoNodo tipoNodo;
+
+    /**
+     * parent entity reference property field
+     */
+    @Allocation(maxDepth = 1, maxRound = 0)
+    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
+    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(hidden = Kleenean.TRUE)
+    public ValorNodoIndice superior;
 
     @ColumnField(nullable = Kleenean.FALSE)
     public DateProperty fechaValor;

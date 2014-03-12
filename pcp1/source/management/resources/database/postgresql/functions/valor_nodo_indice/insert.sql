@@ -1,26 +1,29 @@
-create or replace function valor_nodo_indice$insert(_medicion_nodo$ bigint, _nodo$ bigint, _fecha_valor$ date)
+create or replace function valor_nodo_indice$insert(_medicion_nodo$ bigint, _nodo$ bigint, _superior$ bigint, _fecha_valor$ date)
 returns void as $$
 declare
-    _msg character varying;
---  _enum_tipo_nodo RECORD;
---  _row nodo_indice%ROWTYPE;
+    _enum_tipo_nodo RECORD;
+    _id bigint;
+    _tipo_nodo integer;
     _sub nodo_indice%ROWTYPE;
+    _msg character varying;
 begin
-    raise notice 'valor_nodo_indice$insert(medicion=%, nodo=%, fecha=%)', _medicion_nodo$, _nodo$, _fecha_valor$;
---  _enum_tipo_nodo := tipo_nodo$enum();
---  select * into _row from nodo_indice where id = _nodo$;
---  if not found then
---      _msg := format(gettext('no existe %s con %s = %s'), 'nodo', 'id', _nodo$);
---      raise exception using message = _msg;
---  end if;
---  if _row.tipo_nodo <> _enum_tipo_nodo.HOJA then
-        insert
-        into valor_nodo_indice (id, medicion, nodo, fecha_valor)
-        values (bigintid(), _medicion_nodo$, _nodo$, _fecha_valor$);
-        for _sub in select * from nodo_indice where superior = _nodo$
-        loop
-            perform valor_nodo_indice$insert(_medicion_nodo$, _sub.id, _fecha_valor$);
-        end loop;
---  end if;
+    _enum_tipo_nodo := tipo_nodo$enum();
+    _id := bigintid();
+    if _superior$ is null then
+        _tipo_nodo := _enum_tipo_nodo.RAIZ;
+    else
+        select tipo_nodo into _tipo_nodo from nodo_indice where id = _nodo$;
+        if not found then
+            _msg := format(gettext('no existe %s con %s = %s'), 'nodo', 'id', _nodo$);
+            raise exception using message = _msg;
+        end if;
+    end if;
+    insert
+    into valor_nodo_indice (id, medicion, nodo, tipo_nodo, superior, fecha_valor)
+    values (_id, _medicion_nodo$, _nodo$, _tipo_nodo, _superior$, _fecha_valor$);
+    for _sub in select * from nodo_indice where superior = _nodo$
+    loop
+        perform valor_nodo_indice$insert(_medicion_nodo$, _sub.id, _id, _fecha_valor$);
+    end loop;
 end;
 $$ language plpgsql;
