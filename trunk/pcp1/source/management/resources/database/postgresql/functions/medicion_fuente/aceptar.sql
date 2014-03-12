@@ -36,6 +36,7 @@ begin
     and mf.medicion = vnx.medicion and mf.fuente = nx.fuente
     and mv.medicion = mf.id and mv.variable = nx.variable
     and rv.id = mv.rango;
+    perform medicion_nodo$calcular(_row.medicion);
     return 0;
 end;
 $$ language plpgsql;

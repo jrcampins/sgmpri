@@ -119,12 +119,6 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
      * big decimal property field
      */
     @BigDecimalField(precision = 7, scale = 4)
-    public BigDecimalProperty brechaNorma2;
-
-    /**
-     * big decimal property field
-     */
-    @BigDecimalField(precision = 7, scale = 4)
     public BigDecimalProperty indiceNorma2;
 
     /**
@@ -140,16 +134,10 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @Override
     protected void settleProperties() {
         super.settleProperties();
-//      rango.setDefaultLabel("RTD");
-//      rango.setDefaultDescription("forma lingüistica del Rango de Tendencia Dominante (RTD)");
-//      numeralRango.setDefaultLabel("numeral RTD");
-//      numeralRango.setDefaultDescription("numeral del Rango de Tendencia Dominante (RTD)");
         rango.setDefaultLabel("rango");
         numeralRango.setDefaultLabel("numeral rango");
         brechaNorma1.setDefaultLabel("brecha norma 1");
         brechaNorma1.setDefaultDescription("brecha calculada con la función Distancia Norma 1 (lineal)");
-        brechaNorma2.setDefaultLabel("brecha norma 2");
-        brechaNorma2.setDefaultDescription("brecha calculada con la función Distancia Norma 2 (no lineal)");
         indiceNorma1.setDefaultLabel("índice norma 1");
         indiceNorma1.setDefaultDescription("índice calculado con la función Distancia Norma 1 (lineal)");
         indiceNorma2.setDefaultLabel("índice norma 2");

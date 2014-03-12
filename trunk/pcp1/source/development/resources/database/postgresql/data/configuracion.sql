@@ -33,8 +33,8 @@ select
     'VJ#'||id as codigo,
     'Variable Intangible #'||id as nombre,
     2 as tipo_variable,
-    1 as rango_minimo_x2,
-    5 as rango_maximo_x2
+    0 as rango_minimo_x2,
+    3 as rango_maximo_x2
 from generate_series(2001::bigint, 2100::bigint) as id
 order by 1;
 
@@ -57,7 +57,7 @@ select bigintid() as id, n.codigo||'-'||v.codigo as codigo, v.nombre, 3 as tipo_
 from nodo_indice n, variable v
 where n.tipo_nodo=2 and v.tipo_variable=2 and v.id%1000 between 10*(n.superior%1000)-9 and 10*(n.superior%1000)
 order by 1;
-
+/*
 insert into nodo_indice (id, codigo, nombre, tipo_nodo) values (1000000, 'A', 'A', 1);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1000100, 'A1', 'A1', 2, 1000000);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1000200, 'A2', 'A2', 2, 1000000);
@@ -76,3 +76,4 @@ insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, fuente, variab
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, fuente, variable) values (1000402, 'A42', 'A42', 3, 1000400, 1004, 2010);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, fuente, variable) values (1000501, 'A51', 'A51', 3, 1000500, 1005, 2011);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, fuente, variable) values (1000502, 'A52', 'A52', 3, 1000500, 1005, 2012);
+*/
