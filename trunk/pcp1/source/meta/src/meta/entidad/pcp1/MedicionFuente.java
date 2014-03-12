@@ -44,10 +44,6 @@ public class MedicionFuente extends meta.entidad.base.PersistentEntityBase {
         setDefaultShortLabel("medición por fuente");
         setDefaultCollectionLabel("Mediciones por Fuente");
         setDefaultCollectionShortLabel("Mediciones por Fuente");
-        setDefaultLabel(medicion, "fuente por medición");
-        setDefaultShortLabel(medicion, "fuente");
-        setDefaultCollectionLabel(medicion, "Fuentes por Medición");
-        setDefaultCollectionShortLabel(medicion, "Fuentes");
     }
 
     /**
@@ -127,6 +123,8 @@ public class MedicionFuente extends meta.entidad.base.PersistentEntityBase {
     @Override
     protected void settleProperties() {
         super.settleProperties();
+        medicion.setDefaultLabel("medición por nodo");
+        medicion.setDefaultShortLabel("medición");
         programador.setInitialValue(SpecialEntityValue.CURRENT_USER);
         programador.setDefaultValue(SpecialEntityValue.CURRENT_USER);
         fechaProgramada.setInitialValue(SpecialTemporalValue.CURRENT_DATE);
