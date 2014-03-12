@@ -10,27 +10,28 @@ begin
     for _vnx in
         select
             vnx.id as nodo,
-            nx.codigo as codigo_nodo,
             vnx.tipo_nodo,
-            nx.peso/100 as peso,
+            vnx.peso/100 as peso,
             vnx.numeral_rango as rango,
-            vx.codigo as codigo_variable,
+--          nx.codigo as codigo_nodo,
+--          vx.codigo as codigo_variable,
             vx.rango_minimo_x2 as rango_minimo,
             vx.rango_maximo_x2 as rango_maximo
         from valor_nodo_indice vnx
         inner join nodo_indice nx on nx.id=vnx.nodo
         left outer join variable vx on vx.id=nx.variable
         where vnx.superior = _nodo$
-        order by nx.codigo
+        order by 1
     loop
         _pnx := _pns * coalesce(_vnx.peso, 1);
         if _vnx.tipo_nodo = _enum_tipo_nodo.HOJA then
             return query
             select
                 _vnx.nodo,
-                _vnx.codigo_nodo,
-                _vnx.codigo_variable,
-                _pnx,
+--              _vnx.codigo_nodo,
+--              _vnx.codigo_variable,
+--              _vnx.peso,
+                _pnx as peso,
                 _vnx.rango,
                 _vnx.rango_minimo,
                 _vnx.rango_maximo;
@@ -40,14 +41,14 @@ begin
             from valor_nodo_indice$rangos(_vnx.nodo, _pnx)
             as rangos (
                 nodo bigint,
-                codigo_nodo varchar,
-                codigo_variable varchar,
+--              codigo_nodo varchar,
+--              codigo_variable varchar,
                 peso numeric,
                 rango integer,
                 rango_minimo integer,
                 rango_maximo integer
                 )
-            order by codigo_nodo;
+            order by 1;
         end if;
     end loop;
 end;
