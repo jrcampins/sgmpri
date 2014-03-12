@@ -41,10 +41,6 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
         setDefaultShortLabel("medición de variable");
         setDefaultCollectionLabel("Mediciones de Variables");
         setDefaultCollectionShortLabel("Mediciones de Variables");
-        setDefaultLabel(medicion, "variable por medición");
-        setDefaultShortLabel(medicion, "variable");
-        setDefaultCollectionLabel(medicion, "Variables por Medición");
-        setDefaultCollectionShortLabel(medicion, "Variables");
     }
 
     /**
@@ -87,6 +83,8 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     @Override
     protected void settleProperties() {
         super.settleProperties();
+        medicion.setDefaultLabel("medición por fuente");
+        medicion.setDefaultShortLabel("medición");
         setOrderBy(medicion.codigo, variable.codigo);
     }
 

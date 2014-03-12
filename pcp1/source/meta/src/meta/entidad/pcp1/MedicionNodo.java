@@ -41,7 +41,7 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
         setDefaultLabel("medición por nodo");
         setDefaultShortLabel("medición por nodo");
         setDefaultCollectionLabel("Mediciones por Nodo");
-        setDefaultCollectionShortLabel("Mediciones");
+        setDefaultCollectionShortLabel("Mediciones por Nodo");
     }
 
     /**
