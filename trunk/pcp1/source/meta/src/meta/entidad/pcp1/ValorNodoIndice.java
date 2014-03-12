@@ -70,7 +70,6 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(hidden = Kleenean.TRUE)
     public TipoNodo tipoNodo;
 
     /**
@@ -81,6 +80,10 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @PropertyField(hidden = Kleenean.TRUE)
     public ValorNodoIndice superior;
+
+    @BigDecimalField(precision = 7, scale = 4)
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    public BigDecimalProperty peso;
 
     @ColumnField(nullable = Kleenean.FALSE)
     public DateProperty fechaValor;
