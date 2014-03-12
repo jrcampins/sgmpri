@@ -65,9 +65,10 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     public DateProperty fechaValor;
 
-    public IntegerProperty numeroRango;
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    public StringProperty rango;
 
-    public StringProperty nombreRango;
+    public IntegerProperty numeralRango;
 
     /**
      * big decimal property field
@@ -116,10 +117,12 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @Override
     protected void settleProperties() {
         super.settleProperties();
-        numeroRango.setDefaultLabel("número RTD");
-        numeroRango.setDefaultDescription("numeral del Rango de Tendencia Dominante (RTD)");
-        nombreRango.setDefaultLabel("nombre RTD");
-        nombreRango.setDefaultDescription("forma lingüistica del Rango de Tendencia Dominante (RTD)");
+//      rango.setDefaultLabel("RTD");
+//      rango.setDefaultDescription("forma lingüistica del Rango de Tendencia Dominante (RTD)");
+//      numeralRango.setDefaultLabel("numeral RTD");
+//      numeralRango.setDefaultDescription("numeral del Rango de Tendencia Dominante (RTD)");
+        rango.setDefaultLabel("rango");
+        numeralRango.setDefaultLabel("numeral rango");
         brechaNorma1.setDefaultLabel("brecha norma 1");
         brechaNorma1.setDefaultDescription("brecha calculada con la función Distancia Norma 1 (lineal)");
         brechaNorma2.setDefaultLabel("brecha norma 2");
