@@ -11,7 +11,6 @@ import adalid.core.enums.*;
 import adalid.core.interfaces.*;
 import adalid.core.properties.*;
 import java.lang.reflect.Field;
-import meta.entidad.comun.configuracion.basica.TipoNodo;
 
 /**
  * Fuente Persistent Entity.
@@ -22,7 +21,7 @@ import meta.entidad.comun.configuracion.basica.TipoNodo;
 @EntitySelectOperation(rowsLimit = 1500)
 @EntityTableView(inserts = Kleenean.FALSE)
 @EntityTreeView(enabled = Kleenean.TRUE)
-@EntityTriggers(afterCheck = Kleenean.TRUE)
+//@EntityTriggers(afterCheck = Kleenean.TRUE)
 public class Fuente extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
@@ -56,69 +55,75 @@ public class Fuente extends meta.entidad.base.PersistentEntityBase {
      */
     @NameProperty
     public StringProperty nombre;
-
-    /**
-     * many-to-one entity reference property field
-     */
-    @Allocation(maxDepth = 1, maxRound = 0)
-    @ColumnField(nullable = Kleenean.FALSE)
-    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
-    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(create = Kleenean.TRUE, table = Kleenean.TRUE, report = Kleenean.TRUE, required = Kleenean.TRUE, submit = Kleenean.TRUE)
-    public TipoNodo tipoNodo;
-
-    /**
-     * parent entity reference property field
-     */
-    @ParentProperty
-    @Allocation(maxDepth = 2, maxRound = 0)
-    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
-    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(create = Kleenean.TRUE, table = Kleenean.TRUE, report = Kleenean.TRUE)
-    public Fuente superior;
-
-    @PropertyField(hidden = Kleenean.TRUE)
-    public IntegerProperty numero;
-
-    @PropertyField(hidden = Kleenean.TRUE)
-    public StringProperty clave;
+//
+    // <editor-fold defaultstate="collapsed">
+//  /**
+//   * many-to-one entity reference property field
+//   */
+//  @Allocation(maxDepth = 1, maxRound = 0)
+//  @ColumnField(nullable = Kleenean.FALSE)
+//  @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
+//  @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+//  @PropertyField(create = Kleenean.TRUE, table = Kleenean.TRUE, report = Kleenean.TRUE, required = Kleenean.TRUE, submit = Kleenean.TRUE)
+//  public TipoNodo tipoNodo;
+//
+//  /**
+//   * parent entity reference property field
+//   */
+//  @ParentProperty
+//  @Allocation(maxDepth = 2, maxRound = 0)
+//  @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
+//  @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+//  @PropertyField(create = Kleenean.TRUE, table = Kleenean.TRUE, report = Kleenean.TRUE)
+//  public Fuente superior;
+//
+//  @PropertyField(hidden = Kleenean.TRUE)
+//  public IntegerProperty numero;
+//
+//  @PropertyField(hidden = Kleenean.TRUE)
+//  public StringProperty clave;
+    // </editor-fold>
 
     @Override
     protected void settleProperties() {
         super.settleProperties();
-        tipoNodo.setInitialValue(tipoNodo.RAIZ);
-        tipoNodo.setDefaultValue(tipoNodo.RAIZ);
-        numero.setMinValue(1);
-        numero.setMaxValue(100);
+        // <editor-fold defaultstate="collapsed">
+//      tipoNodo.setInitialValue(tipoNodo.RAIZ);
+//      tipoNodo.setDefaultValue(tipoNodo.RAIZ);
+//      numero.setMinValue(1);
+//      numero.setMaxValue(100);
+        // </editor-fold>
         setOrderBy(codigo);
     }
-
-    protected Segment raiz, rama, hoja;
-
-    protected Check check01, check02, check03;
-
-    @Override
-    protected void settleExpressions() {
-        super.settleExpressions();
-        raiz = tipoNodo.isEqualTo(tipoNodo.RAIZ);
-        rama = tipoNodo.isEqualTo(tipoNodo.RAMA);
-        hoja = tipoNodo.isEqualTo(tipoNodo.HOJA);
-        /**/
-        check01 = raiz.xnor(superior.isNull());
-        check01.setDefaultErrorMessage("la fuente superior se debe especificar si y solo si el tipo de nodo no es Raiz");
-        check02 = this.isNull().or(superior.isNullOrNotEqualTo(this));
-        check02.setDefaultErrorMessage("la fuente superior no puede ser esta misma fuente");
-        check03 = superior.isNotNull().implies(superior.tipoNodo.isNotEqualTo(tipoNodo.HOJA));
-        check03.setDefaultErrorMessage("la fuente superior no puede ser una fuente de tipo Hoja");
-    }
-
-    @Override
-    protected void settleFilters() {
-        super.settleFilters();
-        superior.setRenderingFilter(not(raiz));
-        superior.setRequiringFilter(not(raiz));
-        superior.setModifyingFilter(not(raiz));
-        superior.setNullifyingFilter(raiz);
-    }
+//
+    // <editor-fold defaultstate="collapsed">
+//  protected Segment raiz, rama, hoja;
+//
+//  protected Check check01, check02, check03;
+//
+//  @Override
+//  protected void settleExpressions() {
+//      super.settleExpressions();
+//      raiz = tipoNodo.isEqualTo(tipoNodo.RAIZ);
+//      rama = tipoNodo.isEqualTo(tipoNodo.RAMA);
+//      hoja = tipoNodo.isEqualTo(tipoNodo.HOJA);
+//      /**/
+//      check01 = raiz.xnor(superior.isNull());
+//      check01.setDefaultErrorMessage("la fuente superior se debe especificar si y solo si el tipo de nodo no es Raiz");
+//      check02 = this.isNull().or(superior.isNullOrNotEqualTo(this));
+//      check02.setDefaultErrorMessage("la fuente superior no puede ser esta misma fuente");
+//      check03 = superior.isNotNull().implies(superior.tipoNodo.isNotEqualTo(tipoNodo.HOJA));
+//      check03.setDefaultErrorMessage("la fuente superior no puede ser una fuente de tipo Hoja");
+//  }
+//
+//  @Override
+//  protected void settleFilters() {
+//      super.settleFilters();
+//      superior.setRenderingFilter(not(raiz));
+//      superior.setRequiringFilter(not(raiz));
+//      superior.setModifyingFilter(not(raiz));
+//      superior.setNullifyingFilter(raiz);
+//  }
+    // </editor-fold>
 
 }

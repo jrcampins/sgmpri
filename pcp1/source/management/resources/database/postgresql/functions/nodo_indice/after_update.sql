@@ -23,6 +23,11 @@ begin
             perform nodo_indice$insert$razones(new.superior);
         end if;
     end if;
+    if new.fuente <> old.fuente then
+        if new.tipo_nodo <> _enum_tipo_nodo.HOJA then
+            perform nodo_indice$update$fuente(new.id, new.fuente);
+        end if;
+    end if;
     return null;
 end;
 $$ language plpgsql;
