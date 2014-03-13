@@ -1,3 +1,4 @@
+/*
 create or replace function fuente$after_check(_new$ fuente)
 returns boolean as $$
 begin
@@ -51,3 +52,4 @@ begin
     raise exception using message = _msg;
 end;
 $$ language plpgsql;
+*/

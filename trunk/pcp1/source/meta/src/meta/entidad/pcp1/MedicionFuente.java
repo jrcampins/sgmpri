@@ -190,6 +190,7 @@ public class MedicionFuente extends meta.entidad.base.PersistentEntityBase {
 
     protected Cargar cargar;
 
+    @OperationClass
     @ProcessOperationClass(overloading = Kleenean.FALSE)
     public class Cargar extends ProcessOperation {
 
@@ -200,20 +201,22 @@ public class MedicionFuente extends meta.entidad.base.PersistentEntityBase {
         @FileReference(joinField = "adjunto")
         @ParameterField(required = Kleenean.TRUE, linkedField = "archivo")
         protected StringParameter archivo;
-
-        Check check0101;
-
-        @Override
-        protected void settleExpressions() {
-            super.settleExpressions();
-            check0101 = medicion.programada.isTrue();
-        }
-
-        @Override
-        protected void settleFilters() {
-            super.settleFilters();
-            medicion.setSearchQueryFilter(check0101);
-        }
+//
+        // <editor-fold defaultstate="collapsed">
+//      Check check0101;
+//
+//      @Override
+//      protected void settleExpressions() {
+//          super.settleExpressions();
+//          check0101 = medicion.programada.isTrue();
+//      }
+//
+//      @Override
+//      protected void settleFilters() {
+//          super.settleFilters();
+//          medicion.setSearchQueryFilter(check0101);
+//      }
+        // </editor-fold>
 
     }
 

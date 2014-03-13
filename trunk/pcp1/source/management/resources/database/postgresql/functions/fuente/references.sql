@@ -1,3 +1,4 @@
+/*
 create or replace function fuente$references(_nodo$ bigint, _superior$ bigint)
 returns boolean as $$
 declare
@@ -19,3 +20,4 @@ begin
     return false;
 end;
 $$ language plpgsql;
+*/
