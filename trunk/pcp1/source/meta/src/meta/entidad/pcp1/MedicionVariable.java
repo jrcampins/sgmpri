@@ -108,15 +108,19 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
         key01.newKeyField(medicion, variable);
     }
 
-    protected Segment tangible, intangible;
+    protected Segment tangible, intangible, modificable;
 
     protected Check check01;
 
     @Override
     protected void settleExpressions() {
         super.settleExpressions();
+        /**/
         tangible = variable.tipoVariable.isEqualTo(variable.tipoVariable.TANGIBLE);
         intangible = variable.tipoVariable.isEqualTo(variable.tipoVariable.INTANGIBLE);
+        /**/
+        modificable = or(medicion.condicion.isEqualTo(medicion.condicion.PROGRAMADA), medicion.condicion.isEqualTo(medicion.condicion.RECHAZADA));
+        modificable.setDefaultErrorMessage("la medición no se puede modificar porque no está Programada ni Rechazada");
         /**/
         check01 = rango.isNull().or(rango.variable.isEqualTo(variable));
         check01.setDefaultErrorMessage("el rango no corresponde a la variable");
@@ -125,6 +129,7 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     @Override
     protected void settleFilters() {
         super.settleFilters();
+        setUpdateFilter(modificable);
         /**/
         rango.setRenderingFilter(intangible);
         rango.setRequiringFilter(intangible);
