@@ -85,19 +85,9 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     public StringProperty clave;
 
     /**
-     * many-to-one entity reference property field
-     */
-    @Allocation(maxDepth = 1, maxRound = 0)
-    @ColumnField(nullable = Kleenean.FALSE)
-    @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
-    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(create = Kleenean.TRUE, update = Kleenean.TRUE, table = Kleenean.TRUE, report = Kleenean.TRUE)
-    public Fuente fuente;
-
-    /**
      * big decimal property field
      */
-    @BigDecimalField(precision = 7, scale = 4)
+    @BigDecimalField(precision = 16, scale = 10)
     @ColumnField(nullable = Kleenean.TRUE)
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.FALSE, report = Kleenean.FALSE)
     public BigDecimalProperty peso;
@@ -124,8 +114,6 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         tipoNodo.setDefaultValue(tipoNodo.RAIZ);
         numero.setMinValue(1);
         numero.setMaxValue(100);
-//      fuente.setInitialValue(superior.fuente);
-        fuente.setDefaultValue(superior.fuente);
         setOrderBy(codigo);
     }
 
@@ -135,18 +123,17 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     protected void settleTabs() {
         super.settleTabs();
         tab1.setDefaultLabel("general");
-        tab1.newTabField(tipoNodo, numero, clave, fuente, peso, fechaUltimoCalculo);
+        tab1.newTabField(tipoNodo, numero, clave, peso, fechaUltimoCalculo);
         tab2.setDefaultLabel("general");
-        tab2.newTabField(tipoNodo, numero, clave, fuente, peso, superior, fechaUltimoCalculo);
+        tab2.newTabField(tipoNodo, numero, clave, peso, superior, fechaUltimoCalculo);
         tab3.setDefaultLabel("general");
-        tab3.newTabField(tipoNodo, numero, clave, fuente, peso, superior, variable, fechaUltimoCalculo);
+        tab3.newTabField(tipoNodo, numero, clave, peso, superior, variable, fechaUltimoCalculo);
     }
 
     protected Segment raiz, rama, hoja;
 
     protected Segment raizRama;
 
-//  protected Check check01, check02, check03, check04, check05;
     protected Check check01, check02, check03, check05;
 
     @Override
@@ -168,8 +155,6 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         check02.setDefaultErrorMessage("el nodo superior no puede ser este mismo nodo");
         check03 = superior.isNotNull().implies(superior.tipoNodo.isNotEqualTo(tipoNodo.HOJA));
         check03.setDefaultErrorMessage("el nodo superior no puede ser un nodo de tipo Hoja");
-//      check04 = hoja.xnor(fuente.isNotNull());
-//      check04.setDefaultErrorMessage("la fuente se debe especificar si y solo si el tipo de nodo es Hoja");
         check05 = hoja.xnor(variable.isNotNull());
         check05.setDefaultErrorMessage("la variable se debe especificar si y solo si el tipo de nodo es Hoja");
     }
@@ -185,12 +170,6 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         superior.setRequiringFilter(not(raiz));
         superior.setModifyingFilter(not(raiz));
         superior.setNullifyingFilter(raiz);
-        /**/
-//      fuente.setRenderingFilter(hoja);
-//      fuente.setRequiringFilter(hoja);
-//      fuente.setModifyingFilter(hoja);
-//      fuente.setNullifyingFilter(not(hoja));
-        fuente.setRequiringFilter(raiz);
         /**/
 //      variable.setRenderingFilter(hoja);
         variable.setRequiringFilter(hoja);

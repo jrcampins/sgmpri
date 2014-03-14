@@ -1,88 +1,125 @@
 truncate table valor_nodo_indice cascade;
 truncate table medicion_variable cascade;
-truncate table medicion_fuente cascade;
+truncate table medicion_rama cascade;
 truncate table medicion_nodo cascade;
 truncate table nodo_indice cascade;
 truncate table variable cascade;
-truncate table fuente cascade;
-
--- -----------------------------------------------------------------------------------------------------------
--- fuente
--- -----------------------------------------------------------------------------------------------------------
-/*
-insert into fuente (id, codigo, nombre)
-select id as id, 'F#'||lpad(''||id,4,'0') as codigo, 'Fuente #'||lpad(''||id,4,'0') as nombre
-from generate_series(1::bigint, 10::bigint) as id
-order by 1;
-*/
-insert into fuente (id, codigo, nombre)
-select id as id, 'F#'||id as codigo, 'Fuente #'||id as nombre
-from generate_series(1001::bigint, 1100::bigint) as id
-order by 1;
-
 -- -----------------------------------------------------------------------------------------------------------
 -- variable
 -- -----------------------------------------------------------------------------------------------------------
-insert into seudo_variable_tangible (id, codigo, nombre, tipo_variable, tipo_valor_x1)
-select
-    id as id,
-    'VT#'||id as codigo,
-    'Variable Tangible #'||id as nombre,
-    1 as tipo_variable,
-    util.some_tipo_valor_variable(0) as tipo_valor_x1
-from generate_series(1001::bigint, 1100::bigint) as id
-order by 1;
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2001, 'A01-S01-V01', 'CERCA TIPO MALLA CICLÓN CON PUERTAS Y/O PORTONES', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2002, 'A01-S01-V02', 'CERCA TIPO REJA CON PUERTAS Y/O PORTONES', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2003, 'A01-S01-V03', 'CONO PROTECTOR ANTIESCALAMIENTO', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2004, 'A01-S01-V04', 'PAREDES DE BLOQUE O PREFABRICADO CON PUERTAS Y/O PORTONES', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2005, 'A01-S01-V05', 'MURO DE CONCRETO ARMADO CON PUERTAS Y/O PORTONES', 2, 0, 3);
 
-insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2)
-select
-    id as id,
-    'VJ#'||id as codigo,
-    'Variable Intangible #'||id as nombre,
-    2 as tipo_variable,
-    0 as rango_minimo_x2,
-    3 as rango_maximo_x2
-from generate_series(2001::bigint, 2100::bigint) as id
-order by 1;
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2006, 'A01-S02-V01', 'SISTEMAS DE DETECCIÓN INTERNO', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2007, 'A01-S02-V02', 'SISTEMAS DE DETECCIÓN PERIMETRAL', 2, 0, 3);
 
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2008, 'A01-S03-V01', 'PUNTOS DE EVALUACIÓN SIMPLE', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2009, 'A01-S03-V02', 'GARITA / TORRE', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2010, 'A01-S03-V03', 'RECORRIDO', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2011, 'A01-S03-V04', 'ILUMINACIÓN DE PROTECCIÓN', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2012, 'A01-S03-V05', 'SISTEMA DE VIDEO VIGILANCIA', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2013, 'A01-S03-V06', 'SOFTWARE DE EVALUACIÓN Y ANÁLISIS DE SISTEMAS AUTOMATIZADOS', 2, 0, 3);
+
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2014, 'A01-S04-V01', 'ESTACIÓN DE MONITOREO', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2015, 'A01-S04-V02', 'CENTRO DE CONTROL', 2, 0, 3);
+
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2016, 'A01-S05-V01', 'SISTEMA DE VOCEO', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2017, 'A01-S05-V02', 'INTERCOMINICADORES', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2018, 'A01-S05-V03', 'SISTEMA DE RADIOCUMUNICACIÓN', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2019, 'A01-S05-V04', 'SISTEMA TELEFÓNICO', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2020, 'A01-S05-V05', 'SISTEMA DE TRANSMISIÓN DE VIDEO, VOZ Y DATA', 2, 0, 3);
+
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2021, 'A01-S06-V01', 'OPI', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2022, 'A01-S06-V02', 'GNB', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2023, 'A01-S06-V03', 'MILICIA', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2024, 'A01-S06-V04', 'FUERZA DE RESPUESTA EN INSTALACIÓN', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2025, 'A01-S06-V05', 'FUERZA DE RESPUESTA EXTERNA A LA INSTALACIÓN (FANB/GNB)', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2026, 'A01-S06-V06', 'EQUIPOS DE PROTECCIÓN (EPP, CONOS, CHALECOS, FORO PILOTO, ENTRE OTROS)', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2027, 'A01-S06-V07', 'EQUIPOS DE BUSQUEDA (RAYOS X, DETECTORES DE METALES, DROGA, EXPLOSIVOS, ACTIVOS)', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2028, 'A01-S06-V08', 'SUMINISTRO ÉLECTRICO ALTERNO PARA EL SISTEMA DE PROTECCIÓN', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2029, 'A01-S06-V09', 'VEHÍCULOS DE PATRULLAJE', 2, 0, 3);
+
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2030, 'A01-S07-V01', 'CONTROLES MANUALES', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2031, 'A01-S07-V02', 'CENTRO DE CONTROL', 2, 0, 3);
+
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2032, 'A01-S08-V01', 'POLÍTICAS DE CONTROL DE ACCESO', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2033, 'A01-S08-V02', 'PLAN DE PROTECCIÓN', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2034, 'A01-S08-V03', 'PLAN DE EMERGENCIA', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2035, 'A01-S08-V04', 'SEÑALIZACIÓN DE ÁREAS RESTRINGIDAS DE P.C.P.', 2, 0, 3);
+
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2041, 'A02-V01', 'PLANES DE EMERGENCIAS', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2042, 'A02-V02', 'SEÑALIZACIÓN (ZONA DE SEGURIDAD)', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2043, 'A02-V03', 'SIMULACROS', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2044, 'A02-V04', 'EQUIPOS DE MEDICIÓN', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2045, 'A02-V05', 'MANGAS DE VIENTO', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2046, 'A02-V06', 'SISTEMAS CONTRA INCENDIO (AGUA)', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2047, 'A02-V07', 'SISTEMAS CONTRA INCENDIO (ESPUMA)', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2048, 'A02-V08', 'PERSONAL DE SEGURIDAD INDUSTRIAL', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2049, 'A02-V09', 'MANUAL, PROCEDIMIENTO Y NOTIFICACIÓN DE RIESGOS', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2050, 'A02-V10', 'UNIDADES DE RESPUESTA INMEDIATAS', 2, 0, 3);
+
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2051, 'A03-V01', 'MANTENIMIENTO PREVENTIVO', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2052, 'A03-V02', 'DISPOSITIVOS Y DETECCIÓN DE FALLAS', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2053, 'A03-V03', 'REPUESTOS Y EQUIPOS', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2054, 'A03-V04', 'PERSONAL DE MANTENIMIENTO', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2055, 'A03-V05', 'PLANES DE MANTENIMIENTO', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2056, 'A03-V06', 'PERSONAL OPERACIONAL', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2057, 'A03-V07', 'MEDIOS DE TRANSPORTE', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2058, 'A03-V08', 'PLANES DE EMERGENCIA', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2059, 'A03-V09', 'PLANES DE CONTINGENCIA OPERACIONAL', 2, 0, 3);
+
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2061, 'A04-V01', 'TANQUES DE ALMACENAMIENTO', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2062, 'A04-V02', 'SUBESTACIÓN ELÉCTRICA INTERNA', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2063, 'A04-V03', 'SUBESTACIÓN ELÉCTRICA EXTERNA', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2064, 'A04-V04', 'ESTACIÓN DE BOMBAS', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2065, 'A04-V05', 'TUBERIAS DE CRUDO DE 42’’', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2066, 'A04-V06', 'CENTRO DE CONTROL (CDC)', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2067, 'A04-V07', 'CENTRO DE CONTROL (MEREY OFICINA)', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2068, 'A04-V08', 'ESTACIONES REMOTAS (REBOMBEO, ANACO, Km. 52 ERO Y MORERO)', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2069, 'A04-V09', 'PALMICHAL', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2070, 'A04-V10', 'SALA DE BOOSTER', 2, 0, 3);
+
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2071, 'A05-V01', 'FIBRA OPTICA', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2072, 'A05-V02', 'SOFTWARE', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2073, 'A05-V03', 'CONSUMIBLES (REPUESTOS: PLC, SWITCHES,TARJETAS, CENTRO OTROS)', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2074, 'A05-V04', 'HARDWARE (MONITORES, CPU)', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2075, 'A05-V05', 'RADIOS', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2076, 'A05-V06', 'SISTEMAS DE ALIMENTACIÓN ININTERUMPIDA (UPS)', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2077, 'A05-V07', 'CUARTO DE SERVIDORES', 2, 0, 3);
+
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2081, 'A06-V01', 'RELACIONES (ACERCAMIENTO) CON LAS COMUNIDADES', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2082, 'A06-V02', 'BÚSQUEDA DE INFORMACIÓN (INTELIGENCIA SOCIAL)', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2083, 'A06-V03', 'BÚSQUEDA DE FUENTES DE INFORMACIÓN', 2, 0, 3);
+
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2091, 'A07-V01', 'PRESENCIA DE EFECTIVOS DE LA FANB', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2092, 'A07-V02', 'EFECTIVIDAD DEL CUMPLIMIENTO DEL PLAN OPERATIVO VIGENTE (POV) EN EL PUESTO DE SERVICIO', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2093, 'A07-V03', 'CONDICIONES DEL LUGAR DE DESCANSO DE LOS EFECTIVOS', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2094, 'A07-V04', 'PAGO DE LAS PRIMAS ESTABLECIDAS EN EL CONVENIO GN/PDVSA', 2, 0, 3);
+insert into seudo_variable_intangible (id, codigo, nombre, tipo_variable, rango_minimo_x2, rango_maximo_x2) values (2095, 'A07-V05', 'APOYO POR PARTE DE LOS OSC', 2, 0, 3);
 -- -----------------------------------------------------------------------------------------------------------
 -- nodo_indice
 -- -----------------------------------------------------------------------------------------------------------
-/*
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente)
-select id, 'INS#'||lpad(''||id,4,'0') as codigo, 'Indice del Nivel de Seguridad #'||lpad(''||id,4,'0') as nombre, 1 as tipo_nodo, id as fuente
-from generate_series(1::bigint, 10::bigint) as id
-order by 1;
+insert into nodo_indice (id, codigo, nombre, tipo_nodo) values (1000000, 'A00', 'P.T.O. - SAN TOMÉ', 1);
 
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior)
-select f.id as id, n.codigo||'-'||f.codigo as codigo, 'Componente '||f.codigo as nombre, 2 as tipo_nodo, f.id as fuente, n.id as superior
-from nodo_indice n, fuente f
-where n.tipo_nodo=1 and f.id>1000 and f.id%1000 between 10*n.id-9 and 10*n.id
-order by 1;
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1010000, 'A01', 'PROTECCIÓN FÍSICA', 2, 1000000);
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1020000, 'A02', 'SEGURIDAD INDUSTRIAL', 2, 1000000);
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1030000, 'A03', 'CONTINUIDAD OPERACIONAL', 2, 1000000);
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1040000, 'A04', 'INFRAESTRUCTURA OPERACIONAL', 2, 1000000);
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1050000, 'A05', 'INFRAESTRUCTURA TECNOLÓGICA', 2, 1000000);
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1060000, 'A06', 'ENTORNO SOCIAL', 2, 1000000);
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1070000, 'A07', 'OPERATIVIDAD CON LA FANB/OSC Y OTROS ENTES DEL ESTADO', 2, 1000000);
 
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
-select bigintid() as id, n.codigo||'-'||v.codigo as codigo, v.nombre, 3 as tipo_nodo, n.id as superior, v.id as variable
-from nodo_indice n, variable v
-where n.tipo_nodo=2 and v.tipo_variable=2 and v.id>1000 and v.id%1000 between 10*(n.superior%1000)-9 and 10*(n.superior%1000)
-order by 1;
-*/
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente) values (1000000, 'A00', 'P.T.O. - SAN TOMÉ', 1, 1010);
-
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior) values (1010000, 'A01', 'PROTECCIÓN FÍSICA', 2, 1010, 1000000);
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior) values (1020000, 'A02', 'SEGURIDAD INDUSTRIAL', 2, 1020, 1000000);
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior) values (1030000, 'A03', 'CONTINUIDAD OPERACIONAL', 2, 1030, 1000000);
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior) values (1040000, 'A04', 'INFRAESTRUCTURA OPERACIONAL', 2, 1040, 1000000);
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior) values (1050000, 'A05', 'INFRAESTRUCTURA TECNOLÓGICA', 2, 1050, 1000000);
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior) values (1060000, 'A06', 'ENTORNO SOCIAL', 2, 1060, 1000000);
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior) values (1070000, 'A07', 'OPERATIVIDAD CON LA FANB/OSC Y OTROS ENTES DEL ESTADO', 2, 1070, 1000000);
-
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior) values (1010100, 'A01-S01', 'BARRERAS Y RETARDOS', 2, 1011, 1010000);
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior) values (1010200, 'A01-S02', 'DETECCIÓN', 2, 1012, 1010000);
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior) values (1010300, 'A01-S03', 'EVALUACIÓN', 2, 1013, 1010000);
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior) values (1010400, 'A01-S04', 'CONTROL Y MONITOREO', 2, 1014, 1010000);
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior) values (1010500, 'A01-S05', 'COMUNICACIONES', 2, 1015, 1010000);
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior) values (1010600, 'A01-S06', 'PERSONAL Y EQUIPO', 2, 1016, 1010000);
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior) values (1010700, 'A01-S07', 'CONTROL Y ACCESO', 2, 1017, 1010000);
-insert into nodo_indice (id, codigo, nombre, tipo_nodo, fuente, superior) values (1010800, 'A01-S08', 'NORMAS Y PROCEDIMIENTOS', 2, 1018, 1010000);
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1010100, 'A01-S01', 'BARRERAS Y RETARDOS', 2, 1010000);
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1010200, 'A01-S02', 'DETECCIÓN', 2, 1010000);
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1010300, 'A01-S03', 'EVALUACIÓN', 2, 1010000);
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1010400, 'A01-S04', 'CONTROL Y MONITOREO', 2, 1010000);
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1010500, 'A01-S05', 'COMUNICACIONES', 2, 1010000);
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1010600, 'A01-S06', 'PERSONAL Y EQUIPO', 2, 1010000);
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1010700, 'A01-S07', 'CONTROL Y ACCESO', 2, 1010000);
+insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior) values (1010800, 'A01-S08', 'NORMAS Y PROCEDIMIENTOS', 2, 1010000);
 
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable) values (1010101, 'A01-S01-V01', 'CERCA TIPO MALLA CICLÓN CON PUERTAS Y/O PORTONES', 3, 1010100, 2001);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable) values (1010102, 'A01-S01-V02', 'CERCA TIPO REJA CON PUERTAS Y/O PORTONES', 3, 1010100, 2002);

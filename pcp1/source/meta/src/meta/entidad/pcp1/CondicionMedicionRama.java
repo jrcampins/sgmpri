@@ -11,19 +11,19 @@ import adalid.core.interfaces.*;
 import java.lang.reflect.Field;
 
 /**
- * CondicionMedicionFuente Persistent Entity.
+ * CondicionMedicionRama Persistent Entity.
  *
  * @author Jorge Campins
  */
-public class CondicionMedicionFuente extends meta.entidad.base.PersistentEnumerationEntityBase {
+public class CondicionMedicionRama extends meta.entidad.base.PersistentEnumerationEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
     @Deprecated()
-    private CondicionMedicionFuente() {
+    private CondicionMedicionRama() {
         this(null, null);
     }
 
-    public CondicionMedicionFuente(Artifact declaringArtifact, Field declaringField) {
+    public CondicionMedicionRama(Artifact declaringArtifact, Field declaringField) {
         super(declaringArtifact, declaringField);
     }
     // </editor-fold>
@@ -31,9 +31,9 @@ public class CondicionMedicionFuente extends meta.entidad.base.PersistentEnumera
     @Override
     protected void settleAttributes() {
         super.settleAttributes();
-        setDefaultLabel("condición de medición por fuente");
+        setDefaultLabel("condición de medición por rama");
         setDefaultShortLabel("condición");
-        setDefaultCollectionLabel("Condiciones de Mediciones por Fuente");
+        setDefaultCollectionLabel("Condiciones de Mediciones por Rama");
         setDefaultCollectionShortLabel("Condiciones");
     }
 
