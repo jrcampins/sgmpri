@@ -23,7 +23,7 @@ import meta.entidad.comun.control.acceso.Usuario;
  */
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.OPERATION)
 @EntityInsertOperation(enabled = Kleenean.FALSE)
-@EntityUpdateOperation(enabled = Kleenean.FALSE)
+@EntityDeleteOperation(enabled = Kleenean.FALSE)
 public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
@@ -51,12 +51,14 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
      */
     @BusinessKey
     @StringField(maxLength = 100)
+    @PropertyField(update = Kleenean.FALSE)
     public StringProperty codigo;
 
     /**
      * name property field
      */
     @NameProperty
+    @PropertyField(update = Kleenean.FALSE)
     public StringProperty nombre;
 
     /**
@@ -77,54 +79,66 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(update = Kleenean.FALSE)
     public NodoIndice rama;
 
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(update = Kleenean.FALSE)
     public Usuario programador;
 
     /**
      * date property field
      */
     @ColumnField(nullable = Kleenean.FALSE)
+    @PropertyField(update = Kleenean.FALSE)
     public DateProperty fechaProgramada;
 
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(update = Kleenean.FALSE)
     public Usuario registrador;
 
     /**
      * date property field
      */
+    @PropertyField(update = Kleenean.FALSE)
     public DateProperty fechaRegistro;
 
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(update = Kleenean.FALSE)
     public Usuario verificador;
 
     /**
      * date property field
      */
+    @PropertyField(update = Kleenean.FALSE)
     public DateProperty fechaVerificacion;
 
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE, update = Kleenean.FALSE)
     public CondicionMedicionRama condicion;
 
     @ColumnField(nullable = Kleenean.FALSE)
-    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE, update = Kleenean.FALSE)
     public DateProperty fechaCondicion;
 
+    @PropertyField(update = Kleenean.FALSE)
     public StringProperty observaciones;
 
     @FileReference
+    @PropertyField(update = Kleenean.FALSE)
     public StringProperty archivo;
 
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(update = Kleenean.FALSE)
     public ArchivoAdjunto adjunto;
+
+    public StringProperty comentarios;
 
     @Override
     protected void settleProperties() {
@@ -152,7 +166,7 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
         tab2.setDefaultLabel("cronologia");
         tab2.newTabField(fechaProgramada, programador, fechaRegistro, registrador, fechaVerificacion, verificador);
         tab3.setDefaultLabel("etc");
-        tab3.newTabField(archivo, adjunto, observaciones);
+        tab3.newTabField(archivo, adjunto, observaciones, comentarios);
     }
 
     protected State programada, registrada, aceptada, rechazada;
@@ -171,32 +185,28 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
     }
 
     @Override
-    protected void settleFilters() {
-        setUpdateFilter(programada);
-        setDeleteFilter(programada);
-    }
-
-    @Override
     protected void settleOperations() {
         super.settleOperations();
         insert.addTransition(null, programada);
         registrar.addTransition(programada, registrada);
+        registrar.addTransition(rechazada, registrada);
         aceptar.addTransition(registrada, aceptada);
         rechazar.addTransition(registrada, rechazada);
     }
 
-    Trigger programada_registrar, registrada_aceptar;
+    Trigger programada_registrar, registrada_aceptar, rechazada_registrar;
 
     @Override
     protected void settleTriggers() {
         super.settleTriggers();
         programada_registrar.settle(programada, registrar);
         registrada_aceptar.settle(registrada, aceptar);
+        rechazada_registrar.settle(rechazada, registrar);
     }
 
     protected Cargar cargar;
 
-    @OperationClass
+    @OperationClass(access = OperationAccess.RESTRICTED)
     @ProcessOperationClass(overloading = Kleenean.FALSE)
     public class Cargar extends ProcessOperation {
 
@@ -228,7 +238,7 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
 
     protected Registrar registrar;
 
-    @OperationClass
+    @OperationClass(access = OperationAccess.RESTRICTED)
     @ProcessOperationClass(overloading = Kleenean.FALSE)
     public class Registrar extends ProcessOperation {
 
@@ -249,7 +259,7 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
 
     protected Aceptar aceptar;
 
-    @OperationClass
+    @OperationClass(access = OperationAccess.RESTRICTED)
     @ProcessOperationClass(overloading = Kleenean.FALSE)
     public class Aceptar extends ProcessOperation {
 
@@ -273,7 +283,7 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
 
     protected Rechazar rechazar;
 
-    @OperationClass
+    @OperationClass(access = OperationAccess.RESTRICTED)
     @ProcessOperationClass(overloading = Kleenean.FALSE)
     public class Rechazar extends ProcessOperation {
 
