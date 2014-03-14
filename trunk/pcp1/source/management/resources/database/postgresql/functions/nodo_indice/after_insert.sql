@@ -5,6 +5,7 @@ begin
     _enum_tipo_nodo := tipo_nodo$enum();
     if new.tipo_nodo <> _enum_tipo_nodo.HOJA then
         perform nodo_indice$insert$colores(new.id);
+        perform nodo_indice$insert$segmento(new.id, new.codigo, new.nombre, new.superior);
     end if;
     if new.superior is not null then
         perform nodo_indice$insert$razones(new.superior);

@@ -29,10 +29,10 @@ public class Modulo1 extends Project {
 //  CuestionarioFuente cuestionarioFuente;
 //
 //  CuestionarioVariable cuestionarioVariable;
+//
+//  Fuente fuente;
 
-    Fuente fuente;
-
-    MedicionFuente medicionFuente;
+    MedicionRama medicionRama;
 
     MedicionNodo medicionNodo;
 

@@ -7,8 +7,10 @@ begin
         if new.tipo_nodo = _enum_tipo_nodo.HOJA then
             delete from color_nodo_indice where nodo = new.id;
             delete from razon_nodo_indice where nodo = new.id;
+            delete from elemento_segmento where id_elemento_segmento = new.id;
         elsif old.tipo_nodo = _enum_tipo_nodo.HOJA then
             perform nodo_indice$insert$colores(new.id);
+            perform nodo_indice$insert$segmento(new.id, new.codigo, new.nombre, new.superior);
         end if;
     end if;
     if old.superior is null then
@@ -21,11 +23,6 @@ begin
         elsif new.superior <> old.superior then
             delete from razon_nodo_indice where nodo = old.superior and (numerador = new.id or denominador = new.id);
             perform nodo_indice$insert$razones(new.superior);
-        end if;
-    end if;
-    if new.fuente <> old.fuente then
-        if new.tipo_nodo <> _enum_tipo_nodo.HOJA then
-            perform nodo_indice$update$fuente(new.id, new.fuente);
         end if;
     end if;
     return null;

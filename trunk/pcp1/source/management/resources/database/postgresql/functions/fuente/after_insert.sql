@@ -1,3 +1,4 @@
+/*
 create or replace function fuente$after_insert_row$100() returns trigger as $$
 declare
     _id_clase_recurso bigint;
@@ -36,3 +37,4 @@ begin
     return null;
 end;
 $$ language plpgsql;
+*/

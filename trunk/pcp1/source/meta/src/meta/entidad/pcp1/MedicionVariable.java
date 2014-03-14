@@ -46,12 +46,22 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     /**
      * many-to-one entity reference property field
      */
-    @Allocation(maxDepth = 1, maxRound = 0)
+    @Allocation(maxDepth = 2, maxRound = 0)
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE)
     @PropertyField(update = Kleenean.FALSE)
-    public MedicionFuente medicion;
+    public MedicionRama medicion;
+
+    /**
+     * many-to-one entity reference property field
+     */
+    @Allocation(maxDepth = 1, maxRound = 0)
+    @ColumnField(nullable = Kleenean.FALSE)
+    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
+    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(hidden = Kleenean.TRUE)
+    public NodoIndice hoja;
 
     /**
      * many-to-one entity reference property field
@@ -83,9 +93,10 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     @Override
     protected void settleProperties() {
         super.settleProperties();
-        medicion.setDefaultLabel("medición por fuente");
+        medicion.setDefaultLabel("medición por rama");
         medicion.setDefaultShortLabel("medición");
         setOrderBy(medicion.codigo, variable.codigo);
+        linkForeignSegmentProperty(medicion.rama);
     }
 
     protected Key key01;

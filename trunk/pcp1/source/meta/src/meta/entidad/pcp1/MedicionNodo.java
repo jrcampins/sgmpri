@@ -21,6 +21,7 @@ import meta.entidad.comun.control.acceso.Usuario;
  * @author Jorge Campins
  */
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.OPERATION)
+@EntityTableView(inserts = Kleenean.FALSE)
 @EntityUpdateOperation(enabled = Kleenean.FALSE)
 public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
 
@@ -51,6 +52,13 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
     @StringField(maxLength = 100)
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE, defaultCondition = DefaultCondition.UNCONDITIONALLY)
     public StringProperty codigo;
+
+    /**
+     * name property field
+     */
+    @NameProperty
+    @PropertyField(hidden = Kleenean.TRUE)
+    public StringProperty nombre;
 
     /**
      * many-to-one entity reference property field
@@ -92,6 +100,8 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
         super.settleProperties();
 //      codigo.setInitialValue(nodo.codigo.concat("-").concat(id.toCharString()));
         codigo.setDefaultValue(nodo.codigo.concat("-").concat(id.toCharString()));
+//      nombre.setInitialValue(nodo.nombre);
+        nombre.setDefaultValue(nodo.nombre);
         programador.setInitialValue(SpecialEntityValue.CURRENT_USER);
         programador.setDefaultValue(SpecialEntityValue.CURRENT_USER);
         fechaProgramada.setInitialValue(SpecialTemporalValue.CURRENT_DATE);
