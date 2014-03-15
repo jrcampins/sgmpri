@@ -6,7 +6,6 @@
  */
 package meta.entidad.pcp1;
 
-import adalid.core.*;
 import adalid.core.annotations.*;
 import adalid.core.enums.*;
 import adalid.core.interfaces.*;
@@ -47,27 +46,10 @@ public class ColorIndice extends meta.entidad.base.PersistentEntityBase {
     @NumericKey
     public IntegerProperty extremoInferior;
 
-    public Instance ROJO;
-
-    public Instance AMARILLO;
-
-    public Instance VERDE;
-
     @Override
     protected void settleProperties() {
         super.settleProperties();
         setOrderBy(extremoInferior);
-    }
-
-    @Override
-    protected void settleInstances() {
-        super.settleInstances();
-        ROJO.newInstanceField(codigo, "Rojo");
-        ROJO.newInstanceField(extremoInferior, 0);
-        AMARILLO.newInstanceField(codigo, "Amarillo");
-        AMARILLO.newInstanceField(extremoInferior, 50);
-        VERDE.newInstanceField(codigo, "Verde");
-        VERDE.newInstanceField(extremoInferior, 80);
     }
 
 }

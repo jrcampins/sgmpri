@@ -15,8 +15,8 @@ begin
             vnx.numeral_rango as rango,
 --          nx.codigo as codigo_nodo,
 --          vx.codigo as codigo_variable,
-            vx.rango_minimo_x2 as rango_minimo,
-            vx.rango_maximo_x2 as rango_maximo
+            vx.rango_minimo as rango_minimo,
+            vx.rango_maximo as rango_maximo
         from valor_nodo_indice vnx
         inner join nodo_indice nx on nx.id=vnx.nodo
         left outer join variable vx on vx.id=nx.variable

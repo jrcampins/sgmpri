@@ -78,12 +78,6 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     @PropertyField(create = Kleenean.TRUE, table = Kleenean.TRUE, report = Kleenean.TRUE)
     public NodoIndice superior;
 
-    @PropertyField(hidden = Kleenean.TRUE)
-    public IntegerProperty numero;
-
-    @PropertyField(hidden = Kleenean.TRUE)
-    public StringProperty clave;
-
     /**
      * big decimal property field
      */
@@ -112,8 +106,6 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         super.settleProperties();
         tipoNodo.setInitialValue(tipoNodo.RAIZ);
         tipoNodo.setDefaultValue(tipoNodo.RAIZ);
-        numero.setMinValue(1);
-        numero.setMaxValue(100);
         setOrderBy(codigo);
     }
 
@@ -123,11 +115,11 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     protected void settleTabs() {
         super.settleTabs();
         tab1.setDefaultLabel("general");
-        tab1.newTabField(tipoNodo, numero, clave, peso, fechaUltimoCalculo);
+        tab1.newTabField(tipoNodo, peso, fechaUltimoCalculo);
         tab2.setDefaultLabel("general");
-        tab2.newTabField(tipoNodo, numero, clave, peso, superior, fechaUltimoCalculo);
+        tab2.newTabField(tipoNodo, peso, superior, fechaUltimoCalculo);
         tab3.setDefaultLabel("general");
-        tab3.newTabField(tipoNodo, numero, clave, peso, superior, variable, fechaUltimoCalculo);
+        tab3.newTabField(tipoNodo, peso, superior, variable, fechaUltimoCalculo);
     }
 
     protected Segment raiz, rama, hoja;

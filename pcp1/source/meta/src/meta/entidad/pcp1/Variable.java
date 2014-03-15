@@ -17,9 +17,7 @@ import java.lang.reflect.Field;
  *
  * @author Jorge Campins
  */
-@AbstractClass
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.CONFIGURATION)
-@InheritanceMapping(strategy = InheritanceMappingStrategy.SINGLE_TABLE)
 public class Variable extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
@@ -46,20 +44,40 @@ public class Variable extends meta.entidad.base.PersistentEntityBase {
     public StringProperty nombre;
 
     /**
-     * many-to-one entity reference property field
+     * integer property field
      */
-    @DiscriminatorColumn
-    @Allocation(maxDepth = 1, maxRound = 0)
     @ColumnField(nullable = Kleenean.FALSE)
-    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
-    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @PropertyField(required = Kleenean.TRUE)
-    public TipoVariable tipoVariable;
+    public IntegerProperty rangoMinimo;
+
+    /**
+     * integer property field
+     */
+    @ColumnField(nullable = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE)
+    public IntegerProperty rangoMaximo;
+
+    Check check01;
 
     @Override
     protected void settleProperties() {
         super.settleProperties();
+        rangoMinimo.setInitialValue(0);
+        rangoMinimo.setDefaultValue(0);
+        rangoMinimo.setMinValue(0);
+        rangoMinimo.setMaxValue(1);
+        rangoMaximo.setInitialValue(3);
+        rangoMaximo.setDefaultValue(3);
+        rangoMaximo.setMinValue(1);
+        rangoMaximo.setMaxValue(9);
         setOrderBy(codigo);
+    }
+
+    @Override
+    protected void settleExpressions() {
+        super.settleExpressions();
+        check01 = rangoMinimo.isLessThan(rangoMaximo);
+        check01.setDefaultErrorMessage("el rango mínimo es mayor o igual que el rango máximo");
     }
 
 }
