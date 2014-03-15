@@ -29,7 +29,7 @@ begin
         raise exception using message = _msg;
     end if;
     update valor_nodo_indice vnx
-    set rango = rv.nombre, numeral_rango = rv.numero
+    set rango = rv.expresion, numeral_rango = rv.numeral
     from medicion_variable mv, rango_variable rv
     where vnx.medicion = _row.medicion
     and mv.medicion = _medicion$

@@ -135,7 +135,9 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     protected void settleProperties() {
         super.settleProperties();
         rango.setDefaultLabel("rango");
-        numeralRango.setDefaultLabel("numeral rango");
+        rango.setDefaultDescription("expresión lingüistica del rango");
+        numeralRango.setDefaultLabel("numeral");
+        numeralRango.setDefaultDescription("numeral del rango");
         brechaNorma1.setDefaultLabel("brecha norma 1");
         brechaNorma1.setDefaultDescription("brecha calculada con la función Distancia Norma 1 (lineal)");
         indiceNorma1.setDefaultLabel("índice norma 1");

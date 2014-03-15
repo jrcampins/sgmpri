@@ -49,7 +49,7 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     @Allocation(maxDepth = 2, maxRound = 0)
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
-    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE)
+    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE_AND_DETAIL)
     @PropertyField(update = Kleenean.FALSE)
     public MedicionRama medicion;
 
@@ -84,11 +84,7 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
     public RangoVariable rango;
 
-    /**
-     * string property field
-     */
-    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
-    public StringProperty valor;
+    public StringProperty comentarios;
 
     @Override
     protected void settleProperties() {
@@ -108,16 +104,13 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
         key01.newKeyField(medicion, variable);
     }
 
-    protected Segment tangible, intangible, modificable;
+    protected Segment modificable;
 
     protected Check check01;
 
     @Override
     protected void settleExpressions() {
         super.settleExpressions();
-        /**/
-        tangible = variable.tipoVariable.isEqualTo(variable.tipoVariable.TANGIBLE);
-        intangible = variable.tipoVariable.isEqualTo(variable.tipoVariable.INTANGIBLE);
         /**/
         modificable = or(medicion.condicion.isEqualTo(medicion.condicion.PROGRAMADA), medicion.condicion.isEqualTo(medicion.condicion.RECHAZADA));
         modificable.setDefaultErrorMessage("la medición no se puede modificar porque no está Programada ni Rechazada");
@@ -130,17 +123,7 @@ public class MedicionVariable extends meta.entidad.base.PersistentEntityBase {
     protected void settleFilters() {
         super.settleFilters();
         setUpdateFilter(modificable);
-        /**/
-        rango.setRenderingFilter(intangible);
-        rango.setRequiringFilter(intangible);
-        rango.setModifyingFilter(intangible);
-        rango.setNullifyingFilter(tangible);
-        rango.setSearchQueryFilter(check01);
-        /**/
-        valor.setRenderingFilter(tangible);
-        valor.setRequiringFilter(tangible);
-        valor.setModifyingFilter(tangible);
-        valor.setNullifyingFilter(intangible);
+        rango.setSearchQueryFilter(rango.variable.isEqualTo(variable));
     }
 
 }

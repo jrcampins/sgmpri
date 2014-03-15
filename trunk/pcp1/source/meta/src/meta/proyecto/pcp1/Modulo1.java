@@ -23,14 +23,6 @@ public class Modulo1 extends Project {
     ColorIndice colorIndice;
 
     ColorNodoIndice colorNodoIndice;
-//
-//  Cuestionario cuestionario;
-//
-//  CuestionarioFuente cuestionarioFuente;
-//
-//  CuestionarioVariable cuestionarioVariable;
-//
-//  Fuente fuente;
 
     MedicionRama medicionRama;
 
@@ -47,9 +39,5 @@ public class Modulo1 extends Project {
     ValorNodoIndice valorNodoIndice;
 
     Variable variable;
-
-    VariableIntangible variableIntangible;
-
-    VariableTangible variableTangible;
 
 }

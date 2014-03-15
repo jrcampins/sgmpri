@@ -24,6 +24,7 @@ import meta.entidad.comun.control.acceso.Usuario;
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.OPERATION)
 @EntityInsertOperation(enabled = Kleenean.FALSE)
 @EntityDeleteOperation(enabled = Kleenean.FALSE)
+@EntityTableView(inserts = Kleenean.FALSE, updates = Kleenean.FALSE)
 public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
@@ -67,7 +68,7 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
     @Allocation(maxDepth = 1, maxRound = 0)
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
-    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE)
+    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE_AND_DETAIL)
     @PropertyField(update = Kleenean.FALSE)
     public MedicionNodo medicion;
 
@@ -162,11 +163,11 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
     protected void settleTabs() {
         super.settleTabs();
         tab1.setDefaultLabel("general");
-        tab1.newTabField(medicion, rama, fechaProgramada, condicion, fechaCondicion);
+        tab1.newTabField(medicion, rama, fechaProgramada, condicion, fechaCondicion, observaciones);
         tab2.setDefaultLabel("cronologia");
         tab2.newTabField(fechaProgramada, programador, fechaRegistro, registrador, fechaVerificacion, verificador);
         tab3.setDefaultLabel("etc");
-        tab3.newTabField(archivo, adjunto, observaciones, comentarios);
+        tab3.newTabField(archivo, adjunto, comentarios);
     }
 
     protected State programada, registrada, aceptada, rechazada;

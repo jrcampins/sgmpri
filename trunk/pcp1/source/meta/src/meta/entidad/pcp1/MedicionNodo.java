@@ -21,8 +21,7 @@ import meta.entidad.comun.control.acceso.Usuario;
  * @author Jorge Campins
  */
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.OPERATION)
-@EntityTableView(inserts = Kleenean.FALSE)
-@EntityUpdateOperation(enabled = Kleenean.FALSE)
+@EntityTableView(inserts = Kleenean.FALSE, updates = Kleenean.FALSE)
 public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
@@ -68,6 +67,7 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(update = Kleenean.FALSE)
     public NodoIndice nodo;
 
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
@@ -94,6 +94,9 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
 
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE)
     public StringProperty observaciones;
+
+    @PropertyField(create = Kleenean.TRUE)
+    public StringProperty comentarios;
 
     @Override
     protected void settleProperties() {
@@ -134,7 +137,6 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
 
     @Override
     protected void settleFilters() {
-        setUpdateFilter(programada);
         setDeleteFilter(programada);
         nodo.setSearchQueryFilter(check01);
     }

@@ -53,29 +53,31 @@ public class RangoVariable extends meta.entidad.base.PersistentEntityBase {
     @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE)
     @PropertyField(required = Kleenean.TRUE)
-    public VariableIntangible variable;
+    public Variable variable;
 
     /**
      * integer property field
      */
     @ColumnField(nullable = Kleenean.FALSE)
     @PropertyField(required = Kleenean.TRUE)
-    public IntegerProperty numero;
+    public IntegerProperty numeral;
 
     /**
      * name property field
      */
     @NameProperty
-    public StringProperty nombre;
+    public StringProperty expresion;
 
     @Override
     protected void settleProperties() {
         super.settleProperties();
-        numero.setDefaultDescription("numeral del Rango de Tendencia Dominante (RTD)");
-        numero.setMinValue(0);
-        numero.setMaxValue(9);
-        nombre.setDefaultDescription("forma lingüistica del Rango de Tendencia Dominante (RTD)");
-        setOrderBy(variable.codigo, numero);
+        numeral.setDefaultLabel("numeral");
+        numeral.setDefaultTooltip("numeral del rango");
+        numeral.setMinValue(0);
+        numeral.setMaxValue(9);
+        expresion.setDefaultLabel("expresión");
+        expresion.setDefaultTooltip("expresión lingüistica del rango");
+        setOrderBy(variable.codigo, numeral);
     }
 
     protected Key key01;
@@ -84,7 +86,7 @@ public class RangoVariable extends meta.entidad.base.PersistentEntityBase {
     protected void settleKeys() {
         super.settleKeys();
         key01.setUnique(true);
-        key01.newKeyField(variable, numero);
+        key01.newKeyField(variable, numeral);
     }
 
     protected Check check01;
@@ -92,8 +94,8 @@ public class RangoVariable extends meta.entidad.base.PersistentEntityBase {
     @Override
     protected void settleExpressions() {
         super.settleExpressions();
-        check01 = numero.isGreaterOrEqualTo(variable.rangoMinimo).and(numero.isLessOrEqualTo(variable.rangoMaximo));
-        check01.setDefaultErrorMessage("el número debe ser un número entero comprendido entre el rango mínimo y el rango máximo de la variable");
+        check01 = numeral.isGreaterOrEqualTo(variable.rangoMinimo).and(numeral.isLessOrEqualTo(variable.rangoMaximo));
+        check01.setDefaultErrorMessage("el numeral debe ser un número entero comprendido entre el rango mínimo y el rango máximo de la variable");
     }
 
 }
