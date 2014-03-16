@@ -41,6 +41,7 @@ public class ColorIndice extends meta.entidad.base.PersistentEntityBase {
     }
 
     @BusinessKey
+    @StringField(maxLength = 15)
     public StringProperty codigo;
 
     @NumericKey

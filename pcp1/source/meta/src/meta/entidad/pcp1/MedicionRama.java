@@ -51,7 +51,7 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
      * business key property field
      */
     @BusinessKey
-    @StringField(maxLength = 100)
+    @StringField(maxLength = 50)
     @PropertyField(update = Kleenean.FALSE)
     public StringProperty codigo;
 

@@ -66,6 +66,7 @@ public class RangoVariable extends meta.entidad.base.PersistentEntityBase {
      * name property field
      */
     @NameProperty
+    @StringField(maxLength = 20)
     public StringProperty expresion;
 
     @Override
