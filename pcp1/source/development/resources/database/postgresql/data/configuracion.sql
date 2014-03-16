@@ -413,3 +413,39 @@ insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
 values (1070004, 'A07-V04', 'PAGO DE LAS PRIMAS ESTABLECIDAS EN EL CONVENIO GN/PDVSA', 3, 1070000, 1094);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
 values (1070005, 'A07-V05', 'APOYO POR PARTE DE LOS OSC', 3, 1070000, 1095);
+
+-- ---------------------------------------------------------------------------------------------------------------------------------------------------
+-- initcap
+-- ---------------------------------------------------------------------------------------------------------------------------------------------------
+update variable set nombre=initcap(nombre);
+update variable set nombre=replace(nombre, ' A ',    ' a ');
+update variable set nombre=replace(nombre, ' E ',    ' e ');
+update variable set nombre=replace(nombre, ' Y ',    ' y ');
+update variable set nombre=replace(nombre, ' O ',    ' o ');
+update variable set nombre=replace(nombre, ' U ',    ' u ');
+update variable set nombre=replace(nombre, ' Con ',  ' con ');
+update variable set nombre=replace(nombre, ' De ',   ' de ');
+update variable set nombre=replace(nombre, ' Del ',  ' del ');
+update variable set nombre=replace(nombre, ' En ',   ' en ');
+update variable set nombre=replace(nombre, ' El ',   ' el ');
+update variable set nombre=replace(nombre, ' La ',   ' la ');
+update variable set nombre=replace(nombre, ' Los ',  ' los ');
+update variable set nombre=replace(nombre, ' Las ',  ' las ');
+update variable set nombre=replace(nombre, ' Y/O ',  ' y/o ');
+update rango_variable set expresion=initcap(expresion);
+update color_indice set codigo=initcap(codigo);
+update nodo_indice set nombre=initcap(nombre);
+update nodo_indice set nombre=replace(nombre, ' A ',    ' a ');
+update nodo_indice set nombre=replace(nombre, ' E ',    ' e ');
+update nodo_indice set nombre=replace(nombre, ' Y ',    ' y ');
+update nodo_indice set nombre=replace(nombre, ' O ',    ' o ');
+update nodo_indice set nombre=replace(nombre, ' U ',    ' u ');
+update nodo_indice set nombre=replace(nombre, ' Con ',  ' con ');
+update nodo_indice set nombre=replace(nombre, ' De ',   ' de ');
+update nodo_indice set nombre=replace(nombre, ' Del ',  ' del ');
+update nodo_indice set nombre=replace(nombre, ' En ',   ' en ');
+update nodo_indice set nombre=replace(nombre, ' El ',   ' el ');
+update nodo_indice set nombre=replace(nombre, ' La ',   ' la ');
+update nodo_indice set nombre=replace(nombre, ' Los ',  ' los ');
+update nodo_indice set nombre=replace(nombre, ' Las ',  ' las ');
+update nodo_indice set nombre=replace(nombre, ' Y/O ',  ' y/o ');

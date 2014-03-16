@@ -13,7 +13,6 @@ SET client_min_messages TO WARNING;
 \echo
 \i acceso.sql
 \i configuracion.sql
-\i operacion.sql
 \i prueba.sql
 \echo --------------------------------------------------------------------------
 COMMIT TRANSACTION;
