@@ -55,17 +55,17 @@ insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
 values (1020, 'A01-S05-V05', 'SISTEMA DE TRANSMISIÓN DE VIDEO, VOZ Y DATA', 0, 3);
 
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
-values (1021, 'A01-S06-V01', 'OPI', 0, 3);
+values (1021, 'A01-S06-V01', 'O.P.I.', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
-values (1022, 'A01-S06-V02', 'GNB', 0, 3);
+values (1022, 'A01-S06-V02', 'G.N.B.', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
 values (1023, 'A01-S06-V03', 'MILICIA', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
 values (1024, 'A01-S06-V04', 'FUERZA DE RESPUESTA EN INSTALACIÓN', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
-values (1025, 'A01-S06-V05', 'FUERZA DE RESPUESTA EXTERNA A LA INSTALACIÓN (FANB/GNB)', 0, 3);
+values (1025, 'A01-S06-V05', 'FUERZA DE RESPUESTA EXTERNA A LA INSTALACIÓN (F.A.N.B./G.N.B.)', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
-values (1026, 'A01-S06-V06', 'EQUIPOS DE PROTECCIÓN (EPP, CONOS, CHALECOS, FORO PILOTO, ENTRE OTROS)', 0, 3);
+values (1026, 'A01-S06-V06', 'EQUIPOS DE PROTECCIÓN (E.P.P., CONOS, CHALECOS, FORO PILOTO, ENTRE OTROS)', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
 values (1027, 'A01-S06-V07', 'EQUIPOS DE BUSQUEDA (RAYOS X, DETECTORES DE METALES, DROGA, EXPLOSIVOS, ACTIVOS)', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
@@ -138,7 +138,7 @@ values (1064, 'A04-V04', 'ESTACIÓN DE BOMBAS', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
 values (1065, 'A04-V05', 'TUBERIAS DE CRUDO DE 42’’', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
-values (1066, 'A04-V06', 'CENTRO DE CONTROL (CDC)', 0, 3);
+values (1066, 'A04-V06', 'CENTRO DE CONTROL (C.D.C.)', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
 values (1067, 'A04-V07', 'CENTRO DE CONTROL (MEREY OFICINA)', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
@@ -153,13 +153,13 @@ values (1071, 'A05-V01', 'FIBRA OPTICA', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
 values (1072, 'A05-V02', 'SOFTWARE', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
-values (1073, 'A05-V03', 'CONSUMIBLES (REPUESTOS: PLC, SWITCHES,TARJETAS, CENTRO OTROS)', 0, 3);
+values (1073, 'A05-V03', 'CONSUMIBLES (REPUESTOS: P.L.C., SWITCHES,TARJETAS, CENTRO OTROS)', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
-values (1074, 'A05-V04', 'HARDWARE (MONITORES, CPU)', 0, 3);
+values (1074, 'A05-V04', 'HARDWARE (MONITORES, C.P.U.)', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
 values (1075, 'A05-V05', 'RADIOS', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
-values (1076, 'A05-V06', 'SISTEMAS DE ALIMENTACIÓN ININTERUMPIDA (UPS)', 0, 3);
+values (1076, 'A05-V06', 'SISTEMAS DE ALIMENTACIÓN ININTERUMPIDA (U.P.S.)', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
 values (1077, 'A05-V07', 'CUARTO DE SERVIDORES', 0, 3);
 
@@ -171,15 +171,15 @@ insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
 values (1083, 'A06-V03', 'BÚSQUEDA DE FUENTES DE INFORMACIÓN', 0, 3);
 
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
-values (1091, 'A07-V01', 'PRESENCIA DE EFECTIVOS DE LA FANB', 0, 3);
+values (1091, 'A07-V01', 'PRESENCIA DE EFECTIVOS DE LA F.A.N.B.', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
-values (1092, 'A07-V02', 'EFECTIVIDAD DEL CUMPLIMIENTO DEL PLAN OPERATIVO VIGENTE (POV) EN EL PUESTO DE SERVICIO', 0, 3);
+values (1092, 'A07-V02', 'EFECTIVIDAD DEL CUMPLIMIENTO DEL PLAN OPERATIVO VIGENTE (P.O.V.) EN EL PUESTO DE SERVICIO', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
 values (1093, 'A07-V03', 'CONDICIONES DEL LUGAR DE DESCANSO DE LOS EFECTIVOS', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
-values (1094, 'A07-V04', 'PAGO DE LAS PRIMAS ESTABLECIDAS EN EL CONVENIO GN/PDVSA', 0, 3);
+values (1094, 'A07-V04', 'PAGO DE LAS PRIMAS ESTABLECIDAS EN EL CONVENIO G.N.B./P.D.V.S.A.', 0, 3);
 insert into variable (id, codigo, nombre, rango_minimo, rango_maximo)
-values (1095, 'A07-V05', 'APOYO POR PARTE DE LOS OSC', 0, 3);
+values (1095, 'A07-V05', 'APOYO POR PARTE DE LOS O.S.C.', 0, 3);
 
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------
 -- rango_variable
@@ -223,7 +223,7 @@ values (1050000, 'A05', 'INFRAESTRUCTURA TECNOLÓGICA', 2, 1000000);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior)
 values (1060000, 'A06', 'ENTORNO SOCIAL', 2, 1000000);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior)
-values (1070000, 'A07', 'OPERATIVIDAD CON LA FANB/OSC Y OTROS ENTES DEL ESTADO', 2, 1000000);
+values (1070000, 'A07', 'OPERATIVIDAD CON LA F.A.N.B./O.S.C. Y OTROS ENTES DEL ESTADO', 2, 1000000);
 
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior)
 values (1010100, 'A01-S01', 'BARRERAS Y RETARDOS', 2, 1010000);
@@ -288,17 +288,17 @@ insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
 values (1010505, 'A01-S05-V05', 'SISTEMA DE TRANSMISIÓN DE VIDEO, VOZ Y DATA', 3, 1010500, 1020);
 
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
-values (1010601, 'A01-S06-V01', 'OPI', 3, 1010600, 1021);
+values (1010601, 'A01-S06-V01', 'O.P.I.', 3, 1010600, 1021);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
-values (1010602, 'A01-S06-V02', 'GNB', 3, 1010600, 1022);
+values (1010602, 'A01-S06-V02', 'G.N.B.', 3, 1010600, 1022);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
 values (1010603, 'A01-S06-V03', 'MILICIA', 3, 1010600, 1023);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
 values (1010604, 'A01-S06-V04', 'FUERZA DE RESPUESTA EN INSTALACIÓN', 3, 1010600, 1024);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
-values (1010605, 'A01-S06-V05', 'FUERZA DE RESPUESTA EXTERNA A LA INSTALACIÓN (FANB/GNB)', 3, 1010600, 1025);
+values (1010605, 'A01-S06-V05', 'FUERZA DE RESPUESTA EXTERNA A LA INSTALACIÓN (F.A.N.B./G.N.B.)', 3, 1010600, 1025);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
-values (1010606, 'A01-S06-V06', 'EQUIPOS DE PROTECCIÓN (EPP, CONOS, CHALECOS, FORO PILOTO, ENTRE OTROS)', 3, 1010600, 1026);
+values (1010606, 'A01-S06-V06', 'EQUIPOS DE PROTECCIÓN (E.P.P., CONOS, CHALECOS, FORO PILOTO, ENTRE OTROS)', 3, 1010600, 1026);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
 values (1010607, 'A01-S06-V07', 'EQUIPOS DE BUSQUEDA (RAYOS X, DETECTORES DE METALES, DROGA, EXPLOSIVOS, ACTIVOS)', 3, 1010600, 1027);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
@@ -371,7 +371,7 @@ values (1040004, 'A04-V04', 'ESTACIÓN DE BOMBAS', 3, 1040000, 1064);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
 values (1040005, 'A04-V05', 'TUBERIAS DE CRUDO DE 42’’', 3, 1040000, 1065);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
-values (1040006, 'A04-V06', 'CENTRO DE CONTROL (CDC)', 3, 1040000, 1066);
+values (1040006, 'A04-V06', 'CENTRO DE CONTROL (C.D.C.)', 3, 1040000, 1066);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
 values (1040007, 'A04-V07', 'CENTRO DE CONTROL (MEREY OFICINA)', 3, 1040000, 1067);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
@@ -386,13 +386,13 @@ values (1050001, 'A05-V01', 'FIBRA OPTICA', 3, 1050000, 1071);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
 values (1050002, 'A05-V02', 'SOFTWARE', 3, 1050000, 1072);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
-values (1050003, 'A05-V03', 'CONSUMIBLES (REPUESTOS: PLC, SWITCHES,TARJETAS, CENTRO OTROS)', 3, 1050000, 1073);
+values (1050003, 'A05-V03', 'CONSUMIBLES (REPUESTOS: P.L.C., SWITCHES,TARJETAS, CENTRO OTROS)', 3, 1050000, 1073);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
-values (1050004, 'A05-V04', 'HARDWARE (MONITORES, CPU)', 3, 1050000, 1074);
+values (1050004, 'A05-V04', 'HARDWARE (MONITORES, C.P.U.)', 3, 1050000, 1074);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
 values (1050005, 'A05-V05', 'RADIOS', 3, 1050000, 1075);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
-values (1050006, 'A05-V06', 'SISTEMAS DE ALIMENTACIÓN ININTERUMPIDA (UPS)', 3, 1050000, 1076);
+values (1050006, 'A05-V06', 'SISTEMAS DE ALIMENTACIÓN ININTERUMPIDA (U.P.S.)', 3, 1050000, 1076);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
 values (1050007, 'A05-V07', 'CUARTO DE SERVIDORES', 3, 1050000, 1077);
 
@@ -404,48 +404,60 @@ insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
 values (1060003, 'A06-V03', 'BÚSQUEDA DE FUENTES DE INFORMACIÓN', 3, 1060000, 1083);
 
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
-values (1070001, 'A07-V01', 'PRESENCIA DE EFECTIVOS DE LA FANB', 3, 1070000, 1091);
+values (1070001, 'A07-V01', 'PRESENCIA DE EFECTIVOS DE LA F.A.N.B.', 3, 1070000, 1091);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
-values (1070002, 'A07-V02', 'EFECTIVIDAD DEL CUMPLIMIENTO DEL PLAN OPERATIVO VIGENTE (POV) EN EL PUESTO DE SERVICIO', 3, 1070000, 1092);
+values (1070002, 'A07-V02', 'EFECTIVIDAD DEL CUMPLIMIENTO DEL PLAN OPERATIVO VIGENTE (P.O.V.) EN EL PUESTO DE SERVICIO', 3, 1070000, 1092);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
 values (1070003, 'A07-V03', 'CONDICIONES DEL LUGAR DE DESCANSO DE LOS EFECTIVOS', 3, 1070000, 1093);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
-values (1070004, 'A07-V04', 'PAGO DE LAS PRIMAS ESTABLECIDAS EN EL CONVENIO GN/PDVSA', 3, 1070000, 1094);
+values (1070004, 'A07-V04', 'PAGO DE LAS PRIMAS ESTABLECIDAS EN EL CONVENIO G.N.B./P.D.V.S.A.', 3, 1070000, 1094);
 insert into nodo_indice (id, codigo, nombre, tipo_nodo, superior, variable)
-values (1070005, 'A07-V05', 'APOYO POR PARTE DE LOS OSC', 3, 1070000, 1095);
+values (1070005, 'A07-V05', 'APOYO POR PARTE DE LOS O.S.C.', 3, 1070000, 1095);
 
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------
 -- initcap
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------
 update variable set nombre=initcap(nombre);
-update variable set nombre=replace(nombre, ' A ',    ' a ');
-update variable set nombre=replace(nombre, ' E ',    ' e ');
-update variable set nombre=replace(nombre, ' Y ',    ' y ');
-update variable set nombre=replace(nombre, ' O ',    ' o ');
-update variable set nombre=replace(nombre, ' U ',    ' u ');
-update variable set nombre=replace(nombre, ' Con ',  ' con ');
-update variable set nombre=replace(nombre, ' De ',   ' de ');
-update variable set nombre=replace(nombre, ' Del ',  ' del ');
-update variable set nombre=replace(nombre, ' En ',   ' en ');
-update variable set nombre=replace(nombre, ' El ',   ' el ');
-update variable set nombre=replace(nombre, ' La ',   ' la ');
-update variable set nombre=replace(nombre, ' Los ',  ' los ');
-update variable set nombre=replace(nombre, ' Las ',  ' las ');
-update variable set nombre=replace(nombre, ' Y/O ',  ' y/o ');
+update variable set nombre=replace(nombre, ' A ',      ' a '     );
+update variable set nombre=replace(nombre, ' E ',      ' e '     );
+update variable set nombre=replace(nombre, ' Y ',      ' y '     );
+update variable set nombre=replace(nombre, ' O ',      ' o '     );
+update variable set nombre=replace(nombre, ' U ',      ' u '     );
+update variable set nombre=replace(nombre, ' Con ',    ' con '   );
+update variable set nombre=replace(nombre, ' De ',     ' de '    );
+update variable set nombre=replace(nombre, ' Del ',    ' del '   );
+update variable set nombre=replace(nombre, ' En ',     ' en '    );
+update variable set nombre=replace(nombre, ' Entre ',  ' entre ' );
+update variable set nombre=replace(nombre, ' El ',     ' el '    );
+update variable set nombre=replace(nombre, ' La ',     ' la '    );
+update variable set nombre=replace(nombre, ' Los ',    ' los '   );
+update variable set nombre=replace(nombre, ' Las ',    ' las '   );
+update variable set nombre=replace(nombre, ' Otro ',   ' otro '  );
+update variable set nombre=replace(nombre, ' Otra ',   ' otra '  );
+update variable set nombre=replace(nombre, ' Otros ',  ' otros ' );
+update variable set nombre=replace(nombre, ' Otras ',  ' otras ' );
+update variable set nombre=replace(nombre, ' Para ',   ' para '  );
+update variable set nombre=replace(nombre, ' Y/O ',    ' y/o '   );
 update rango_variable set expresion=initcap(expresion);
 update color_indice set codigo=initcap(codigo);
 update nodo_indice set nombre=initcap(nombre);
-update nodo_indice set nombre=replace(nombre, ' A ',    ' a ');
-update nodo_indice set nombre=replace(nombre, ' E ',    ' e ');
-update nodo_indice set nombre=replace(nombre, ' Y ',    ' y ');
-update nodo_indice set nombre=replace(nombre, ' O ',    ' o ');
-update nodo_indice set nombre=replace(nombre, ' U ',    ' u ');
-update nodo_indice set nombre=replace(nombre, ' Con ',  ' con ');
-update nodo_indice set nombre=replace(nombre, ' De ',   ' de ');
-update nodo_indice set nombre=replace(nombre, ' Del ',  ' del ');
-update nodo_indice set nombre=replace(nombre, ' En ',   ' en ');
-update nodo_indice set nombre=replace(nombre, ' El ',   ' el ');
-update nodo_indice set nombre=replace(nombre, ' La ',   ' la ');
-update nodo_indice set nombre=replace(nombre, ' Los ',  ' los ');
-update nodo_indice set nombre=replace(nombre, ' Las ',  ' las ');
-update nodo_indice set nombre=replace(nombre, ' Y/O ',  ' y/o ');
+update nodo_indice set nombre=replace(nombre, ' A ',      ' a '     );
+update nodo_indice set nombre=replace(nombre, ' E ',      ' e '     );
+update nodo_indice set nombre=replace(nombre, ' Y ',      ' y '     );
+update nodo_indice set nombre=replace(nombre, ' O ',      ' o '     );
+update nodo_indice set nombre=replace(nombre, ' U ',      ' u '     );
+update nodo_indice set nombre=replace(nombre, ' Con ',    ' con '   );
+update nodo_indice set nombre=replace(nombre, ' De ',     ' de '    );
+update nodo_indice set nombre=replace(nombre, ' Del ',    ' del '   );
+update nodo_indice set nombre=replace(nombre, ' En ',     ' en '    );
+update nodo_indice set nombre=replace(nombre, ' Entre ',  ' entre ' );
+update nodo_indice set nombre=replace(nombre, ' El ',     ' el '    );
+update nodo_indice set nombre=replace(nombre, ' La ',     ' la '    );
+update nodo_indice set nombre=replace(nombre, ' Los ',    ' los '   );
+update nodo_indice set nombre=replace(nombre, ' Las ',    ' las '   );
+update nodo_indice set nombre=replace(nombre, ' Otro ',   ' otro '  );
+update nodo_indice set nombre=replace(nombre, ' Otra ',   ' otra '  );
+update nodo_indice set nombre=replace(nombre, ' Otros ',  ' otros ' );
+update nodo_indice set nombre=replace(nombre, ' Otras ',  ' otras ' );
+update nodo_indice set nombre=replace(nombre, ' Para ',   ' para '  );
+update nodo_indice set nombre=replace(nombre, ' Y/O ',    ' y/o '   );
