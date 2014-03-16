@@ -51,7 +51,6 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE)
-    @PropertyField(update = Kleenean.FALSE)
     public MedicionNodo medicion;
 
     /**
@@ -70,6 +69,7 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(table = Kleenean.FALSE, report = Kleenean.FALSE, search = Kleenean.TRUE)
     public TipoNodo tipoNodo;
 
     /**
@@ -82,13 +82,15 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     public ValorNodoIndice superior;
 
     @BigDecimalField(precision = 16, scale = 10)
-    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @PropertyField(table = Kleenean.FALSE, report = Kleenean.FALSE)
     public BigDecimalProperty peso;
 
     @ColumnField(nullable = Kleenean.FALSE)
+    @PropertyField(table = Kleenean.FALSE, report = Kleenean.FALSE)
     public DateProperty fechaValor;
 
     @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @StringField(maxLength = 20)
     public StringProperty rango;
 
     public IntegerProperty numeralRango;
@@ -103,6 +105,7 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
      * big decimal property field
      */
     @BigDecimalField(precision = 5, scale = 2)
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
     public BigDecimalProperty indiceNorma1;
 
     /**
@@ -119,6 +122,7 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
      * big decimal property field
      */
     @BigDecimalField(precision = 5, scale = 2)
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
     public BigDecimalProperty indiceNorma2;
 
     /**
@@ -134,20 +138,30 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @Override
     protected void settleProperties() {
         super.settleProperties();
+        medicion.setDefaultLabel("medición");
+        medicion.setDefaultDescription("medición por nodo");
+        medicion.codigo.setDefaultLabel("medición");
+        medicion.nombre.setDefaultLabel("nombre de la medición por nodo");
+        nodo.setDefaultLabel("nodo");
+        nodo.setDefaultDescription("nodo de índice");
+        nodo.codigo.setDefaultLabel("nodo");
+        nodo.nombre.setDefaultLabel("nombre del nodo");
         rango.setDefaultLabel("rango");
         rango.setDefaultDescription("expresión lingüistica del rango");
         numeralRango.setDefaultLabel("numeral");
         numeralRango.setDefaultDescription("numeral del rango");
-        brechaNorma1.setDefaultLabel("brecha norma 1");
+        brechaNorma1.setDefaultLabel("brecha 1");
         brechaNorma1.setDefaultDescription("brecha calculada con la función Distancia Norma 1 (lineal)");
-        indiceNorma1.setDefaultLabel("índice norma 1");
+        indiceNorma1.setDefaultLabel("índice 1");
         indiceNorma1.setDefaultDescription("índice calculado con la función Distancia Norma 1 (lineal)");
-        indiceNorma2.setDefaultLabel("índice norma 2");
+        indiceNorma2.setDefaultLabel("índice 2");
         indiceNorma2.setDefaultDescription("índice calculado con la función Distancia Norma 2 (no lineal)");
-        colorNorma1.setDefaultLabel("color norma 1");
-        colorNorma1.setDefaultDescription("color del semáforo para el índice norma 1");
-        colorNorma2.setDefaultLabel("color norma 2");
-        colorNorma2.setDefaultDescription("color sel semáforo para el índice norma 2");
+        colorNorma1.setDefaultLabel("color 1");
+        colorNorma1.setDefaultDescription("color del semáforo para el índice 1");
+        colorNorma1.codigo.setDefaultLabel("color 1");
+        colorNorma2.setDefaultLabel("color 2");
+        colorNorma2.setDefaultDescription("color sel semáforo para el índice 2");
+        colorNorma2.codigo.setDefaultLabel("color 2");
         setOrderBy(nodo.codigo, fechaValor);
     }
 

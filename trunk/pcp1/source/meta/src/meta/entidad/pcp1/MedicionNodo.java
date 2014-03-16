@@ -48,7 +48,7 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
      * business key property field
      */
     @BusinessKey
-    @StringField(maxLength = 100)
+    @StringField(maxLength = 50)
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE, defaultCondition = DefaultCondition.UNCONDITIONALLY_ON_INSERT)
     public StringProperty codigo;
 
