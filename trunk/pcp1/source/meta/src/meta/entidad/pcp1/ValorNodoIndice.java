@@ -162,7 +162,7 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
         colorNorma2.setDefaultLabel("color 2");
         colorNorma2.setDefaultDescription("color sel semáforo para el índice 2");
         colorNorma2.codigo.setDefaultLabel("color 2");
-        setOrderBy(nodo.codigo, fechaValor);
+        setOrderBy(medicion.codigo, nodo.codigo);
     }
 
 }
