@@ -140,12 +140,12 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
         super.settleProperties();
         medicion.setDefaultLabel("medición");
         medicion.setDefaultDescription("medición por nodo");
-        medicion.codigo.setDefaultLabel("medición");
-        medicion.nombre.setDefaultLabel("nombre de la medición por nodo");
+//      medicion.codigo.setDefaultLabel("medición");
+//      medicion.nombre.setDefaultLabel("nombre de la medición");
         nodo.setDefaultLabel("nodo");
         nodo.setDefaultDescription("nodo de índice");
-        nodo.codigo.setDefaultLabel("nodo");
-        nodo.nombre.setDefaultLabel("nombre del nodo");
+//      nodo.codigo.setDefaultLabel("nodo");
+//      nodo.nombre.setDefaultLabel("nombre del nodo");
         rango.setDefaultLabel("rango");
         rango.setDefaultDescription("expresión lingüistica del rango");
         numeralRango.setDefaultLabel("numeral");
@@ -158,10 +158,10 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
         indiceNorma2.setDefaultDescription("índice calculado con la función Distancia Norma 2 (no lineal)");
         colorNorma1.setDefaultLabel("color 1");
         colorNorma1.setDefaultDescription("color del semáforo para el índice 1");
-        colorNorma1.codigo.setDefaultLabel("color 1");
+//      colorNorma1.codigo.setDefaultLabel("color 1");
         colorNorma2.setDefaultLabel("color 2");
         colorNorma2.setDefaultDescription("color sel semáforo para el índice 2");
-        colorNorma2.codigo.setDefaultLabel("color 2");
+//      colorNorma2.codigo.setDefaultLabel("color 2");
         setOrderBy(medicion.codigo, nodo.codigo);
     }
 
