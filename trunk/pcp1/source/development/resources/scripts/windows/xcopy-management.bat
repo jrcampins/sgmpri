@@ -1,5 +1,6 @@
 @echo off
 cd /d "%~dp0"
+setlocal
 call variables
 set source=%project_source_dir%\management
 set source

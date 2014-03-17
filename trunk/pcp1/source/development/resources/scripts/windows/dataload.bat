@@ -1,5 +1,6 @@
 @echo off
 cd /d "%~dp0"
+call xcopy-management
 setlocal
 call variables
 call:set-variables
