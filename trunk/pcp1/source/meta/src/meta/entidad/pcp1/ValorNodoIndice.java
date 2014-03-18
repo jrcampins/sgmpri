@@ -18,7 +18,7 @@ import meta.entidad.comun.configuracion.basica.TipoNodo;
  *
  * @author Jorge Campins
  */
-@EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.OPERATION)
+@EntityClass(independent = Kleenean.FALSE, resourceType = ResourceType.OPERATION)
 @EntityInsertOperation(enabled = Kleenean.FALSE)
 @EntityDeleteOperation(enabled = Kleenean.FALSE)
 @EntityTableView(updates = Kleenean.FALSE)
