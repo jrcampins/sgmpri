@@ -20,8 +20,8 @@ import meta.entidad.comun.configuracion.basica.TipoNodo;
  */
 @EntityClass(independent = Kleenean.TRUE, resourceType = ResourceType.OPERATION)
 @EntityInsertOperation(enabled = Kleenean.FALSE)
-@EntityUpdateOperation(enabled = Kleenean.FALSE)
 @EntityDeleteOperation(enabled = Kleenean.FALSE)
+@EntityTableView(updates = Kleenean.FALSE)
 public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
@@ -51,6 +51,7 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.TABLE)
+    @PropertyField(update = Kleenean.FALSE)
     public MedicionNodo medicion;
 
     /**
@@ -60,6 +61,7 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(update = Kleenean.FALSE)
     public NodoIndice nodo;
 
     /**
@@ -69,7 +71,7 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(table = Kleenean.FALSE, report = Kleenean.FALSE, search = Kleenean.TRUE)
+    @PropertyField(table = Kleenean.FALSE, report = Kleenean.FALSE, search = Kleenean.TRUE, update = Kleenean.FALSE)
     public TipoNodo tipoNodo;
 
     /**
@@ -82,30 +84,32 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     public ValorNodoIndice superior;
 
     @BigDecimalField(precision = 16, scale = 10)
-    @PropertyField(table = Kleenean.FALSE, report = Kleenean.FALSE)
+    @PropertyField(table = Kleenean.FALSE, report = Kleenean.FALSE, update = Kleenean.FALSE)
     public BigDecimalProperty peso;
 
     @ColumnField(nullable = Kleenean.FALSE)
-    @PropertyField(table = Kleenean.FALSE, report = Kleenean.FALSE)
+    @PropertyField(table = Kleenean.FALSE, report = Kleenean.FALSE, update = Kleenean.FALSE)
     public DateProperty fechaValor;
 
-    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
     @StringField(maxLength = 20)
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE, update = Kleenean.FALSE)
     public StringProperty rango;
 
+    @PropertyField(update = Kleenean.FALSE)
     public IntegerProperty numeralRango;
 
     /**
      * big decimal property field
      */
     @BigDecimalField(precision = 5, scale = 2)
+    @PropertyField(update = Kleenean.FALSE)
     public BigDecimalProperty brechaNorma1;
 
     /**
      * big decimal property field
      */
     @BigDecimalField(precision = 5, scale = 2)
-    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE, update = Kleenean.FALSE)
     public BigDecimalProperty indiceNorma1;
 
     /**
@@ -115,14 +119,14 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @EntityReferenceSearch(searchType = SearchType.LIST, listStyle = ListStyle.CHARACTER_KEY)
-    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE, update = Kleenean.FALSE)
     public ColorIndice colorNorma1;
 
     /**
      * big decimal property field
      */
     @BigDecimalField(precision = 5, scale = 2)
-    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE, update = Kleenean.FALSE)
     public BigDecimalProperty indiceNorma2;
 
     /**
@@ -132,8 +136,10 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @EntityReferenceSearch(searchType = SearchType.LIST, listStyle = ListStyle.CHARACTER_KEY)
-    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE)
+    @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE, update = Kleenean.FALSE)
     public ColorIndice colorNorma2;
+
+    public StringProperty comentarios;
 
     @Override
     protected void settleProperties() {
