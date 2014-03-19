@@ -45,4 +45,6 @@ public class CondicionMedicionRama extends meta.entidad.base.PersistentEnumerati
 
     public Instance RECHAZADA;
 
+    public Instance ANULADA;
+
 }

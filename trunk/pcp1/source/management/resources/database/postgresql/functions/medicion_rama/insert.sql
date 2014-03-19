@@ -1,4 +1,4 @@
-create or replace function medicion_rama$insert(_medicion_nodo$ bigint, _nodo$ bigint, _programador$ bigint, _fecha_programada$ date)
+create or replace function medicion_rama$insert(_medicion_nodo$ bigint, _nodo$ bigint)
 returns void as $$
 declare
     _msg character varying;
@@ -9,7 +9,7 @@ declare
     _codigo character varying;
     _nombre character varying;
 begin
-    raise notice 'medicion_rama$insert(medicion=%, nodo=%, programador=%, fecha=%)', _medicion_nodo$, _nodo$, _programador$, _fecha_programada$;
+    raise notice 'medicion_rama$insert(medicion=%, nodo=%)', _medicion_nodo$, _nodo$;
     _enum_tipo_nodo := tipo_nodo$enum();
     for _sub in select * from nodo_indice where superior = _nodo$
     loop
@@ -23,8 +23,8 @@ begin
                     raise exception using message = _msg;
                 end if;
                 insert
-                into medicion_rama (id, codigo, nombre, medicion, rama, programador, fecha_programada)
-                values (_id1, _codigo||'-'||_medicion_nodo$, _nombre, _medicion_nodo$, _nodo$, _programador$, _fecha_programada$);
+                into medicion_rama (id, codigo, nombre, medicion, rama)
+                values (_id1, _codigo||'-'||_medicion_nodo$, _nombre, _medicion_nodo$, _nodo$);
                 insert
                 into medicion_variable (id, medicion, hoja, variable)
                 values (bigintid(), _id1, _sub.id, _sub.variable);
@@ -37,7 +37,7 @@ begin
                 end if;
             end if;
         else
-            perform medicion_rama$insert(_medicion_nodo$, _sub.id, _programador$, _fecha_programada$);
+            perform medicion_rama$insert(_medicion_nodo$, _sub.id);
         end if;
     end loop;
 end;

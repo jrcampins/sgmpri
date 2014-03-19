@@ -43,6 +43,6 @@ public class CondicionMedicionNodo extends meta.entidad.base.PersistentEnumerati
 
     public Instance TERMINADA;
 
-    public Instance CANCELADA;
+    public Instance ANULADA;
 
 }

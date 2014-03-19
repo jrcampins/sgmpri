@@ -86,18 +86,6 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @PropertyField(update = Kleenean.FALSE)
-    public Usuario programador;
-
-    /**
-     * date property field
-     */
-    @ColumnField(nullable = Kleenean.FALSE)
-    @PropertyField(update = Kleenean.FALSE)
-    public DateProperty fechaProgramada;
-
-    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
-    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(update = Kleenean.FALSE)
     public Usuario registrador;
 
     /**
@@ -146,10 +134,6 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
         super.settleProperties();
         medicion.setDefaultLabel("medición por nodo");
         medicion.setDefaultShortLabel("medición");
-        programador.setInitialValue(SpecialEntityValue.CURRENT_USER);
-        programador.setDefaultValue(SpecialEntityValue.CURRENT_USER);
-        fechaProgramada.setInitialValue(SpecialTemporalValue.CURRENT_DATE);
-        fechaProgramada.setDefaultValue(SpecialTemporalValue.CURRENT_DATE);
         condicion.setInitialValue(condicion.PROGRAMADA);
         condicion.setDefaultValue(condicion.PROGRAMADA);
         fechaCondicion.setInitialValue(SpecialTemporalValue.CURRENT_DATE);
@@ -163,14 +147,14 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
     protected void settleTabs() {
         super.settleTabs();
         tab1.setDefaultLabel("general");
-        tab1.newTabField(medicion, rama, fechaProgramada, condicion, fechaCondicion, observaciones);
+        tab1.newTabField(medicion, rama, condicion, fechaCondicion, observaciones);
         tab2.setDefaultLabel("cronologia");
-        tab2.newTabField(fechaProgramada, programador, fechaRegistro, registrador, fechaVerificacion, verificador);
+        tab2.newTabField(fechaRegistro, registrador, fechaVerificacion, verificador);
         tab3.setDefaultLabel("etc");
         tab3.newTabField(archivo, adjunto, comentarios);
     }
 
-    protected State programada, registrada, aceptada, rechazada;
+    protected State programada, registrada, aceptada, rechazada, anulada;
 
     @Override
     protected void settleExpressions() {
@@ -183,6 +167,8 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
         aceptada.setDefaultErrorMessage("la medición no se encuentra en condición Aceptada");
         rechazada = condicion.isEqualTo(condicion.RECHAZADA);
         rechazada.setDefaultErrorMessage("la medición no se encuentra en condición Rechazada");
+        anulada = condicion.isEqualTo(condicion.ANULADA);
+        anulada.setDefaultErrorMessage("la medición no se encuentra en condición Anulada");
     }
 
     @Override
@@ -218,22 +204,6 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
         @FileReference(joinField = "adjunto")
         @ParameterField(required = Kleenean.TRUE, linkedField = "archivo")
         protected StringParameter archivo;
-//
-        // <editor-fold defaultstate="collapsed">
-//      Check check0101;
-//
-//      @Override
-//      protected void settleExpressions() {
-//          super.settleExpressions();
-//          check0101 = medicion.programada.isTrue();
-//      }
-//
-//      @Override
-//      protected void settleFilters() {
-//          super.settleFilters();
-//          medicion.setSearchQueryFilter(check0101);
-//      }
-        // </editor-fold>
 
     }
 
@@ -246,6 +216,9 @@ public class MedicionRama extends meta.entidad.base.PersistentEntityBase {
         @InstanceReference
         @Allocation(maxDepth = 1, maxRound = 0)
         protected MedicionRama medicion;
+
+        @ParameterField(required = Kleenean.FALSE, linkedField = "observaciones")
+        protected StringParameter observaciones;
 
         @Override
         protected void settleParameters() {
