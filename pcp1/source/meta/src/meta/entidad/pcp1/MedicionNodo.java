@@ -7,6 +7,7 @@
 package meta.entidad.pcp1;
 
 import adalid.core.ProcessOperation;
+import adalid.core.Tab;
 import adalid.core.annotations.*;
 import adalid.core.enums.*;
 import adalid.core.interfaces.*;
@@ -80,7 +81,18 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
      */
     @ColumnField(nullable = Kleenean.FALSE)
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE)
-    public DateProperty fechaProgramada;
+    public DateProperty fechaProgramacion;
+
+    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
+    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(update = Kleenean.FALSE)
+    public Usuario anulador;
+
+    /**
+     * date property field
+     */
+    @PropertyField(update = Kleenean.FALSE)
+    public DateProperty fechaAnulacion;
 
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
@@ -107,8 +119,8 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
         nombre.setDefaultValue(nodo.nombre);
         programador.setInitialValue(SpecialEntityValue.CURRENT_USER);
         programador.setDefaultValue(SpecialEntityValue.CURRENT_USER);
-        fechaProgramada.setInitialValue(SpecialTemporalValue.CURRENT_DATE);
-        fechaProgramada.setDefaultValue(SpecialTemporalValue.CURRENT_DATE);
+        fechaProgramacion.setInitialValue(SpecialTemporalValue.CURRENT_DATE);
+        fechaProgramacion.setDefaultValue(SpecialTemporalValue.CURRENT_DATE);
         condicion.setInitialValue(condicion.PROGRAMADA);
         condicion.setDefaultValue(condicion.PROGRAMADA);
         fechaCondicion.setInitialValue(SpecialTemporalValue.CURRENT_DATE);
@@ -116,7 +128,20 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
         setOrderBy(codigo);
     }
 
-    protected State programada, empezada, terminada, cancelada;
+    protected Tab tab1, tab2, tab3;
+
+    @Override
+    protected void settleTabs() {
+        super.settleTabs();
+        tab1.setDefaultLabel("general");
+        tab1.newTabField(nodo, condicion, fechaCondicion, observaciones);
+        tab2.setDefaultLabel("cronologia");
+        tab2.newTabField(fechaProgramacion, programador, fechaAnulacion, anulador);
+        tab3.setDefaultLabel("etc");
+        tab3.newTabField(comentarios);
+    }
+
+    protected State programada, empezada, terminada, anulada;
 
     protected Check check01;
 
@@ -129,8 +154,8 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
         empezada.setDefaultErrorMessage("la medición no se encuentra en condición Empezada");
         terminada = condicion.isEqualTo(condicion.TERMINADA);
         terminada.setDefaultErrorMessage("la medición no se encuentra en condición Terminada");
-        cancelada = condicion.isEqualTo(condicion.CANCELADA);
-        cancelada.setDefaultErrorMessage("la medición no se encuentra en condición Cancelada");
+        anulada = condicion.isEqualTo(condicion.ANULADA);
+        anulada.setDefaultErrorMessage("la medición no se encuentra en condición Anulada");
         check01 = nodo.tipoNodo.isNotEqualTo(nodo.tipoNodo.HOJA);
         check01.setDefaultErrorMessage("el nodo es de tipo Hoja");
     }
@@ -148,7 +173,7 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
         empezar.addTransition(programada, empezada);
         terminar.addTransition(programada, terminada);
         terminar.addTransition(empezada, terminada);
-        cancelar.addTransition(empezada, cancelada);
+        anular.addTransition(empezada, anulada);
     }
 
     protected Empezar empezar;
@@ -187,11 +212,11 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
 
     }
 
-    protected Cancelar cancelar;
+    protected Anular anular;
 
     @OperationClass(access = OperationAccess.RESTRICTED)
     @ProcessOperationClass(overloading = Kleenean.FALSE)
-    public class Cancelar extends ProcessOperation {
+    public class Anular extends ProcessOperation {
 
         @InstanceReference
         protected MedicionNodo medicion;
@@ -202,7 +227,9 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
         @Override
         protected void settleParameters() {
             super.settleParameters();
-            medicion.condicion.setCurrentValue(condicion.CANCELADA);
+            medicion.anulador.setCurrentValue(SpecialEntityValue.CURRENT_USER);
+            medicion.fechaAnulacion.setCurrentValue(SpecialTemporalValue.CURRENT_DATE);
+            medicion.condicion.setCurrentValue(condicion.ANULADA);
             medicion.fechaCondicion.setCurrentValue(SpecialTemporalValue.CURRENT_DATE);
         }
 

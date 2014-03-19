@@ -18,7 +18,7 @@ begin
         raise exception using message = _msg;
     end if;
     update medicion_rama
-    set observaciones = _observaciones$,
+    set observaciones = coalesce(observaciones||E'\n'||_observaciones$, _observaciones$),
         verificador = _log.id_usuario,
         fecha_verificacion = current_date,
         condicion = _enum_condicion_medicion_rama.ACEPTADA,
