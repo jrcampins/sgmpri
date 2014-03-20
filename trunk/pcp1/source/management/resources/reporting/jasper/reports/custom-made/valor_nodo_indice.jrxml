@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="valor_nodo_indice"
+              pageWidth="1008"
+              pageHeight="612"
+              orientation="Landscape"
+              columnWidth="960"
+              leftMargin="24"
+              rightMargin="24"
+              topMargin="24"
+              bottomMargin="24">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="java.util.*"/>
+	<import value="java.math.BigDecimal"/>
+	<import value="pcp1ap101.lib.base.bundle.*"/>
+	<import value="pcp1ap101.lib.base.enumeration.*"/>
+	<import value="pcp1ap101.lib.base.entity.enumeration.*"/>
+	<import value="pcp1ap101.lib.base.util.*"/>
+
+        <template><![CDATA[$P{CUSTOM_STYLE_TEMPLATE}]]></template>
+
+	<parameter name="BOXY_STYLE_BAND" class="java.lang.Boolean" isForPrompting="false">
+		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BOXY_STYLE_TEXT" class="java.lang.Boolean" isForPrompting="false">
+		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+        <parameter name="ENTERPRISE_APPLICATION_CODE" class="java.lang.String" isForPrompting="false">
+            <defaultValueExpression><![CDATA["pcp1ap101"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="ENTERPRISE_APPLICATION_NAME" class="java.lang.String" isForPrompting="false">
+            <defaultValueExpression><![CDATA["Sistema de Gestión de Mantenimiento y Preservación de Recursos Industriales"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="RESOURCES_DIR" class="java.lang.String" isForPrompting="false">
+            <defaultValueExpression><![CDATA["./resources/"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="CUSTOM_STYLE_TEMPLATE" class="java.lang.String" isForPrompting="false">
+            <defaultValueExpression><![CDATA[$P{RESOURCES_DIR} + $P{ENTERPRISE_APPLICATION_CODE} + "0.jrtx"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="PAGE_HEADER_IMAGE_1" class="java.lang.String" isForPrompting="false">
+            <defaultValueExpression><![CDATA[$P{RESOURCES_DIR} + $P{ENTERPRISE_APPLICATION_CODE} + "1.jpg"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="PAGE_HEADER_IMAGE_2" class="java.lang.String" isForPrompting="false">
+            <defaultValueExpression><![CDATA[$P{RESOURCES_DIR} + $P{ENTERPRISE_APPLICATION_CODE} + "2.jpg"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="SUBREPORTS_DIR" class="java.lang.String" isForPrompting="false">
+            <defaultValueExpression><![CDATA["./subreports/"]]></defaultValueExpression>
+        </parameter>
+        <parameter name="SUPER_REPORT" class="java.lang.String" isForPrompting="false">
+                <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+        </parameter>
+        <parameter name="END_USER_CODE" class="java.lang.String" isForPrompting="false">
+            <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+        </parameter>
+        <parameter name="END_USER_NAME" class="java.lang.String" isForPrompting="false">
+            <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+        </parameter>
+        <parameter name="es_informe_resumido" class="java.lang.Integer" isForPrompting="false">
+            <defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+        </parameter>
+        <parameter name="SQL_WHERE_CLAUSE" class="java.lang.String" isForPrompting="false">
+            <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+        </parameter>
+        <parameter name="SQL_LIMIT_CLAUSE" class="java.lang.String" isForPrompting="false">
+            <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+        </parameter>
+
+	<queryString>
+		<![CDATA[select * from consulta_valor_nodo_indice order by medicion, codigo_2]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="version" class="java.lang.Long"/>
+	<field name="medicion" class="java.lang.Long"/>
+	<field name="nodo" class="java.lang.Long"/>
+	<field name="tipo_nodo" class="java.lang.Integer"/>
+	<field name="superior" class="java.lang.Long"/>
+	<field name="peso" class="java.math.BigDecimal"/>
+	<field name="fecha_valor" class="java.sql.Date"/>
+	<field name="rango" class="java.lang.String"/>
+	<field name="numeral_rango" class="java.lang.Integer"/>
+	<field name="brecha_norma1" class="java.math.BigDecimal"/>
+	<field name="indice_norma1" class="java.math.BigDecimal"/>
+	<field name="color_norma1" class="java.lang.Long"/>
+	<field name="indice_norma2" class="java.math.BigDecimal"/>
+	<field name="color_norma2" class="java.lang.Long"/>
+	<field name="comentarios" class="java.lang.String"/>
+	<field name="id_1" class="java.lang.Long"/>
+	<field name="version_1" class="java.lang.Long"/>
+	<field name="codigo_1" class="java.lang.String"/>
+	<field name="nombre_1" class="java.lang.String"/>
+	<field name="fecha_programacion_1" class="java.sql.Date"/>
+	<field name="fecha_anulacion_1" class="java.sql.Date"/>
+	<field name="fecha_condicion_1" class="java.sql.Date"/>
+	<field name="observaciones_1" class="java.lang.String"/>
+	<field name="comentarios_1" class="java.lang.String"/>
+	<field name="id_2" class="java.lang.Long"/>
+	<field name="version_2" class="java.lang.Long"/>
+	<field name="codigo_2" class="java.lang.String"/>
+	<field name="nombre_2" class="java.lang.String"/>
+	<field name="peso_2" class="java.math.BigDecimal"/>
+	<field name="fecha_ultimo_calculo_2" class="java.sql.Date"/>
+	<field name="numero_tipo_nodo_3" class="java.lang.Integer"/>
+	<field name="codigo_tipo_nodo_3" class="java.lang.String"/>
+	<field name="id_4" class="java.lang.Long"/>
+	<field name="version_4" class="java.lang.Long"/>
+	<field name="peso_4" class="java.math.BigDecimal"/>
+	<field name="fecha_valor_4" class="java.sql.Date"/>
+	<field name="rango_4" class="java.lang.String"/>
+	<field name="numeral_rango_4" class="java.lang.Integer"/>
+	<field name="brecha_norma1_4" class="java.math.BigDecimal"/>
+	<field name="indice_norma1_4" class="java.math.BigDecimal"/>
+	<field name="indice_norma2_4" class="java.math.BigDecimal"/>
+	<field name="comentarios_4" class="java.lang.String"/>
+	<field name="id_5" class="java.lang.Long"/>
+	<field name="version_5" class="java.lang.Long"/>
+	<field name="codigo_5" class="java.lang.String"/>
+	<field name="extremo_inferior_5" class="java.lang.Integer"/>
+	<field name="id_6" class="java.lang.Long"/>
+	<field name="version_6" class="java.lang.Long"/>
+	<field name="codigo_6" class="java.lang.String"/>
+	<field name="extremo_inferior_6" class="java.lang.Integer"/>
+	<group name="medicion" isReprintHeaderOnEachPage="true" minHeightToStartNewPage="132">
+		<groupExpression><![CDATA[$F{medicion}]]></groupExpression>
+		<groupHeader>
+			<band height="48" splitType="Prevent">
+				<printWhenExpression><![CDATA[$P{SUPER_REPORT}=="" && $P{es_informe_resumido}==0]]></printWhenExpression>
+				<frame>
+					<reportElement key="frame" style="ch-band1" x="0" y="24" width="960" height="20" />
+					<staticText>
+						<reportElement key="staticText" style="ch-text1" x="0" y="0" width="120" height="20" />
+						<text><![CDATA[codigo]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="staticText" style="ch-text1" x="120" y="0" width="360" height="20" />
+						<text><![CDATA[nombre]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="staticText" style="ch-text1" x="480" y="0" width="120" height="20" />
+						<text><![CDATA[rango]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="staticText" style="ch-text1" x="600" y="0" width="90" height="20" />
+						<textElement textAlignment="Right"/>
+						<text><![CDATA[indice norma 1]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="staticText" style="ch-text1" x="690" y="0" width="90" height="20" />
+						<text><![CDATA[color norma 1]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="staticText" style="ch-text1" x="780" y="0" width="90" height="20" />
+						<textElement textAlignment="Right"/>
+						<text><![CDATA[indice norma 2]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="staticText" style="ch-text1" x="870" y="0" width="90" height="20" />
+						<text><![CDATA[color norma 2]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement key="frame" style="gh1band1" x="0" y="0" width="960" height="24" />
+					<staticText>
+						<reportElement key="staticText" style="gh1text1" x="0" y="0" width="120" height="24" />
+						<text><![CDATA[nodo]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+						<reportElement key="textField" style="gh1text2" stretchType="RelativeToBandHeight" x="120" y="0" width="360" height="24" />
+						<textFieldExpression><![CDATA[$F{nombre_1}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+						<reportElement key="textField" style="gh1text2" stretchType="RelativeToBandHeight" x="480" y="0" width="120" height="24" />
+						<textFieldExpression class="java.util.Date"><![CDATA[$F{fecha_programacion_1}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="24" splitType="Prevent">
+				<printWhenExpression><![CDATA[$P{SUPER_REPORT}==""]]></printWhenExpression>
+			</band>
+		</groupFooter>
+	</group>
+	<pageHeader>
+		<band height="32" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{SUPER_REPORT}==""]]></printWhenExpression>
+			<frame>
+				<reportElement key="frame" style="ph-band1" x="0" y="0" width="960" height="32" />
+				<image onErrorType="Icon">
+					<reportElement key="image-1" x="0" y="0" width="70" height="30" />
+					<imageExpression><![CDATA[]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement key="staticText" style="ph-text1" x="160" y="0" width="640" height="32" />
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[INDICE DE SEGURIDAD POR NODO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText" style="ph-text1" x="800" y="0" width="160" height="32" />
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{es_informe_resumido}==0]]></printWhenExpression>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{es_informe_resumido}==0]]></printWhenExpression>
+			<frame>
+				<reportElement key="frame" style="dx-band1" x="0" y="0" width="960" height="16" />
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+					<reportElement key="textField" style="dx-text1" stretchType="RelativeToBandHeight" x="0" y="0" width="120" height="16" />
+					<textFieldExpression><![CDATA[$F{codigo_2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+					<reportElement key="textField" style="dx-text1" stretchType="RelativeToBandHeight" x="120" y="0" width="360" height="16" />
+					<textFieldExpression><![CDATA[$F{nombre_2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+					<reportElement key="textField" style="dx-text1" stretchType="RelativeToBandHeight" x="480" y="0" width="120" height="16" />
+					<textFieldExpression><![CDATA[$F{rango}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement key="textField" style="dx-text1" stretchType="RelativeToBandHeight" x="600" y="0" width="90" height="16" />
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{indice_norma1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+					<reportElement key="textField" style="dx-text1" stretchType="RelativeToBandHeight" x="690" y="0" width="90" height="16" />
+					<textFieldExpression><![CDATA[$F{codigo_5}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement key="textField" style="dx-text1" stretchType="RelativeToBandHeight" x="780" y="0" width="90" height="16" />
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{indice_norma2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+					<reportElement key="textField" style="dx-text1" stretchType="RelativeToBandHeight" x="870" y="0" width="90" height="16" />
+					<textFieldExpression><![CDATA[$F{codigo_6}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{SUPER_REPORT}==""]]></printWhenExpression>
+			<frame>
+				<reportElement key="frame" style="pf-band1" x="0" y="0" width="960" height="20" />
+				<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
+					<reportElement key="textField" style="pf-text2" stretchType="RelativeToBandHeight" x="0" y="0" width="320" height="20" />
+					<textElement textAlignment="Left"/>
+					<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" evaluationTime="Page" pattern="" isBlankWhenNull="true">
+					<reportElement key="textField" style="pf-text2" stretchType="RelativeToBandHeight" x="320" y="0" width="160" height="20" />
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA["Pagina" + " " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
+					<reportElement key="textField" style="pf-text2" stretchType="RelativeToBandHeight" x="480" y="0" width="160" height="20" />
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[" " + "de" + " " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
+					<reportElement key="staticText" style="pf-text2" stretchType="RelativeToBandHeight" x="640" y="0" width="320" height="20" />
+					<textElement textAlignment="Right" markup="none"/>
+					<textFieldExpression><![CDATA[$P{END_USER_NAME}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+</jasperReport>
