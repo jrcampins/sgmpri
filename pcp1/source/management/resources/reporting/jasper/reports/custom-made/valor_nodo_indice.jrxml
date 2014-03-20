@@ -193,7 +193,7 @@
 				<reportElement key="frame" style="ph-band1" x="0" y="0" width="960" height="32" />
 				<image onErrorType="Icon">
 					<reportElement key="image-1" x="0" y="0" width="70" height="30" />
-					<imageExpression><![CDATA[]]></imageExpression>
+					<imageExpression><![CDATA[$P{PAGE_HEADER_IMAGE_1}]]></imageExpression>
 				</image>
 				<staticText>
 					<reportElement key="staticText" style="ph-text1" x="160" y="0" width="640" height="32" />
