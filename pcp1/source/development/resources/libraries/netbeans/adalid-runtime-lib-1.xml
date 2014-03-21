@@ -6,24 +6,23 @@
         <type>classpath</type>
         <resource>jar:file:/C:/workspace/third-party/lib/commons-beanutils-1.8.2.jar!/</resource>
         <resource>jar:file:/C:/workspace/third-party/lib/commons-collections-3.2.1.jar!/</resource>
-        <resource>jar:file:/C:/workspace/third-party/lib/commons-digester-1.7.jar!/</resource>
+        <resource>jar:file:/C:/workspace/third-party/lib/commons-digester-2.1.jar!/</resource>
         <resource>jar:file:/C:/workspace/third-party/lib/commons-fileupload-1.2.2.jar!/</resource>
         <resource>jar:file:/C:/workspace/third-party/lib/commons-io-2.1.jar!/</resource>
         <resource>jar:file:/C:/workspace/third-party/lib/commons-javaflow-20060411.jar!/</resource>
         <resource>jar:file:/C:/workspace/third-party/lib/commons-lang-2.6.jar!/</resource>
-        <resource>jar:file:/C:/workspace/third-party/lib/commons-logging-1.1.jar!/</resource>
+        <resource>jar:file:/C:/workspace/third-party/lib/commons-logging-1.1.2.jar!/</resource>
         <resource>jar:file:/C:/workspace/third-party/lib/iText-2.1.7.jar!/</resource>
-        <resource>jar:file:/C:/workspace/third-party/lib/jasperreports-4.0.0.jar!/</resource>
-        <resource>jar:file:/C:/workspace/third-party/lib/jasperreports-chart-themes-4.0.0.jar!/</resource>
-        <resource>jar:file:/C:/workspace/third-party/lib/jasperreports-extensions-3.5.3.jar!/</resource>
-        <resource>jar:file:/C:/workspace/third-party/lib/jasperreports-fonts-4.0.0.jar!/</resource>
+        <resource>jar:file:/C:/workspace/third-party/lib/jasperreports-5.5.1.jar!/</resource>
+        <resource>jar:file:/C:/workspace/third-party/lib/jasperreports-fonts-5.5.1.jar!/</resource>
+        <resource>jar:file:/C:/workspace/third-party/lib/jasperreports-functions-5.5.1.jar!/</resource>
+        <resource>jar:file:/C:/workspace/third-party/lib/jasperreports-javaflow-5.5.1.jar!/</resource>
         <resource>jar:file:/C:/workspace/third-party/lib/jcommon-1.0.15.jar!/</resource>
         <resource>jar:file:/C:/workspace/third-party/lib/jdt-compiler-3.1.1.jar!/</resource>
         <resource>jar:file:/C:/workspace/third-party/lib/jfreechart-1.0.12.jar!/</resource>
         <resource>jar:file:/C:/workspace/third-party/lib/joda-time-1.6.2.jar!/</resource>
         <resource>jar:file:/C:/workspace/third-party/lib/jxl-2.6.10.jar!/</resource>
         <resource>jar:file:/C:/workspace/third-party/lib/log4j-1.2.16.jar!/</resource>
-        <resource>jar:file:/C:/workspace/third-party/lib/poi-3.6-20091214.jar!/</resource>
         <resource>jar:file:/C:/workspace/third-party/lib/spring.jar!/</resource>
         <resource>jar:file:/C:/workspace/third-party/lib/velocity-1.7.jar!/</resource>
         <resource>jar:file:/C:/workspace/third-party/lib/visualweb2/modules/ext/appbase.jar!/</resource>

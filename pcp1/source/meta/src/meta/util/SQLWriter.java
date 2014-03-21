@@ -86,6 +86,7 @@ public class SQLWriter {
         }
         SqlWriter writer = new SqlWriter(args);
         if (writer.isInitialised()) {
+//          writer.setSelectTemplatesPath("templates/meta/java/sql");
             EntidadesComunes.setAlertLoggingLevel(LoggingLevel.OFF);
             EntidadesComunes entidadesComunes = new EntidadesComunes();
             if (entidadesComunes.build()) {
