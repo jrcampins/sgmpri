@@ -5,7 +5,7 @@
         <archive path="C:/workspace/third-party/lib/commons-fileupload-1.2.2.jar"/>
         <archive path="C:/workspace/third-party/lib/commons-io-2.1.jar"/>
         <archive path="C:/workspace/third-party/lib/commons-lang-2.6.jar"/>
-        <archive path="C:/workspace/third-party/lib/jasperreports-4.0.0.jar"/>
+        <archive path="C:/workspace/third-party/lib/jasperreports-5.5.1.jar"/>
         <archive path="C:/workspace/third-party/lib/joda-time-1.6.2.jar"/>
         <archive path="C:/workspace/third-party/lib/log4j-1.2.16.jar"/>
         <archive path="C:/workspace/third-party/lib/velocity-1.7.jar"/>
