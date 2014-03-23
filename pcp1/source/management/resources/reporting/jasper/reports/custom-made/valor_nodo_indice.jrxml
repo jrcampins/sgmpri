@@ -256,7 +256,7 @@
 			<printWhenExpression><![CDATA[$P{SUPER_REPORT}==""]]></printWhenExpression>
 			<frame>
 				<reportElement key="frame" style="pf-band1" x="0" y="0" width="960" height="20" />
-				<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
+				<textField isStretchWithOverflow="true" evaluationTime="Report" pattern="dd/MM/yyyy" isBlankWhenNull="true">
 					<reportElement key="textField" style="pf-text2" stretchType="RelativeToBandHeight" x="0" y="0" width="320" height="20" />
 					<textElement textAlignment="Left"/>
 					<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
@@ -269,7 +269,7 @@
 				<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
 					<reportElement key="textField" style="pf-text2" stretchType="RelativeToBandHeight" x="480" y="0" width="160" height="20" />
 					<textElement textAlignment="Left"/>
-					<textFieldExpression><![CDATA[" " + "de" + " " + $V{PAGE_NUMBER}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["de" + " " + $V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
 					<reportElement key="staticText" style="pf-text2" stretchType="RelativeToBandHeight" x="640" y="0" width="320" height="20" />
