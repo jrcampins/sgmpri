@@ -269,12 +269,12 @@
 				<textField isStretchWithOverflow="true" evaluationTime="Page" pattern="" isBlankWhenNull="true">
 					<reportElement key="textField" style="pf-text2" stretchType="RelativeToBandHeight" x="320" y="0" width="160" height="20" uuid="81de470a-8a83-4192-8f1a-0989b88454ec"/>
 					<textElement textAlignment="Right"/>
-					<textFieldExpression><![CDATA["Pagina" + " " + $V{PAGE_NUMBER}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
 					<reportElement key="textField" style="pf-text2" stretchType="RelativeToBandHeight" x="480" y="0" width="160" height="20" uuid="797507ef-fae5-4f8f-a216-2a32cc3c6c8f"/>
 					<textElement textAlignment="Left"/>
-					<textFieldExpression><![CDATA["de" + " " + $V{PAGE_NUMBER}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["/ " + $V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
 					<reportElement key="staticText" style="pf-text2" stretchType="RelativeToBandHeight" x="640" y="0" width="320" height="20" uuid="e1eb77c2-e39a-4ab9-8415-185373a67acf"/>
