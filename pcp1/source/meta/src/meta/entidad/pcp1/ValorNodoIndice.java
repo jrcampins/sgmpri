@@ -83,7 +83,7 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @PropertyField(hidden = Kleenean.TRUE)
     public ValorNodoIndice superior;
 
-    @BigDecimalField(precision = 16, scale = 10)
+    @BigDecimalField(precision = 16, scale = 12)
     @PropertyField(table = Kleenean.FALSE, report = Kleenean.FALSE, update = Kleenean.FALSE)
     public BigDecimalProperty peso;
 

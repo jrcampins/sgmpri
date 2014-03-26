@@ -81,10 +81,18 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     /**
      * big decimal property field
      */
-    @BigDecimalField(precision = 16, scale = 10)
+    @BigDecimalField(precision = 16, scale = 12)
     @ColumnField(nullable = Kleenean.TRUE)
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.FALSE, report = Kleenean.FALSE)
     public BigDecimalProperty peso;
+
+    /**
+     * big decimal property field
+     */
+    @BigDecimalField(precision = 16, scale = 12)
+    @ColumnField(nullable = Kleenean.TRUE)
+    @PropertyField(hidden = Kleenean.TRUE)
+    public BigDecimalProperty suma;
 
     /**
      * many-to-one entity reference property field
