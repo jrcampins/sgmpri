@@ -17,7 +17,9 @@ begin
         and denominador = new.numerador
         and editable is false;
     end if;
-    perform nodo_indice$update$peso(new.nodo);
+    if (new.razon is not null or old.razon is not null) and (new.razon is null or old.razon is null or new.razon <> old.razon) then
+        perform nodo_indice$update$peso(new.nodo);
+    end if;
     return null;
 end;
 $$ language plpgsql;
