@@ -78,7 +78,7 @@ public class RazonNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
     public BigDecimalProperty razon;
 
-    @ColumnField(nullable = Kleenean.TRUE)
+    @ColumnField(nullable = Kleenean.TRUE, insertable = Kleenean.FALSE, updateable = Kleenean.FALSE)
     @BigDecimalField(precision = 16, scale = 12)
     @PropertyField(hidden = Kleenean.TRUE)
     public BigDecimalProperty proporcion;
