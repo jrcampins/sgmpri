@@ -9,8 +9,10 @@ begin
     end if;
     if new.superior is not null then
         perform nodo_indice$insert$razones(new.superior);
+        /*
         perform nodo_indice$update$peso_ahp(new.superior);
         perform nodo_indice$update$peso_simplificado(new.superior);
+        */
     end if;
     return null;
 end;
