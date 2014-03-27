@@ -1,4 +1,4 @@
-create or replace function nodo_indice$ae$razon_nodo_indice(_nodo$ bigint) returns bigint as $$
+create or replace function nodo_indice$update$peso_ahp(_nodo$ bigint) returns void as $$
 declare
     _record RECORD;
 begin
@@ -28,6 +28,18 @@ begin
     loop
         update nodo_indice set peso_a_h_p = _record.avg_proporcion*100 where id = _record.numerador;
     end loop;
-    return _nodo$;
+end;
+$$ language plpgsql;
+
+create or replace function nodo_indice$update$peso_simplificado(_nodo$ bigint) returns void as $$
+declare
+    _sum_impacto numeric;
+begin
+    select sum(impacto) into _sum_impacto from nodo_indice where superior = _nodo$;
+    if _sum_impacto is not null and _sum_impacto > 0 then
+        update nodo_indice set peso_simplificado = 100*impacto/_sum_impacto where superior = _nodo$;
+    else
+        update nodo_indice set peso_simplificado = null where superior = _nodo$;
+    end if;
 end;
 $$ language plpgsql;
