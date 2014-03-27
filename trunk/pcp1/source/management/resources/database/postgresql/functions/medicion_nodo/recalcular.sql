@@ -3,7 +3,7 @@ declare
     _msg character varying;
 begin
     raise notice 'medicion_nodo$recalcular$biz(%, %)', _super$, _medicion$;
-    perform medicion_nodo$calcular(_row.medicion);
+    perform medicion_nodo$calcular(_medicion$);
     return 0;
 end;
 $$ language plpgsql;
