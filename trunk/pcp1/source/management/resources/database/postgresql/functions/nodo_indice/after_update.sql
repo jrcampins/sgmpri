@@ -10,6 +10,7 @@ begin
             _diff_tipo_nodo := true;
             delete from color_nodo_indice where nodo = new.id;
             delete from razon_nodo_indice where nodo = new.id;
+--          perform nodo_indice$ae$razon_nodo_indice(new.id);
         elsif old.tipo_nodo = _enum_tipo_nodo.HOJA then
             _diff_tipo_nodo := true;
             perform nodo_indice$insert$colores(new.id);
@@ -19,15 +20,19 @@ begin
         if new.superior is not null then
             _diff_superior := true;
             perform nodo_indice$insert$razones(new.superior);
+            perform nodo_indice$ae$razon_nodo_indice(new.superior);
         end if;
     else
         if new.superior is null then
             _diff_superior := true;
             delete from razon_nodo_indice where nodo = old.superior and (numerador = new.id or denominador = new.id);
+            perform nodo_indice$ae$razon_nodo_indice(old.superior);
         elsif new.superior <> old.superior then
             _diff_superior := true;
             delete from razon_nodo_indice where nodo = old.superior and (numerador = new.id or denominador = new.id);
+            perform nodo_indice$ae$razon_nodo_indice(old.superior);
             perform nodo_indice$insert$razones(new.superior);
+            perform nodo_indice$ae$razon_nodo_indice(new.superior);
         end if;
     end if;
     if _diff_tipo_nodo is true or _diff_superior is true then -- or new.codigo <> old.codigo or new.nombre <> old.nombre

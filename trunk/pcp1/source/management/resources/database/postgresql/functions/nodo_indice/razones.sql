@@ -18,6 +18,8 @@ begin
                         select razon into _razon from razon_nodo_indice where nodo = _nodo$ and numerador = _col.id and denominador = _row.id;
                         if _razon is not null and _razon > 0 then
                             _razon := 1/_razon;
+                        else
+                            _razon := 1;
                         end if;
                     end if;
                     _editable := _row.codigo < _col.codigo;

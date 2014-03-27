@@ -1,4 +1,4 @@
-create or replace function nodo_indice$update$peso(_nodo$ bigint) returns void as $$
+create or replace function nodo_indice$ae$razon_nodo_indice(_nodo$ bigint) returns bigint as $$
 declare
     _record RECORD;
 begin
@@ -26,7 +26,8 @@ begin
         group by numerador
         order by numerador
     loop
-        update nodo_indice set peso = _record.avg_proporcion*100 where id = _record.numerador;
+        update nodo_indice set peso_a_h_p = _record.avg_proporcion*100 where id = _record.numerador;
     end loop;
+    return _nodo$;
 end;
 $$ language plpgsql;

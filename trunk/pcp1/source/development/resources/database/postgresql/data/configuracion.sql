@@ -461,3 +461,5 @@ update nodo_indice set nombre=replace(nombre, ' Otros ',  ' otros ' );
 update nodo_indice set nombre=replace(nombre, ' Otras ',  ' otras ' );
 update nodo_indice set nombre=replace(nombre, ' Para ',   ' para '  );
 update nodo_indice set nombre=replace(nombre, ' Y/O ',    ' y/o '   );
+
+select nodo_indice$ae$razon_nodo_indice(id) from nodo_indice where tipo_nodo<>3;
