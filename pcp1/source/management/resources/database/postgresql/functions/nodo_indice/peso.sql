@@ -2,6 +2,7 @@ create or replace function nodo_indice$update$peso_ahp(_nodo$ bigint) returns vo
 declare
     _record RECORD;
 begin
+    update razon_nodo_indice set proporcion = null where nodo = _nodo$;
     for _record in
         select denominador, sum(razon) as sum_razon
         from razon_nodo_indice
@@ -9,16 +10,15 @@ begin
         group by denominador
         order by denominador
     loop
-        update nodo_indice set suma_a_h_p = _record.sum_razon where id = _record.denominador;
+        if _record.sum_razon is not null and _record.sum_razon > 0 then
+            update razon_nodo_indice
+            set proporcion = razon/_record.sum_razon
+            where nodo = _nodo$
+            and denominador = _record.denominador;
+        end if;
     end loop;
     /**/
-    update razon_nodo_indice
-    set proporcion = razon_nodo_indice.razon/nodo_indice.suma_a_h_p
-    from nodo_indice
-    where razon_nodo_indice.nodo = _nodo$
-    and razon_nodo_indice.denominador = nodo_indice.id
-    and nodo_indice.suma_a_h_p <> 0;
-    /**/
+    update nodo_indice set peso_a_h_p = null where superior = _nodo$;
     for _record in
         select numerador, avg(proporcion) as avg_proporcion
         from razon_nodo_indice

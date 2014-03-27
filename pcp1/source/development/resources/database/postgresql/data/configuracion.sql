@@ -462,5 +462,4 @@ update nodo_indice set nombre=replace(nombre, ' Otras ',  ' otras ' );
 update nodo_indice set nombre=replace(nombre, ' Para ',   ' para '  );
 update nodo_indice set nombre=replace(nombre, ' Y/O ',    ' y/o '   );
 
-select nodo_indice$update$peso_ahp(id) from nodo_indice where tipo_nodo<>3;
-select nodo_indice$update$peso_simplificado(id) from nodo_indice where tipo_nodo<>3;
+select nodo_indice$recalcular$biz(null, 1000000);

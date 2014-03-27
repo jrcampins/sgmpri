@@ -13,10 +13,10 @@ begin
         select
             vnx.id as nodo,
             vnx.tipo_nodo,
-            case vnx.tipo_peso_nodo
-                when _enum_tipo_peso_nodo.ASIGNACION_DIRECTA    then vnx.peso_asignado
-                when _enum_tipo_peso_nodo.METODO_AHP            then vnx.peso_a_h_p
-                when _enum_tipo_peso_nodo.METODO_SIMPLIFICADO   then vnx.peso_simplificado
+            case nx.tipo_peso_nodo
+                when _enum_tipo_peso_nodo.ASIGNACION_DIRECTA    then nx.peso_asignado
+                when _enum_tipo_peso_nodo.METODO_AHP            then nx.peso_a_h_p
+                when _enum_tipo_peso_nodo.METODO_SIMPLIFICADO   then nx.peso_simplificado
                 else null
             end as peso,
             vnx.numeral_rango as rango,

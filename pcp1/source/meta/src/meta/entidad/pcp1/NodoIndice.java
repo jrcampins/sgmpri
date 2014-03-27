@@ -123,14 +123,6 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     public BigDecimalProperty pesoSimplificado;
 
     /**
-     * big decimal property field
-     */
-    @BigDecimalField(precision = 16, scale = 12)
-    @ColumnField(nullable = Kleenean.TRUE, insertable = Kleenean.FALSE, updateable = Kleenean.FALSE)
-    @PropertyField(hidden = Kleenean.TRUE)
-    public BigDecimalProperty sumaAHP;
-
-    /**
      * many-to-one entity reference property field
      */
     @Allocation(maxDepth = 1, maxRound = 0)
@@ -245,6 +237,31 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         variable.setRequiringFilter(hoja);
         variable.setModifyingFilter(hoja);
         variable.setNullifyingFilter(not(hoja));
+    }
+
+    protected Recalcular recalcular;
+
+    @OperationClass(access = OperationAccess.RESTRICTED)
+    @ProcessOperationClass(overloading = Kleenean.FALSE)
+    public class Recalcular extends ProcessOperation {
+
+        @InstanceReference
+        protected NodoIndice nodo;
+
+        Check check01;
+
+        @Override
+        protected void settleExpressions() {
+            super.settleExpressions();
+            check01 = nodo.raiz.isTrue();
+        }
+
+        @Override
+        protected void settleFilters() {
+            super.settleFilters();
+            nodo.setSearchQueryFilter(check01);
+        }
+
     }
 
 }

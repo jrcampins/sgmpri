@@ -6,8 +6,7 @@
  */
 package meta.entidad.pcp1;
 
-import adalid.core.ProcessOperation;
-import adalid.core.Tab;
+import adalid.core.*;
 import adalid.core.annotations.*;
 import adalid.core.enums.*;
 import adalid.core.interfaces.*;
@@ -174,6 +173,17 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
         terminar.addTransition(programada, terminada);
         terminar.addTransition(empezada, terminada);
         anular.addTransition(empezada, anulada);
+    }
+
+    protected Recalcular recalcular;
+
+    @OperationClass(access = OperationAccess.RESTRICTED)
+    @ProcessOperationClass(overloading = Kleenean.FALSE)
+    public class Recalcular extends ProcessOperation {
+
+        @InstanceReference
+        protected MedicionNodo medicion;
+
     }
 
     protected Empezar empezar;
