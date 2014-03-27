@@ -11,19 +11,19 @@ import adalid.core.interfaces.*;
 import java.lang.reflect.Field;
 
 /**
- * MetodoPesoNodo Persistent Entity.
+ * TipoPesoNodo Persistent Entity.
  *
  * @author Jorge Campins
  */
-public class MetodoPesoNodo extends meta.entidad.base.PersistentEnumerationEntityBase {
+public class TipoPesoNodo extends meta.entidad.base.PersistentEnumerationEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
     @Deprecated()
-    private MetodoPesoNodo() {
+    private TipoPesoNodo() {
         this(null, null);
     }
 
-    public MetodoPesoNodo(Artifact declaringArtifact, Field declaringField) {
+    public TipoPesoNodo(Artifact declaringArtifact, Field declaringField) {
         super(declaringArtifact, declaringField);
     }
     // </editor-fold>
@@ -31,16 +31,26 @@ public class MetodoPesoNodo extends meta.entidad.base.PersistentEnumerationEntit
     @Override
     protected void settleAttributes() {
         super.settleAttributes();
-        setDefaultLabel("método de asignación de peso");
-        setDefaultShortLabel("método");
-        setDefaultCollectionLabel("Métodos de Asignación de Pesos");
-        setDefaultCollectionShortLabel("Métodos");
+        setDefaultLabel("tipo de peso de nodo");
+        setDefaultShortLabel("tipo de peso");
+        setDefaultCollectionLabel("Tipos de Pesos de Nodos");
+        setDefaultCollectionShortLabel("Tipos de Pesos");
     }
+
+    public Instance INDETERMINADO;
 
     public Instance ASIGNACION_DIRECTA;
 
     public Instance METODO_AHP;
 
     public Instance METODO_SIMPLIFICADO;
+
+    @Override
+    protected void settleInstances() {
+        super.settleInstances();
+        ASIGNACION_DIRECTA.newInstanceField(codigo, "Asignación Directa");
+        METODO_AHP.newInstanceField(codigo, "Método AHP");
+        METODO_SIMPLIFICADO.newInstanceField(codigo, "Método Simplificado");
+    }
 
 }
