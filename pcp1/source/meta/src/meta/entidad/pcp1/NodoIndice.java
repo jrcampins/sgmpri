@@ -110,7 +110,7 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
      * big decimal property field
      */
     @BigDecimalField(precision = 16, scale = 12)
-    @ColumnField(nullable = Kleenean.TRUE)
+    @ColumnField(nullable = Kleenean.TRUE, insertable = Kleenean.FALSE, updateable = Kleenean.FALSE)
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.FALSE, report = Kleenean.FALSE)
     public BigDecimalProperty pesoAHP;
 
@@ -118,7 +118,7 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
      * big decimal property field
      */
     @BigDecimalField(precision = 16, scale = 12)
-    @ColumnField(nullable = Kleenean.TRUE)
+    @ColumnField(nullable = Kleenean.TRUE, insertable = Kleenean.FALSE, updateable = Kleenean.FALSE)
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.FALSE, report = Kleenean.FALSE)
     public BigDecimalProperty pesoSimplificado;
 
@@ -126,9 +126,9 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
      * big decimal property field
      */
     @BigDecimalField(precision = 16, scale = 12)
-    @ColumnField(nullable = Kleenean.TRUE)
+    @ColumnField(nullable = Kleenean.TRUE, insertable = Kleenean.FALSE, updateable = Kleenean.FALSE)
     @PropertyField(hidden = Kleenean.TRUE)
-    public BigDecimalProperty suma;
+    public BigDecimalProperty sumaAHP;
 
     /**
      * many-to-one entity reference property field
@@ -142,6 +142,7 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     /**
      * date property field
      */
+    @ColumnField(nullable = Kleenean.TRUE, insertable = Kleenean.FALSE, updateable = Kleenean.FALSE)
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE)
     public DateProperty fechaUltimoCalculo;
 

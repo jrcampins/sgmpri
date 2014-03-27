@@ -9,15 +9,15 @@ begin
         group by denominador
         order by denominador
     loop
-        update nodo_indice set suma = _record.sum_razon where id = _record.denominador;
+        update nodo_indice set suma_a_h_p = _record.sum_razon where id = _record.denominador;
     end loop;
     /**/
     update razon_nodo_indice
-    set proporcion = razon_nodo_indice.razon/nodo_indice.suma
+    set proporcion = razon_nodo_indice.razon/nodo_indice.suma_a_h_p
     from nodo_indice
     where razon_nodo_indice.nodo = _nodo$
     and razon_nodo_indice.denominador = nodo_indice.id
-    and nodo_indice.suma <> 0;
+    and nodo_indice.suma_a_h_p <> 0;
     /**/
     for _record in
         select numerador, avg(proporcion) as avg_proporcion
