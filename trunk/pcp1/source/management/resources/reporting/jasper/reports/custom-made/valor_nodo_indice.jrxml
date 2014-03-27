@@ -1,28 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
-              name="valor_nodo_indice"
-              pageWidth="1008"
-              pageHeight="612"
-              orientation="Landscape"
-              columnWidth="960"
-              leftMargin="24"
-              rightMargin="24"
-              topMargin="24"
-              bottomMargin="24"
-              uuid="7e3ca8e4-cd3b-4e1e-b3e5-577bc4aff336">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="valor_nodo_indice" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="960" leftMargin="24" rightMargin="24" topMargin="24" bottomMargin="24" uuid="7e3ca8e4-cd3b-4e1e-b3e5-577bc4aff336">
 	<property name="ireport.scriptlethandling" value="0"/>
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<import value="pcp1ap101.lib.base.bundle.*"/>
+	<import value="pcp1ap101.lib.base.util.*"/>
 	<import value="java.util.*"/>
 	<import value="java.math.BigDecimal"/>
-	<import value="pcp1ap101.lib.base.bundle.*"/>
-	<import value="pcp1ap101.lib.base.enumeration.*"/>
 	<import value="pcp1ap101.lib.base.entity.enumeration.*"/>
-	<import value="pcp1ap101.lib.base.util.*"/>
+	<import value="pcp1ap101.lib.base.enumeration.*"/>
 	<template><![CDATA[$P{CUSTOM_STYLE_TEMPLATE}]]></template>
 	<parameter name="BOXY_STYLE_BAND" class="java.lang.Boolean" isForPrompting="false">
 		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
@@ -101,7 +89,9 @@
 	<field name="version_2" class="java.lang.Long"/>
 	<field name="codigo_2" class="java.lang.String"/>
 	<field name="nombre_2" class="java.lang.String"/>
-	<field name="peso_2" class="java.math.BigDecimal"/>
+	<field name="peso_asignado_2" class="java.math.BigDecimal"/>
+	<field name="peso_a_h_p_2" class="java.math.BigDecimal"/>
+	<field name="peso_simplificado_2" class="java.math.BigDecimal"/>
 	<field name="fecha_ultimo_calculo_2" class="java.sql.Date"/>
 	<field name="numero_tipo_nodo_3" class="java.lang.Integer"/>
 	<field name="codigo_tipo_nodo_3" class="java.lang.String"/>
