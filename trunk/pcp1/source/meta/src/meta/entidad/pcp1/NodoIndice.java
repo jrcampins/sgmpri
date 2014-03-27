@@ -85,13 +85,14 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(create = Kleenean.TRUE, table = Kleenean.TRUE, report = Kleenean.TRUE, submit = Kleenean.TRUE)
+    @PropertyField(create = Kleenean.TRUE, table = Kleenean.FALSE, report = Kleenean.FALSE, submit = Kleenean.TRUE)
     public TipoPesoNodo tipoPesoNodo;
 
     /**
      * many-to-one entity reference property field
      */
     @Allocation(maxDepth = 1, maxRound = 0)
+    @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @PropertyField(create = Kleenean.TRUE, table = Kleenean.FALSE, report = Kleenean.FALSE)
@@ -151,8 +152,10 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         tipoNodo.setDefaultValue(tipoNodo.RAIZ);
         tipoPesoNodo.setInitialValue(tipoPesoNodo.INDETERMINADO);
         tipoPesoNodo.setDefaultValue(tipoPesoNodo.INDETERMINADO);
+        impacto.setInitialValue(impacto.ALTO);
+        impacto.setDefaultValue(impacto.ALTO);
         pesoAsignado.setDefaultDescription("peso por asignación directa");
-        pesoAHP.setDefaultLabel("peso A.H.P.");
+        pesoAHP.setDefaultLabel("peso AHP");
         pesoAHP.setDefaultDescription("peso calculado con el método de la técnica AHP");
         pesoSimplificado.setDefaultDescription("peso calculado con el método simplificado");
         setOrderBy(codigo);
@@ -177,7 +180,7 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
 
     protected Segment raizRama;
 
-    protected Check check01, check02, check03, check04, check05, check06, check07;
+    protected Check check01, check02, check03, check04, check05, check06, check07, check08;
 
     @Override
     protected void settleExpressions() {
@@ -202,10 +205,12 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         check04.setDefaultErrorMessage("el tipo del peso del nodo debe ser Indeterminado si el tipo de nodo es Raiz");
         check05 = hoja.xnor(variable.isNotNull());
         check05.setDefaultErrorMessage("la variable se debe especificar si y solo si el tipo de nodo es Hoja");
-        check06 = tipoPesoNodo.isEqualTo(tipoPesoNodo.METODO_SIMPLIFICADO).implies(impacto.isNotNull());
-        check06.setDefaultErrorMessage("el impacto del nodo se debe especificar si el tipo del peso del nodo es Método Simplificado");
-        check07 = tipoPesoNodo.isEqualTo(tipoPesoNodo.ASIGNACION_DIRECTA).implies(pesoAsignado.isNotNull());
-        check07.setDefaultErrorMessage("el peso asignado del nodo se debe especificar si el tipo del peso del nodo es Asignación Directa");
+        check06 = tipoPesoNodo.isEqualTo(tipoPesoNodo.ASIGNACION_DIRECTA).implies(pesoAsignado.isNotNull());
+        check06.setDefaultErrorMessage("el peso asignado del nodo se debe especificar si el tipo del peso del nodo es Asignación Directa");
+        check07 = pesoAsignado.isNullOrGreaterThan(0);
+        check07.setDefaultErrorMessage("el peso asignado es menor o igual a 0");
+        check08 = pesoAsignado.isNullOrLessOrEqualTo(100);
+        check08.setDefaultErrorMessage("el peso asignado es mayor que 100");
     }
 
     @Override
@@ -226,9 +231,9 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         tipoPesoNodo.setNullifyingFilter(raiz);
         /**/
 //      impacto.setRenderingFilter(not(raiz));
-        impacto.setRequiringFilter(tipoPesoNodo.isEqualTo(tipoPesoNodo.METODO_SIMPLIFICADO));
+        impacto.setRequiringFilter(not(raiz));
         impacto.setModifyingFilter(not(raiz));
-        impacto.setNullifyingFilter(raiz);
+//      impacto.setNullifyingFilter(raiz);
         /**/
 //      pesoAsignado.setRenderingFilter(not(raiz));
         pesoAsignado.setRequiringFilter(tipoPesoNodo.isEqualTo(tipoPesoNodo.ASIGNACION_DIRECTA));

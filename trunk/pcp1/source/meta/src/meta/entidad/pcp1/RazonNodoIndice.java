@@ -107,7 +107,7 @@ public class RazonNodoIndice extends meta.entidad.base.PersistentEntityBase {
         key01.newKeyField(nodo, numerador, denominador);
     }
 
-    protected Check check01, check02, check03, check04;
+    protected Check check01, check02, check03, check04, check05;
 
     @Override
     protected void settleExpressions() {
@@ -118,8 +118,10 @@ public class RazonNodoIndice extends meta.entidad.base.PersistentEntityBase {
         check02.setDefaultErrorMessage("el denominador no es un subordinado del nodo");
         check03 = razon.isNullOrGreaterThan(0);
         check03.setDefaultErrorMessage("la razón es menor o igual a 0");
-        check04 = numerador.isEqualTo(denominador).implies(razon.isEqualTo(1));
-        check04.setDefaultErrorMessage("el numerador y el denominador son iguales y la razón no es igual a 1");
+        check04 = razon.isNullOrLessOrEqualTo(9);
+        check04.setDefaultErrorMessage("la razón es mayor que 9");
+        check05 = numerador.isEqualTo(denominador).implies(razon.isEqualTo(1));
+        check05.setDefaultErrorMessage("el numerador y el denominador son iguales y la razón no es igual a 1");
     }
 
 }
