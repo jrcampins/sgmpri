@@ -7,6 +7,8 @@
 package meta.entidad.pcp1;
 
 import adalid.core.*;
+import adalid.core.annotations.*;
+import adalid.core.enums.*;
 import adalid.core.interfaces.*;
 import java.lang.reflect.Field;
 
@@ -15,6 +17,7 @@ import java.lang.reflect.Field;
  *
  * @author Jorge Campins
  */
+@EntityClass(resourceType = ResourceType.CONFIGURATION, startWith = 0)
 public class TipoPesoNodo extends meta.entidad.base.PersistentEnumerationEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">

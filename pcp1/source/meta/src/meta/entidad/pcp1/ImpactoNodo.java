@@ -47,8 +47,11 @@ public class ImpactoNodo extends meta.entidad.base.PersistentEnumerationEntityBa
     protected void settleInstances() {
         super.settleInstances();
         MODERADO.newInstanceField(numero, 1);
+        MODERADO.newInstanceField(codigo, 1 + ". Moderado");
         ALTO.newInstanceField(numero, 3);
+        ALTO.newInstanceField(codigo, 3 + ". Alto");
         MUY_ALTO.newInstanceField(numero, 5);
+        MUY_ALTO.newInstanceField(codigo, 5 + ". Muy Alto");
     }
 
 }
