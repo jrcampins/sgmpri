@@ -74,5 +74,9 @@ begin
         raise warning using message = _msg;
         update rastro_proceso_temporal set descripcion_error = coalesce(descripcion_error||';'||E'\n'||_msg, _msg);
     end if;
+exception
+    when undefined_table then
+        get stacked diagnostics _msg = message_text;
+        raise warning using message = _msg;
 end;
 $$ language plpgsql;

@@ -1,20 +1,17 @@
 create or replace function razon_nodo_indice$after_update_row$100() returns trigger as $$
 declare
-    _razon numeric;
-    _editable boolean := false;
-    _nueva_razon boolean;
+    _msg character varying;
+    _razon_inversa integer;
 begin
     if old.editable is true then
-        if new.razon is not null and new.razon > 0 then
-            _razon := 1/new.razon;
-        end if;
-        if new.editable is false then
-            _editable := true;
-        end if;
-        _nueva_razon := (new.razon is not null or old.razon is not null) and (new.razon is null or old.razon is null or new.razon <> old.razon);
-        if _nueva_razon is true or _editable is true then
+        if new.ordinal_razon <> old.ordinal_razon or new.editable is false then
+            select inversa from ordinal_razon into _razon_inversa where numero = new.ordinal_razon;
+            if not found then
+                _msg := format(gettext('no existe %s con %s = %s'), 'ordinal de razon', 'numero', new.ordinal_razon);
+                raise exception using message = _msg;
+            end if;
             update razon_nodo_indice
-            set razon=_razon, editable=_editable
+            set ordinal_razon = _razon_inversa, editable = not(new.editable)
             where nodo = new.nodo
             and numerador = new.denominador
             and denominador = new.numerador

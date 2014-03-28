@@ -73,25 +73,39 @@ public class RazonNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @PropertyField(update = Kleenean.FALSE)
     public NodoIndice denominador;
 
-    @ColumnField(nullable = Kleenean.TRUE)
-    @BigDecimalField(precision = 16, scale = 12)
+    /**
+     * many-to-one entity reference property field
+     */
+    @Allocation(maxDepth = 1, maxRound = 0)
+    @ColumnField(nullable = Kleenean.FALSE)
+    @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
+    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
     @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    public OrdinalRazon ordinalRazon;
+
+    @ColumnField(nullable = Kleenean.FALSE)
+    @BigDecimalField(precision = 16, scale = 13)
+    @PropertyField(hidden = Kleenean.TRUE, defaultCondition = DefaultCondition.UNCONDITIONALLY)
     public BigDecimalProperty razon;
 
     @ColumnField(nullable = Kleenean.TRUE, insertable = Kleenean.FALSE, updateable = Kleenean.FALSE)
-    @BigDecimalField(precision = 16, scale = 12)
+    @BigDecimalField(precision = 16, scale = 13)
     @PropertyField(hidden = Kleenean.TRUE)
     public BigDecimalProperty proporcion;
 
     @ColumnField(nullable = Kleenean.FALSE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.TRUE)
+    @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE, search = Kleenean.TRUE)
     BooleanProperty editable;
 
     @Override
     protected void settleProperties() {
         super.settleProperties();
-        razon.setDefaultValue(numerador.isEqualTo(denominador).then(1));
-        editable.setDefaultValue(true);
+        ordinalRazon.setInitialValue(ordinalRazon.UNO);
+        ordinalRazon.setDefaultValue(ordinalRazon.UNO);
+        ordinalRazon.setDefaultLabel("razón");
+//      razon.setInitialValue(1);
+        razon.setDefaultValue(ordinalRazon.razon.isNull().then(1).otherwise(ordinalRazon.razon));
+        editable.setDefaultValue(false);
         setInsertFilter(nodo.raizRama);
         setUpdateFilter(editable.and(numerador.isNotEqualTo(denominador)));
         setMasterDetailFilter(nodo.raizRama);
