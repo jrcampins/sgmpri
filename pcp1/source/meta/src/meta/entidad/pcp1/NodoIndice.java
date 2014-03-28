@@ -82,10 +82,19 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
      * many-to-one entity reference property field
      */
     @Allocation(maxDepth = 1, maxRound = 0)
+    @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
+    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
+    @PropertyField(create = Kleenean.TRUE)
+    public Variable variable;
+
+    /**
+     * many-to-one entity reference property field
+     */
+    @Allocation(maxDepth = 1, maxRound = 0)
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(create = Kleenean.TRUE, table = Kleenean.FALSE, report = Kleenean.FALSE, submit = Kleenean.TRUE)
+    @PropertyField(create = Kleenean.TRUE, update = Kleenean.TRUE, table = Kleenean.FALSE, report = Kleenean.FALSE)
     public TipoPesoNodo tipoPesoNodo;
 
     /**
@@ -95,13 +104,13 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(create = Kleenean.TRUE, table = Kleenean.FALSE, report = Kleenean.FALSE)
+    @PropertyField(create = Kleenean.TRUE, table = Kleenean.TRUE, report = Kleenean.TRUE)
     public ImpactoNodo impacto;
 
     /**
      * big decimal property field
      */
-    @BigDecimalField(precision = 16, scale = 12)
+    @BigDecimalField(precision = 16, scale = 13)
     @ColumnField(nullable = Kleenean.TRUE)
     @PropertyField(create = Kleenean.TRUE, table = Kleenean.FALSE, report = Kleenean.FALSE)
     public BigDecimalProperty pesoAsignado;
@@ -109,7 +118,7 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     /**
      * big decimal property field
      */
-    @BigDecimalField(precision = 16, scale = 12)
+    @BigDecimalField(precision = 16, scale = 13)
     @ColumnField(nullable = Kleenean.TRUE, insertable = Kleenean.FALSE, updateable = Kleenean.FALSE)
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.FALSE, report = Kleenean.FALSE)
     public BigDecimalProperty pesoAHP;
@@ -117,34 +126,18 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     /**
      * big decimal property field
      */
-    @BigDecimalField(precision = 16, scale = 12)
+    @BigDecimalField(precision = 16, scale = 13)
     @ColumnField(nullable = Kleenean.TRUE, insertable = Kleenean.FALSE, updateable = Kleenean.FALSE)
     @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.FALSE, report = Kleenean.FALSE)
     public BigDecimalProperty pesoSimplificado;
-
-    /**
-     * many-to-one entity reference property field
-     */
-    @Allocation(maxDepth = 1, maxRound = 0)
-    @ForeignKey(onDelete = OnDeleteAction.CASCADE, onUpdate = OnUpdateAction.CASCADE)
-    @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(create = Kleenean.TRUE)
-    public Variable variable;
-
-    /**
-     * date property field
-     */
-    @ColumnField(nullable = Kleenean.TRUE, insertable = Kleenean.FALSE, updateable = Kleenean.FALSE)
-    @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE)
-    public DateProperty fechaUltimoCalculo;
 
     @Override
     protected void settleProperties() {
         super.settleProperties();
         tipoNodo.setInitialValue(tipoNodo.RAIZ);
         tipoNodo.setDefaultValue(tipoNodo.RAIZ);
-        tipoPesoNodo.setInitialValue(tipoPesoNodo.INDETERMINADO);
-        tipoPesoNodo.setDefaultValue(tipoPesoNodo.INDETERMINADO);
+//      tipoPesoNodo.setInitialValue(tipoPesoNodo.INDETERMINADO);
+        tipoPesoNodo.setDefaultValue(tipoNodo.isEqualTo(tipoNodo.RAIZ).then(tipoPesoNodo.INDETERMINADO).otherwise(superior.tipoPesoNodo));
         impacto.setInitialValue(impacto.ALTO);
         impacto.setDefaultValue(impacto.ALTO);
         pesoAsignado.setDefaultDescription("peso por asignación directa");
@@ -160,11 +153,11 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     protected void settleTabs() {
         super.settleTabs();
         tab1.setDefaultLabel("general");
-        tab1.newTabField(tipoNodo, fechaUltimoCalculo);
+        tab1.newTabField(tipoNodo);
         tab2.setDefaultLabel("general");
-        tab2.newTabField(tipoNodo, superior, fechaUltimoCalculo);
+        tab2.newTabField(tipoNodo, superior);
         tab3.setDefaultLabel("general");
-        tab3.newTabField(tipoNodo, superior, variable, fechaUltimoCalculo);
+        tab3.newTabField(tipoNodo, superior, variable);
         tab4.setDefaultLabel("pesos");
         tab4.newTabField(tipoPesoNodo, impacto, pesoAsignado, pesoAHP, pesoSimplificado);
     }
@@ -173,7 +166,7 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
 
     protected Segment raizRama;
 
-    protected Check check01, check02, check03, check04, check05, check06, check07, check08;
+    protected Check check01, check02, check03, check05, check07, check08;
 
     @Override
     protected void settleExpressions() {
@@ -194,12 +187,12 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         check02.setDefaultErrorMessage("el nodo superior no puede ser este mismo nodo");
         check03 = superior.isNotNull().implies(superior.tipoNodo.isNotEqualTo(tipoNodo.HOJA));
         check03.setDefaultErrorMessage("el nodo superior no puede ser un nodo de tipo Hoja");
-        check04 = raiz.implies(tipoPesoNodo.isNullOrEqualTo(tipoPesoNodo.INDETERMINADO));
-        check04.setDefaultErrorMessage("el tipo del peso del nodo debe ser Indeterminado si el tipo de nodo es Raiz");
+//      check04 = raiz.implies(tipoPesoNodo.isNullOrEqualTo(tipoPesoNodo.INDETERMINADO));
+//      check04.setDefaultErrorMessage("el tipo del peso del nodo debe ser Indeterminado si el tipo de nodo es Raiz");
         check05 = hoja.xnor(variable.isNotNull());
         check05.setDefaultErrorMessage("la variable se debe especificar si y solo si el tipo de nodo es Hoja");
-        check06 = tipoPesoNodo.isEqualTo(tipoPesoNodo.ASIGNACION_DIRECTA).implies(pesoAsignado.isNotNull());
-        check06.setDefaultErrorMessage("el peso asignado del nodo se debe especificar si el tipo del peso del nodo es Asignación Directa");
+//      check06 = tipoPesoNodo.isEqualTo(tipoPesoNodo.ASIGNACION_DIRECTA).implies(pesoAsignado.isNotNull());
+//      check06.setDefaultErrorMessage("el peso asignado del nodo se debe especificar si el tipo del peso del nodo es Asignación Directa");
         check07 = pesoAsignado.isNullOrGreaterThan(0);
         check07.setDefaultErrorMessage("el peso asignado es menor o igual a 0");
         check08 = pesoAsignado.isNullOrLessOrEqualTo(100);
@@ -218,10 +211,9 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         superior.setModifyingFilter(not(raiz));
         superior.setNullifyingFilter(raiz);
         /**/
-//      tipoPesoNodo.setRenderingFilter(not(raiz));
-        tipoPesoNodo.setRequiringFilter(not(raiz));
-        tipoPesoNodo.setModifyingFilter(not(raiz));
-        tipoPesoNodo.setNullifyingFilter(raiz);
+//      tipoPesoNodo.setRenderingFilter(tipoNodo.isNull());
+        tipoPesoNodo.setRequiringFilter(tipoNodo.isNull());
+        tipoPesoNodo.setModifyingFilter(tipoNodo.isNull());
         /**/
 //      impacto.setRenderingFilter(not(raiz));
         impacto.setRequiringFilter(not(raiz));
@@ -237,6 +229,34 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         variable.setRequiringFilter(hoja);
         variable.setModifyingFilter(hoja);
         variable.setNullifyingFilter(not(hoja));
+    }
+
+    protected ActualizarTipoPesoNodo actualizarTipoPeso;
+
+    @OperationClass(access = OperationAccess.RESTRICTED)
+    @ProcessOperationClass(overloading = Kleenean.FALSE)
+    public class ActualizarTipoPesoNodo extends ProcessOperation {
+
+        @InstanceReference
+        protected NodoIndice nodo;
+
+        @ParameterField(required = Kleenean.TRUE, linkedField = "tipoPesoNodo")
+        protected TipoPesoNodo tipoPesoNodo;
+
+        Check check01;
+
+        @Override
+        protected void settleExpressions() {
+            super.settleExpressions();
+            check01 = nodo.raiz.isTrue();
+        }
+
+        @Override
+        protected void settleFilters() {
+            super.settleFilters();
+            nodo.setSearchQueryFilter(check01);
+        }
+
     }
 
     protected Recalcular recalcular;
