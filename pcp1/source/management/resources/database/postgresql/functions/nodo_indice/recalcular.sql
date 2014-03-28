@@ -9,6 +9,7 @@ begin
     raise notice 'nodo_indice$recalcular$biz(%, %)', _super$, _nodo$;
     perform nodo_indice$update$peso_ahp(_nodo$);
     perform nodo_indice$update$peso_simplificado(_nodo$);
+    perform nodo_indice$verify$peso_asignado(_nodo$);
     for _row in select * from nodo_indice where superior = _nodo$ and tipo_nodo <> _enum_tipo_nodo.HOJA order by codigo
     loop
         _rowcount := _rowcount + nodo_indice$recalcular$biz(_super$, _row.id);
