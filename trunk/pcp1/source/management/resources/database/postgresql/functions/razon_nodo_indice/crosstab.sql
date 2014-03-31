@@ -1,41 +1,33 @@
 create or replace function razon_nodo_indice$crosstab(_nodo$ bigint) returns SETOF RECORD as $$
 declare
+    _s character varying;
+    _n integer;
     _r RECORD;
-    _i integer;
-    _o integer;
-    _v integer[] := '{}';
+    _c integer[]; -- := '{}';
 begin
+    select string_agg(codigo, E'\n' order by codigo), count(*) into _s, _n from nodo_indice where superior = _nodo$;
     for _r in
-        select numerador as id, 0::bigint as version, nodo_indice.codigo, count(*)::integer as dimension
-        from razon_nodo_indice
-        inner join nodo_indice on nodo_indice.id = razon_nodo_indice.numerador
-        where nodo = _nodo$
-        group by numerador, nodo_indice.codigo
-        order by nodo_indice.codigo
+        select *, row_number()over(order by codigo)::integer as fila from nodo_indice where superior = _nodo$ order by codigo
     loop
-        _i := 0;
-        for _o in
-            select ordinal_razon
-            from razon_nodo_indice
-            inner join nodo_indice on nodo_indice.id = razon_nodo_indice.denominador
-            where nodo = _nodo$
-            and numerador = _r.id
-            order by nodo_indice.codigo
-        loop
-            _i := _i + 1;
-            _v[_i] := _o;
-        end loop;
+        select array_agg(ordinal_razon order by codigo)
+        into _c
+        from razon_nodo_indice
+        inner join nodo_indice on nodo_indice.id = razon_nodo_indice.denominador
+        where nodo = _nodo$
+        and numerador = _r.id;
         return query
-            select _r.id, _r.version, _r.codigo, _nodo$, _r.dimension,
-                _v[01], _v[02], _v[03], _v[04], _v[05], _v[06], _v[07], _v[08], _v[09], _v[10],
-                _v[11], _v[12], _v[13], _v[14], _v[15], _v[16], _v[17], _v[18], _v[19], _v[20];
+            select _r.id, _r.version, _r.codigo, _r.superior, _r.fila, _n,
+                _c[01], _c[02], _c[03], _c[04], _c[05], _c[06], _c[07], _c[08], _c[09], _c[10],
+                _c[11], _c[12], _c[13], _c[14], _c[15], _c[16], _c[17], _c[18], _c[19], _c[20],
+                _s;
     end loop;
 end;
 $$ language plpgsql;
-/*
+-- /*
 select * from razon_nodo_indice$crosstab(1010100)
-as fila_matriz_razon (id bigint, version bigint, codigo character varying, nodo bigint, dimension integer,
+as fila_matriz_razon (id bigint, version bigint, codigo character varying, nodo bigint, fila integer, dimension integer,
 c01 integer, c02 integer, c03 integer, c04 integer, c05 integer, c06 integer, c07 integer, c08 integer, c09 integer, c10 integer,
-c11 integer, c12 integer, c13 integer, c14 integer, c15 integer, c16 integer, c17 integer, c18 integer, c19 integer, c20 integer)
+c11 integer, c12 integer, c13 integer, c14 integer, c15 integer, c16 integer, c17 integer, c18 integer, c19 integer, c20 integer,
+etiquetas character varying)
 order by nodo, codigo;
-*/
+-- */
