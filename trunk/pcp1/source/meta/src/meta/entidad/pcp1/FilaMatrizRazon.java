@@ -269,6 +269,9 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     public OrdinalRazon c20;
 
     @PropertyField(hidden = Kleenean.TRUE)
+    public StringProperty claves;
+
+    @PropertyField(hidden = Kleenean.TRUE)
     public StringProperty etiquetas;
 
     @Override

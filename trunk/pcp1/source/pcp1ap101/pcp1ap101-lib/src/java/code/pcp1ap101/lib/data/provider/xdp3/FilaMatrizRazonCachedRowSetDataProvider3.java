@@ -40,13 +40,18 @@ public class FilaMatrizRazonCachedRowSetDataProvider3 extends FilaMatrizRazonCac
     }
 
     @Override
+    public String getTablaDestino() {
+        return "seudo_fila_matriz_razon";
+    }
+
+    @Override
     public String getComandoSelect() {
         return ""
             + "select * from razon_nodo_indice$crosstab" + "(" + getIdentificacionMaestro() + ") "
             + "as fila_matriz_razon (id bigint, version bigint, codigo character varying, nodo bigint, fila integer, dimension integer, "
             + "c01 integer, c02 integer, c03 integer, c04 integer, c05 integer, c06 integer, c07 integer, c08 integer, c09 integer, c10 integer, "
             + "c11 integer, c12 integer, c13 integer, c14 integer, c15 integer, c16 integer, c17 integer, c18 integer, c19 integer, c20 integer, "
-            + "etiquetas character varying) ";
+            + "claves character varying, etiquetas character varying) ";
     }
 
 }
