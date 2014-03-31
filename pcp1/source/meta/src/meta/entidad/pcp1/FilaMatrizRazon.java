@@ -22,7 +22,7 @@ import java.lang.reflect.Field;
 @EntityInsertOperation(enabled = Kleenean.FALSE)
 @EntityDeleteOperation(enabled = Kleenean.FALSE)
 @EntityTableView(rows = 20)
-@PersistentEntityClass(dataProvider = 3)
+@PersistentEntityClass(pseudoTargetTable = Kleenean.TRUE)
 public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
 
     // <editor-fold defaultstate="collapsed" desc="class constructors">
