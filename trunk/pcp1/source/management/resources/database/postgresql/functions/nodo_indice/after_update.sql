@@ -56,6 +56,9 @@ begin
             perform nodo_indice$insert$segmento(new.id, new.codigo, new.nombre, new.superior);
         end if;
     end if;
+    if _diff_superior is false and new.superior is not null and new.codigo <> old.codigo then
+        perform nodo_indice$insert$razones(new.superior);
+    end if;
     return null;
 end;
 $$ language plpgsql;

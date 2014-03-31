@@ -2,6 +2,7 @@ create or replace function nodo_indice$insert$razones(_nodo$ bigint) returns voi
 declare
     _row nodo_indice%ROWTYPE;
     _col nodo_indice%ROWTYPE;
+    _id bigint;
     _razon numeric;
     _editable boolean;
 begin
@@ -10,8 +11,11 @@ begin
         loop
             for _col in select * from nodo_indice where superior = _nodo$ order by codigo
             loop
-                select razon into _razon from razon_nodo_indice where nodo = _nodo$ and numerador = _row.id and denominador = _col.id;
-                if not found then
+                select id, razon into _id, _razon from razon_nodo_indice where nodo = _nodo$ and numerador = _row.id and denominador = _col.id;
+                _editable := _row.codigo < _col.codigo;
+                if found then
+                    update razon_nodo_indice set editable = _editable where id = _id;
+                else
                     if _row.id = _col.id then
                         _razon := 1;
                     else
@@ -22,7 +26,6 @@ begin
                             _razon := 1;
                         end if;
                     end if;
-                    _editable := _row.codigo < _col.codigo;
                     insert
                     into razon_nodo_indice (id, nodo, numerador, denominador, razon, editable)
                     values (bigintid(), _nodo$, _row.id, _col.id, _razon, _editable);
