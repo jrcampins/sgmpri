@@ -4,9 +4,7 @@ declare
     _col nodo_indice%ROWTYPE;
     _id bigint;
     _editable boolean;
-    _enum_ordinal_razon RECORD;
 begin
-    _enum_ordinal_razon := ordinal_razon$enum();
     if _nodo$ is not null then
         for _row in select * from nodo_indice where superior = _nodo$ order by codigo
         loop
@@ -16,8 +14,8 @@ begin
                 if not found then
                     _editable := _row.codigo < _col.codigo;
                     insert
-                    into razon_nodo_indice (id, nodo, numerador, denominador, ordinal_razon, editable)
-                    values (bigintid(), _nodo$, _row.id, _col.id, _enum_ordinal_razon.UNO, _editable);
+                    into razon_nodo_indice (id, nodo, numerador, denominador, editable)
+                    values (bigintid(), _nodo$, _row.id, _col.id, _editable);
                 end if;
             end loop;
         end loop;
