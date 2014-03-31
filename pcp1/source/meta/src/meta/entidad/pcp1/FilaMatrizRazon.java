@@ -18,8 +18,10 @@ import java.lang.reflect.Field;
  * @author Jorge Campins
  */
 @EntityClass(independent = Kleenean.FALSE, resourceType = ResourceType.CONFIGURATION)
+@EntitySelectOperation(enabled = Kleenean.FALSE)
 @EntityInsertOperation(enabled = Kleenean.FALSE)
 @EntityDeleteOperation(enabled = Kleenean.FALSE)
+@EntityTableView(rows = 20)
 @PersistentEntityClass(dataProvider = 3)
 public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
 
@@ -61,6 +63,9 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     public NodoIndice nodo;
 
     @PropertyField(hidden = Kleenean.TRUE)
+    public IntegerProperty fila;
+
+    @PropertyField(hidden = Kleenean.TRUE)
     public IntegerProperty dimension;
 
     /**
@@ -70,7 +75,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c01;
 
     /**
@@ -80,7 +85,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c02;
 
     /**
@@ -90,7 +95,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c03;
 
     /**
@@ -100,7 +105,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c04;
 
     /**
@@ -110,7 +115,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c05;
 
     /**
@@ -120,7 +125,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c06;
 
     /**
@@ -130,7 +135,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c07;
 
     /**
@@ -140,7 +145,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c08;
 
     /**
@@ -150,7 +155,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c09;
 
     /**
@@ -160,7 +165,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c10;
 
     /**
@@ -170,7 +175,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c11;
 
     /**
@@ -180,7 +185,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c12;
 
     /**
@@ -190,7 +195,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c13;
 
     /**
@@ -200,7 +205,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c14;
 
     /**
@@ -210,7 +215,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c15;
 
     /**
@@ -220,7 +225,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c16;
 
     /**
@@ -230,7 +235,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c17;
 
     /**
@@ -240,7 +245,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c18;
 
     /**
@@ -250,7 +255,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c19;
 
     /**
@@ -260,12 +265,16 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE)
+    @PropertyField(required = Kleenean.TRUE, search = Kleenean.FALSE, headertextless = Kleenean.TRUE)
     public OrdinalRazon c20;
+
+    @PropertyField(hidden = Kleenean.TRUE)
+    public StringProperty etiquetas;
 
     @Override
     protected void settleProperties() {
         super.settleProperties();
+        codigo.setDefaultLabel("nodo");
         c01.setInitialValue(c01.UNO);
         c01.setDefaultValue(c01.UNO);
         c02.setInitialValue(c02.UNO);
@@ -308,31 +317,6 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
         c20.setDefaultValue(c20.UNO);
         setMasterDetailFilter(nodo.raizRama);
         setOrderBy(codigo);
-    }
-
-    @Override
-    protected void settleFilters() {
-        super.settleFilters();
-        c01.setRenderingFilter(dimension.isGreaterThan(1));
-        c02.setRenderingFilter(dimension.isGreaterThan(2));
-        c03.setRenderingFilter(dimension.isGreaterThan(3));
-        c04.setRenderingFilter(dimension.isGreaterThan(4));
-        c05.setRenderingFilter(dimension.isGreaterThan(5));
-        c06.setRenderingFilter(dimension.isGreaterThan(6));
-        c07.setRenderingFilter(dimension.isGreaterThan(7));
-        c08.setRenderingFilter(dimension.isGreaterThan(8));
-        c09.setRenderingFilter(dimension.isGreaterThan(9));
-        c10.setRenderingFilter(dimension.isGreaterThan(10));
-        c11.setRenderingFilter(dimension.isGreaterThan(11));
-        c12.setRenderingFilter(dimension.isGreaterThan(12));
-        c13.setRenderingFilter(dimension.isGreaterThan(13));
-        c14.setRenderingFilter(dimension.isGreaterThan(14));
-        c15.setRenderingFilter(dimension.isGreaterThan(15));
-        c16.setRenderingFilter(dimension.isGreaterThan(16));
-        c17.setRenderingFilter(dimension.isGreaterThan(17));
-        c18.setRenderingFilter(dimension.isGreaterThan(18));
-        c19.setRenderingFilter(dimension.isGreaterThan(19));
-        c20.setRenderingFilter(dimension.isGreaterThan(20));
     }
 
 }
