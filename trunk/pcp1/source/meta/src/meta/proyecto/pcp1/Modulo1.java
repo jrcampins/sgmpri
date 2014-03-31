@@ -24,6 +24,8 @@ public class Modulo1 extends Project {
 
     ColorNodoIndice colorNodoIndice;
 
+    FilaMatrizRazon filaMatrizRazon;
+
     MedicionRama medicionRama;
 
     MedicionNodo medicionNodo;
