@@ -68,6 +68,10 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     @PropertyField(create = Kleenean.TRUE, table = Kleenean.TRUE, report = Kleenean.TRUE, required = Kleenean.TRUE, submit = Kleenean.TRUE)
     public TipoNodo tipoNodo;
 
+    @ColumnField(nullable = Kleenean.FALSE)
+    @PropertyField(create = Kleenean.FALSE, update = Kleenean.FALSE, table = Kleenean.FALSE, report = Kleenean.FALSE)
+    public IntegerProperty subordinados;
+
     /**
      * parent entity reference property field
      */
@@ -144,6 +148,8 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         pesoAHP.setDefaultLabel("peso AHP");
         pesoAHP.setDefaultDescription("peso calculado con el método de la técnica AHP");
         pesoSimplificado.setDefaultDescription("peso calculado con el método simplificado");
+        subordinados.setInitialValue(0);
+        subordinados.setDefaultValue(0);
         setOrderBy(codigo);
     }
 
@@ -153,9 +159,9 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     protected void settleTabs() {
         super.settleTabs();
         tab1.setDefaultLabel("general");
-        tab1.newTabField(tipoNodo);
+        tab1.newTabField(tipoNodo, subordinados);
         tab2.setDefaultLabel("general");
-        tab2.newTabField(tipoNodo, superior);
+        tab2.newTabField(tipoNodo, superior, subordinados);
         tab3.setDefaultLabel("general");
         tab3.newTabField(tipoNodo, superior, variable);
         tab4.setDefaultLabel("pesos");
@@ -164,7 +170,7 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
 
     protected Segment raiz, rama, hoja;
 
-    protected Segment raizRama;
+    protected Segment raizRama, subordinadosMayor, subordinadosMenor;
 
     protected Check check01, check02, check03, check05, check07, check08;
 
@@ -180,6 +186,11 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
         /**/
         raizRama = not(hoja);
         raizRama.setDefaultErrorMessage("el nodo es de tipo Hoja");
+        /**/
+        subordinadosMayor = and(not(hoja), subordinados.isGreaterThan(20));
+        subordinadosMayor.setDefaultErrorMessage("el nodo no tiene mas de 20 nodos subordinados");
+        subordinadosMenor = and(not(hoja), subordinados.isGreaterThan(1), subordinados.isLessOrEqualTo(20));
+        subordinadosMenor.setDefaultErrorMessage("el nodo no tiene nodos subordinados o tiene mas de 20");
         /**/
         check01 = raiz.xnor(superior.isNull());
         check01.setDefaultErrorMessage("el nodo superior se debe especificar si y solo si el tipo de nodo no es Raiz");

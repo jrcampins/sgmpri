@@ -13,6 +13,7 @@ begin
         perform nodo_indice$update$peso_ahp(new.superior);
         perform nodo_indice$update$peso_simplificado(new.superior);
         */
+        update nodo_indice set subordinados = subordinados+1 where id = new.superior;
     end if;
     return null;
 end;

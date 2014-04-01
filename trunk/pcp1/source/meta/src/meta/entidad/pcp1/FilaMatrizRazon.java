@@ -39,10 +39,10 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
     @Override
     protected void settleAttributes() {
         super.settleAttributes();
-        setDefaultLabel("fila de matriz de razón de nodo de índice");
-        setDefaultShortLabel("fila de matriz de razón");
-        setDefaultCollectionLabel("Filas de Matrices de Razones de Nodos de Indices");
-        setDefaultCollectionShortLabel("Filas de Matrices de Razones");
+        setDefaultLabel("fila de matriz de razones de nodos de indices");
+        setDefaultShortLabel("fila de matriz de razones");
+        setDefaultCollectionLabel("Matriz de Razones de Nodos de Indices");
+        setDefaultCollectionShortLabel("Matriz de Razones");
     }
 
     /**
@@ -318,7 +318,7 @@ public class FilaMatrizRazon extends meta.entidad.base.PersistentEntityBase {
         c19.setDefaultValue(c19.UNO);
         c20.setInitialValue(c20.UNO);
         c20.setDefaultValue(c20.UNO);
-        setMasterDetailFilter(nodo.raizRama);
+        setMasterDetailFilter(nodo.subordinadosMenor);
         setOrderBy(codigo);
     }
 
