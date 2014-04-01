@@ -23,6 +23,7 @@ begin
             perform nodo_indice$update$peso_ahp(new.superior);
             perform nodo_indice$update$peso_simplificado(new.superior);
             */
+            update nodo_indice set subordinados = subordinados+1 where id = new.superior;
         end if;
     else
         if new.superior is null then
@@ -32,6 +33,7 @@ begin
             perform nodo_indice$update$peso_ahp(old.superior);
             perform nodo_indice$update$peso_simplificado(old.superior);
             */
+            update nodo_indice set subordinados = subordinados-1 where id = old.superior;
         elsif new.superior <> old.superior then
             _diff_superior := true;
             delete from razon_nodo_indice where nodo = old.superior and (numerador = new.id or denominador = new.id);
@@ -39,11 +41,14 @@ begin
             perform nodo_indice$update$peso_ahp(old.superior);
             perform nodo_indice$update$peso_simplificado(old.superior);
             */
+            update nodo_indice set subordinados = subordinados-1 where id = old.superior;
+            /**/
             perform nodo_indice$insert$razones(new.superior);
             /*
             perform nodo_indice$update$peso_ahp(new.superior);
             perform nodo_indice$update$peso_simplificado(new.superior);
             */
+            update nodo_indice set subordinados = subordinados+1 where id = new.superior;
         /*
         elsif new.impacto <> old.impacto then
             perform nodo_indice$update$peso_simplificado(new.superior);

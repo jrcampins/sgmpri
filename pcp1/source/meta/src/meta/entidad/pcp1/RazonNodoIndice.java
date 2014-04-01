@@ -108,7 +108,7 @@ public class RazonNodoIndice extends meta.entidad.base.PersistentEntityBase {
         editable.setDefaultValue(false);
         setInsertFilter(nodo.raizRama);
         setUpdateFilter(editable.and(numerador.isNotEqualTo(denominador)));
-        setMasterDetailFilter(nodo.raizRama);
+        setMasterDetailFilter(nodo.subordinadosMayor);
         setOrderBy(nodo.codigo, numerador.codigo, denominador.codigo);
     }
 
