@@ -89,10 +89,10 @@
 	<field name="version_2" class="java.lang.Long"/>
 	<field name="codigo_2" class="java.lang.String"/>
 	<field name="nombre_2" class="java.lang.String"/>
+	<field name="subordinados_2" class="java.lang.Integer"/>
 	<field name="peso_asignado_2" class="java.math.BigDecimal"/>
 	<field name="peso_a_h_p_2" class="java.math.BigDecimal"/>
 	<field name="peso_simplificado_2" class="java.math.BigDecimal"/>
-	<field name="fecha_ultimo_calculo_2" class="java.sql.Date"/>
 	<field name="numero_tipo_nodo_3" class="java.lang.Integer"/>
 	<field name="codigo_tipo_nodo_3" class="java.lang.String"/>
 	<field name="id_4" class="java.lang.Long"/>
