@@ -65,7 +65,7 @@ public class NodoIndice extends meta.entidad.base.PersistentEntityBase {
     @ColumnField(nullable = Kleenean.FALSE)
     @ForeignKey(onDelete = OnDeleteAction.NONE, onUpdate = OnUpdateAction.NONE)
     @ManyToOne(navigability = Navigability.UNIDIRECTIONAL, view = MasterDetailView.NONE)
-    @PropertyField(create = Kleenean.TRUE, table = Kleenean.TRUE, report = Kleenean.TRUE, required = Kleenean.TRUE, submit = Kleenean.TRUE)
+    @PropertyField(create = Kleenean.TRUE, table = Kleenean.FALSE, report = Kleenean.TRUE, required = Kleenean.TRUE, submit = Kleenean.TRUE)
     public TipoNodo tipoNodo;
 
     @ColumnField(nullable = Kleenean.FALSE)
