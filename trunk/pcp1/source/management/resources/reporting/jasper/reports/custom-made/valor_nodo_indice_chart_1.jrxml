@@ -13,16 +13,25 @@
 	<import value="pcp1ap101.lib.base.enumeration.*"/>
 	<template><![CDATA[$P{CUSTOM_STYLE_TEMPLATE}]]></template>
 	<subDataset name="FrecuenciasPorRango" uuid="b19c8f13-633e-4e62-bbb5-b778244b2cd0">
-		<parameter name="SUPERIOR" class="java.lang.Long"/>
+		<parameter name="COMPONENTE" class="java.lang.Long"/>
+		<parameter name="CATEGORIA" class="java.lang.String"/>
 		<queryString>
-			<![CDATA[select ni.codigo||': '||ni.nombre as categoria, vni1.rango, count(*) as frecuencia
-from valor_nodo_indice vni1
-inner join valor_nodo_indice vni2 on vni2.id=vni1.superior
-inner join nodo_indice ni on ni.id=vni2.nodo
-where vni1.tipo_nodo=3
-and vni1.superior=$P{SUPERIOR}
-group by 1, 2
-order by 1, 2;
+			<![CDATA[select $P{CATEGORIA} as categoria, rango, count(*) as frecuencia
+from (
+    select *
+    from valor_nodo_indice$respuestas($P{COMPONENTE})
+    as respuestas (
+        componente bigint,
+        codigo_componente character varying(30),
+        nombre_componente character varying(100),
+        elemento bigint,
+        codigo_elemento character varying(30),
+        nombre_elemento character varying(100),
+        rango character varying(20)
+    )
+) as respuestas_agrupadas
+group by 1,2
+order by 1,2;
 ]]>
 		</queryString>
 		<field name="categoria" class="java.lang.String"/>
@@ -222,8 +231,11 @@ order by mn.codigo, ni.codigo;]]>
 				<categoryDataset>
 					<dataset>
 						<datasetRun subDataset="FrecuenciasPorRango" uuid="1be83d0c-ced1-4fc9-a887-1cd353519ac1">
-							<datasetParameter name="SUPERIOR">
+							<datasetParameter name="COMPONENTE">
 								<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="CATEGORIA">
+								<datasetParameterExpression><![CDATA[$F{nombre_nodo}]]></datasetParameterExpression>
 							</datasetParameter>
 						</datasetRun>
 					</dataset>
@@ -233,14 +245,19 @@ order by mn.codigo, ni.codigo;]]>
 						<valueExpression><![CDATA[$F{frecuencia}]]></valueExpression>
 					</categorySeries>
 				</categoryDataset>
-				<bar3DPlot>
-					<plot/>
+				<bar3DPlot isShowLabels="true">
+					<plot>
+						<seriesColor seriesOrder="0" color="#FF0000"/>
+						<seriesColor seriesOrder="1" color="#FF7F00"/>
+						<seriesColor seriesOrder="2" color="#FFFF00"/>
+						<seriesColor seriesOrder="3" color="#33FF00"/>
+					</plot>
 					<itemLabel/>
 					<categoryAxisFormat>
-						<axisFormat/>
+						<axisFormat verticalTickLabels="true"/>
 					</categoryAxisFormat>
 					<valueAxisFormat>
-						<axisFormat/>
+						<axisFormat verticalTickLabels="true"/>
 					</valueAxisFormat>
 				</bar3DPlot>
 			</bar3DChart>
