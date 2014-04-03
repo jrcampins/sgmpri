@@ -31,8 +31,7 @@ from (
     )
 ) as respuestas_agrupadas
 group by 1,2
-order by 1,2;
-]]>
+order by 1,2;]]>
 		</queryString>
 		<field name="categoria" class="java.lang.String"/>
 		<field name="rango" class="java.lang.String"/>
@@ -213,7 +212,7 @@ order by mn.codigo, ni.codigo;]]>
 				<textField>
 					<reportElement key="staticText" style="ch-text1" x="0" y="0" width="960" height="20" uuid="a5721dd3-6c35-4475-babd-5f1e912e0740"/>
 					<textElement markup="none"/>
-					<textFieldExpression><![CDATA[System.getProperty("user.dir")]]></textFieldExpression>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
