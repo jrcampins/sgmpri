@@ -11,7 +11,6 @@ echo xcopy "%source%" "%target%" /s
 set xf=/xf
 set xf=%xf% *.lnk
 set xf=%xf% *.log
-set xf=%xf% FilaMatrizRazonCachedRowSetDataProvider3.java
 set xf=%xf% Thumbs.db
 set xd=/xd
 set xd=%xd% meta
