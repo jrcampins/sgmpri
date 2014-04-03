@@ -139,6 +139,39 @@ public class ValorNodoIndice extends meta.entidad.base.PersistentEntityBase {
     @PropertyField(table = Kleenean.TRUE, report = Kleenean.TRUE, update = Kleenean.FALSE)
     public ColorIndice colorNorma2;
 
+    @PropertyField(hidden = Kleenean.TRUE)
+    public IntegerProperty frecuencia1;
+
+    @PropertyField(hidden = Kleenean.TRUE)
+    public IntegerProperty frecuencia2;
+
+    @PropertyField(hidden = Kleenean.TRUE)
+    public IntegerProperty frecuencia3;
+
+    @PropertyField(hidden = Kleenean.TRUE)
+    public IntegerProperty frecuencia4;
+
+    @PropertyField(hidden = Kleenean.TRUE)
+    public IntegerProperty frecuencia5;
+
+    @PropertyField(hidden = Kleenean.TRUE)
+    public IntegerProperty frecuencia6;
+
+    @PropertyField(hidden = Kleenean.TRUE)
+    public IntegerProperty frecuencia7;
+
+    @PropertyField(hidden = Kleenean.TRUE)
+    public IntegerProperty frecuencia8;
+
+    @PropertyField(hidden = Kleenean.TRUE)
+    public IntegerProperty frecuencia9;
+
+    @PropertyField(hidden = Kleenean.TRUE)
+    public IntegerProperty respuestas;
+
+    @PropertyField(hidden = Kleenean.TRUE)
+    public IntegerProperty rangos;
+
     public StringProperty comentarios;
 
     @Override

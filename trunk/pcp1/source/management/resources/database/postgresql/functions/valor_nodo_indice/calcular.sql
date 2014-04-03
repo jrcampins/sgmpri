@@ -5,6 +5,10 @@ declare
     _row valor_nodo_indice%ROWTYPE;
     _enum_tipo_nodo RECORD;
     _pdq RECORD;
+    _respuestas integer := 0;
+    _rangos integer := 0;
+    _ordinal integer;
+    _frecuencia integer[] := array[0,0,0,0,0,0,0,0,0];
     _suma_n_1 numeric := 0;
     _suma_d_1 numeric := 0;
     _suma_n_2 numeric := 0;
@@ -39,11 +43,20 @@ begin
         )
         order by 1
     loop
+        _respuestas := _respuestas + 1;
+        _rangos  := case when _pdq.rango_minimo = 0 then _pdq.rango_maximo + 1 else _pdq.rango_maximo end;
+        _ordinal := case when _pdq.rango_minimo = 0 then _pdq.rango + 1 else _pdq.rango end;
+        _frecuencia[_ordinal] := _frecuencia[_ordinal] + 1;
         _suma_n_1 := _suma_n_1 + _pdq.peso * ((_pdq.rango_maximo - _pdq.rango)^2);
         _suma_d_1 := _suma_d_1 + _pdq.peso * ((_pdq.rango_maximo - _pdq.rango_minimo)^2);
         _suma_n_2 := _suma_n_2 + _pdq.peso * _pdq.rango;
         _suma_d_2 := _suma_d_2 + _pdq.peso * _pdq.rango_maximo;
     end loop;
+    if _rangos < 9 then
+        for i in (_rangos+1)..9 loop
+            _frecuencia[i] := null;
+        end loop;
+    end if;
     if _suma_n_1 is not null and _suma_d_1 is not null and _suma_d_1 <> 0 then
         _brecha_1 := |/_suma_n_1;
         _maxima_1 := |/_suma_d_1;
@@ -70,7 +83,18 @@ begin
         indice_norma1 = _indice_1,
         color_norma1 = _color_1,
         indice_norma2 = _indice_2,
-        color_norma2 = _color_2
+        color_norma2 = _color_2,
+        frecuencia1 = _frecuencia[1],
+        frecuencia2 = _frecuencia[2],
+        frecuencia3 = _frecuencia[3],
+        frecuencia4 = _frecuencia[4],
+        frecuencia5 = _frecuencia[5],
+        frecuencia6 = _frecuencia[6],
+        frecuencia7 = _frecuencia[7],
+        frecuencia8 = _frecuencia[8],
+        frecuencia9 = _frecuencia[9],
+        respuestas = _respuestas,
+        rangos = _rangos
     where id = _row.id;
     if _cascade$ then
         for _row in
