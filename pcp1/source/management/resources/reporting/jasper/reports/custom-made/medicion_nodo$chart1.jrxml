@@ -41,7 +41,7 @@ order by 1,2;]]>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<parameter name="RESOURCES_DIR" class="java.lang.String" isForPrompting="false">
-        <defaultValueExpression><![CDATA["./resources/"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["./resources/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="CUSTOM_STYLE_TEMPLATE" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[$P{RESOURCES_DIR} + $P{ENTERPRISE_APPLICATION_CODE} + "0.jrtx"]]></defaultValueExpression>
@@ -211,7 +211,9 @@ order by 1,2;]]>
 			<printWhenExpression><![CDATA[$P{es_informe_resumido}==0]]></printWhenExpression>
 			<bar3DChart>
 				<chart>
-					<reportElement x="0" y="0" width="960" height="400" uuid="243effef-cc73-40ed-9812-1d86e309d079"/>
+					<reportElement x="0" y="0" width="960" height="400" uuid="243effef-cc73-40ed-9812-1d86e309d079">
+						<property name="net.sf.jasperreports.chart.range.axis.integer.unit" value="true"/>
+					</reportElement>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
