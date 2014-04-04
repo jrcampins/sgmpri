@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="medicion_nodo$chart1" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="960" leftMargin="24" rightMargin="24" topMargin="24" bottomMargin="24" uuid="997c730a-3dde-4589-ba12-83bfdb5e13d2">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="medicion_nodo$chart1" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="720" leftMargin="36" rightMargin="36" topMargin="36" bottomMargin="36" uuid="997c730a-3dde-4589-ba12-83bfdb5e13d2">
 	<property name="ireport.scriptlethandling" value="0"/>
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.0"/>
@@ -91,17 +91,17 @@ order by 1,2;]]>
 			<band height="24" splitType="Prevent">
 				<printWhenExpression><![CDATA[$P{SUPER_REPORT}=="" && $P{es_informe_resumido}==0]]></printWhenExpression>
 				<frame>
-					<reportElement key="frame" style="gh1band1" x="0" y="0" width="960" height="24" uuid="c6ed42ad-b709-489d-91d5-94583caaa835"/>
+					<reportElement key="frame" style="gh1band1" x="0" y="0" width="720" height="24" uuid="c6ed42ad-b709-489d-91d5-94583caaa835"/>
 					<staticText>
-						<reportElement key="staticText" style="gh1text1" x="0" y="0" width="160" height="24" uuid="4083e31b-d240-4027-ba78-678a42df6231"/>
-						<text><![CDATA[raíz]]></text>
+						<reportElement key="staticText" style="gh1text1" x="0" y="0" width="60" height="24" uuid="4083e31b-d240-4027-ba78-678a42df6231"/>
+						<text><![CDATA[foco]]></text>
 					</staticText>
 					<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-						<reportElement key="textField" style="gh1text2" stretchType="RelativeToBandHeight" x="160" y="0" width="640" height="24" uuid="6ed59002-5772-47bb-9e10-d90477a076d0"/>
+						<reportElement key="textField" style="gh1text2" stretchType="RelativeToBandHeight" x="60" y="0" width="480" height="24" uuid="6ed59002-5772-47bb-9e10-d90477a076d0"/>
 						<textFieldExpression><![CDATA[$F{nombre_medicion}]]></textFieldExpression>
 					</textField>
 					<textField isStretchWithOverflow="true" pattern="dd MMMMM yyyy" isBlankWhenNull="true">
-						<reportElement key="textField" style="gh1text2" stretchType="RelativeToBandHeight" x="800" y="0" width="160" height="24" uuid="65bef2dc-ed54-4802-9397-44223b78c5a3"/>
+						<reportElement key="textField" style="gh1text2" stretchType="RelativeToBandHeight" x="540" y="0" width="180" height="24" uuid="65bef2dc-ed54-4802-9397-44223b78c5a3"/>
 						<textFieldExpression><![CDATA[$F{fecha_medicion}]]></textFieldExpression>
 					</textField>
 				</frame>
@@ -111,7 +111,7 @@ order by 1,2;]]>
 			<band height="24" splitType="Prevent">
 				<printWhenExpression><![CDATA[$P{SUPER_REPORT}=="?"]]></printWhenExpression>
 				<frame>
-					<reportElement key="frame" style="gf1band1" x="0" y="0" width="960" height="24" uuid="85e51282-6dee-4d3b-a9f7-8905a7748e9b"/>
+					<reportElement key="frame" style="gf1band1" x="0" y="0" width="720" height="24" uuid="85e51282-6dee-4d3b-a9f7-8905a7748e9b"/>
 					<staticText>
 						<reportElement key="staticText" style="gf1text1" x="0" y="0" width="160" height="24" uuid="51d727da-8f14-400a-aeb0-fb042a327e33"/>
 						<text><![CDATA[]]></text>
@@ -121,7 +121,7 @@ order by 1,2;]]>
 						<textFieldExpression><![CDATA[]]></textFieldExpression>
 					</textField>
 					<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-						<reportElement key="textField" style="gf1text2" stretchType="RelativeToBandHeight" x="480" y="0" width="480" height="24" uuid="a2480396-37b2-43a5-8919-4f8725a5b785"/>
+						<reportElement key="textField" style="gf1text2" stretchType="RelativeToBandHeight" x="480" y="0" width="240" height="24" uuid="a2480396-37b2-43a5-8919-4f8725a5b785"/>
 						<textFieldExpression><![CDATA[]]></textFieldExpression>
 					</textField>
 				</frame>
@@ -134,17 +134,17 @@ order by 1,2;]]>
 			<band height="24" splitType="Prevent">
 				<printWhenExpression><![CDATA[$P{SUPER_REPORT}=="" && $P{es_informe_resumido}==0]]></printWhenExpression>
 				<frame>
-					<reportElement key="frame" style="gh2band1" x="0" y="0" width="960" height="24" uuid="ef5da1a4-a535-45ef-8ddc-d25b33fa5d33"/>
+					<reportElement key="frame" style="gh2band1" x="0" y="0" width="720" height="24" uuid="ef5da1a4-a535-45ef-8ddc-d25b33fa5d33"/>
 					<staticText>
-						<reportElement key="staticText" style="gh2text1" x="0" y="0" width="160" height="24" uuid="b5482dd6-c582-4bd3-be0f-e78ce729424d"/>
+						<reportElement key="staticText" style="gh2text1" x="0" y="0" width="60" height="24" uuid="b5482dd6-c582-4bd3-be0f-e78ce729424d"/>
 						<text><![CDATA[nodo]]></text>
 					</staticText>
 					<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-						<reportElement key="textField" style="gh2text2" stretchType="RelativeToBandHeight" x="160" y="0" width="640" height="24" uuid="ce851a0a-56ef-439a-97a5-a9cd54b7931d"/>
+						<reportElement key="textField" style="gh2text2" stretchType="RelativeToBandHeight" x="60" y="0" width="480" height="24" uuid="ce851a0a-56ef-439a-97a5-a9cd54b7931d"/>
 						<textFieldExpression><![CDATA[$F{nombre_nodo}]]></textFieldExpression>
 					</textField>
 					<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-						<reportElement key="textField" style="gh2text2" stretchType="RelativeToBandHeight" x="800" y="0" width="160" height="24" uuid="5b47d06a-dfc3-441f-87af-3e7610179fcb"/>
+						<reportElement key="textField" style="gh2text2" stretchType="RelativeToBandHeight" x="540" y="0" width="180" height="24" uuid="5b47d06a-dfc3-441f-87af-3e7610179fcb"/>
 						<textFieldExpression><![CDATA[$F{respuestas} + " respuestas "]]></textFieldExpression>
 					</textField>
 				</frame>
@@ -154,7 +154,7 @@ order by 1,2;]]>
 			<band height="24" splitType="Prevent">
 				<printWhenExpression><![CDATA[$P{SUPER_REPORT}=="?"]]></printWhenExpression>
 				<frame>
-					<reportElement key="frame" style="gf2band1" x="0" y="0" width="960" height="24" uuid="27629e8d-d77c-4754-a0e5-1ad7eaa16576"/>
+					<reportElement key="frame" style="gf2band1" x="0" y="0" width="720" height="24" uuid="27629e8d-d77c-4754-a0e5-1ad7eaa16576"/>
 					<staticText>
 						<reportElement key="staticText" style="gf2text1" x="0" y="0" width="160" height="24" uuid="32f1d548-d28f-4702-9e9b-64a338830e46"/>
 						<text><![CDATA[]]></text>
@@ -164,7 +164,7 @@ order by 1,2;]]>
 						<textFieldExpression><![CDATA[]]></textFieldExpression>
 					</textField>
 					<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-						<reportElement key="textField" style="gf2text2" stretchType="RelativeToBandHeight" x="480" y="0" width="480" height="24" uuid="95469732-bd97-415a-8e3c-ad9417855b31"/>
+						<reportElement key="textField" style="gf2text2" stretchType="RelativeToBandHeight" x="480" y="0" width="240" height="24" uuid="95469732-bd97-415a-8e3c-ad9417855b31"/>
 						<textFieldExpression><![CDATA[]]></textFieldExpression>
 					</textField>
 				</frame>
@@ -175,18 +175,18 @@ order by 1,2;]]>
 		<band height="32" splitType="Stretch">
 			<printWhenExpression><![CDATA[$P{SUPER_REPORT}==""]]></printWhenExpression>
 			<frame>
-				<reportElement key="frame" style="ph-band1" x="0" y="0" width="960" height="32" uuid="b617c312-5f49-4824-9ff0-61b1494fc1e1"/>
+				<reportElement key="frame" style="ph-band1" x="0" y="0" width="720" height="32" uuid="b617c312-5f49-4824-9ff0-61b1494fc1e1"/>
 				<image onErrorType="Icon">
 					<reportElement key="image-1" x="0" y="0" width="70" height="30" uuid="e0312a86-5c57-4a38-8a23-c41ebae65c79"/>
 					<imageExpression><![CDATA[$P{PAGE_HEADER_IMAGE_1}]]></imageExpression>
 				</image>
 				<staticText>
-					<reportElement key="staticText" style="ph-text1" x="160" y="0" width="640" height="32" uuid="6d479700-4aa9-436b-8c24-10577cf037cb"/>
+					<reportElement key="staticText" style="ph-text1" x="120" y="0" width="480" height="32" uuid="6d479700-4aa9-436b-8c24-10577cf037cb"/>
 					<textElement textAlignment="Center"/>
 					<text><![CDATA[DISTRIBUCIÓN DE FRECUENCIAS ABSOLUTAS POR RANGO]]></text>
 				</staticText>
 				<staticText>
-					<reportElement key="staticText" style="ph-text1" x="800" y="0" width="160" height="32" uuid="b62e7186-505b-484a-b529-8c6d0a888a43"/>
+					<reportElement key="staticText" style="ph-text1" x="600" y="0" width="120" height="32" uuid="b62e7186-505b-484a-b529-8c6d0a888a43"/>
 					<textElement textAlignment="Right"/>
 					<text><![CDATA[]]></text>
 				</staticText>
@@ -197,9 +197,9 @@ order by 1,2;]]>
 		<band height="20" splitType="Stretch">
 			<printWhenExpression><![CDATA[$P{es_informe_resumido}==0]]></printWhenExpression>
 			<frame>
-				<reportElement key="frame" style="ch-band1" x="0" y="0" width="960" height="20" uuid="defdd53c-f04e-4a37-8bf0-21e63c995dc6"/>
+				<reportElement key="frame" style="ch-band1" x="0" y="0" width="720" height="20" uuid="defdd53c-f04e-4a37-8bf0-21e63c995dc6"/>
 				<textField>
-					<reportElement key="staticText" style="ch-text1" x="0" y="0" width="960" height="20" uuid="a5721dd3-6c35-4475-babd-5f1e912e0740"/>
+					<reportElement key="staticText" style="ch-text1" x="0" y="0" width="720" height="20" uuid="a5721dd3-6c35-4475-babd-5f1e912e0740"/>
 					<textElement markup="none"/>
 					<textFieldExpression><![CDATA[""]]></textFieldExpression>
 				</textField>
@@ -211,7 +211,7 @@ order by 1,2;]]>
 			<printWhenExpression><![CDATA[$P{es_informe_resumido}==0]]></printWhenExpression>
 			<bar3DChart>
 				<chart>
-					<reportElement x="0" y="0" width="960" height="400" uuid="243effef-cc73-40ed-9812-1d86e309d079">
+					<reportElement x="0" y="0" width="720" height="400" uuid="243effef-cc73-40ed-9812-1d86e309d079">
 						<property name="net.sf.jasperreports.chart.range.axis.integer.unit" value="true"/>
 					</reportElement>
 					<chartTitle/>
@@ -257,24 +257,24 @@ order by 1,2;]]>
 		<band height="20" splitType="Stretch">
 			<printWhenExpression><![CDATA[$P{SUPER_REPORT}==""]]></printWhenExpression>
 			<frame>
-				<reportElement key="frame" style="pf-band1" x="0" y="0" width="960" height="20" uuid="98fc1d9c-62fa-450e-ab25-896982b45b21"/>
+				<reportElement key="frame" style="pf-band1" x="0" y="0" width="720" height="20" uuid="98fc1d9c-62fa-450e-ab25-896982b45b21"/>
 				<textField isStretchWithOverflow="true" evaluationTime="Report" pattern="dd/MM/yyyy" isBlankWhenNull="true">
-					<reportElement key="textField" style="pf-text2" stretchType="RelativeToBandHeight" x="0" y="0" width="320" height="20" uuid="2539b9b5-8877-4d95-93eb-76af4742f9e5"/>
+					<reportElement key="textField" style="pf-text2" stretchType="RelativeToBandHeight" x="0" y="0" width="120" height="20" uuid="2539b9b5-8877-4d95-93eb-76af4742f9e5"/>
 					<textElement textAlignment="Left"/>
 					<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" evaluationTime="Page" pattern="" isBlankWhenNull="true">
-					<reportElement key="textField" style="pf-text2" stretchType="RelativeToBandHeight" x="320" y="0" width="160" height="20" uuid="347b0451-15de-43a9-9012-843ccc254a74"/>
+					<reportElement key="textField" style="pf-text2" stretchType="RelativeToBandHeight" x="120" y="0" width="240" height="20" uuid="347b0451-15de-43a9-9012-843ccc254a74"/>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
-					<reportElement key="textField" style="pf-text2" stretchType="RelativeToBandHeight" x="480" y="0" width="160" height="20" uuid="458d83a9-22d1-416d-ae85-7a42320cd2c7"/>
+					<reportElement key="textField" style="pf-text2" stretchType="RelativeToBandHeight" x="360" y="0" width="240" height="20" uuid="458d83a9-22d1-416d-ae85-7a42320cd2c7"/>
 					<textElement textAlignment="Left"/>
 					<textFieldExpression><![CDATA["/ " + $V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
-					<reportElement key="staticText" style="pf-text2" stretchType="RelativeToBandHeight" x="640" y="0" width="320" height="20" uuid="38495263-eea8-4029-b3d6-55fa2d0a6c85"/>
+					<reportElement key="staticText" style="pf-text2" stretchType="RelativeToBandHeight" x="600" y="0" width="120" height="20" uuid="38495263-eea8-4029-b3d6-55fa2d0a6c85"/>
 					<textElement textAlignment="Right" markup="none"/>
 					<textFieldExpression><![CDATA[$P{END_USER_NAME}]]></textFieldExpression>
 				</textField>
