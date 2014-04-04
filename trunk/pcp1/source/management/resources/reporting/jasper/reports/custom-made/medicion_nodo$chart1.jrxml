@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="valor_nodo_indice_chart_1" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="960" leftMargin="24" rightMargin="24" topMargin="24" bottomMargin="24" uuid="997c730a-3dde-4589-ba12-83bfdb5e13d2">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="medicion_nodo$chart1" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="960" leftMargin="24" rightMargin="24" topMargin="24" bottomMargin="24" uuid="997c730a-3dde-4589-ba12-83bfdb5e13d2">
 	<property name="ireport.scriptlethandling" value="0"/>
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.0"/>
@@ -17,9 +17,7 @@
 		<parameter name="CATEGORIA" class="java.lang.String"/>
 		<queryString>
 			<![CDATA[select $P{CATEGORIA} as categoria, rango, count(*) as frecuencia
-from (
-    select *
-    from valor_nodo_indice$respuestas($P{COMPONENTE})
+from valor_nodo_indice$respuestas($P{COMPONENTE})
     as respuestas (
         componente bigint,
         codigo_componente character varying(30),
@@ -29,7 +27,6 @@ from (
         nombre_elemento character varying(100),
         rango character varying(20)
     )
-) as respuestas_agrupadas
 group by 1,2
 order by 1,2;]]>
 		</queryString>
@@ -44,7 +41,7 @@ order by 1,2;]]>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<parameter name="RESOURCES_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["resources/"]]></defaultValueExpression>
+        <defaultValueExpression><![CDATA["./resources/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="CUSTOM_STYLE_TEMPLATE" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[$P{RESOURCES_DIR} + $P{ENTERPRISE_APPLICATION_CODE} + "0.jrtx"]]></defaultValueExpression>
@@ -77,15 +74,7 @@ order by 1,2;]]>
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select vni.id,
-vni.medicion, mn.codigo as codigo_medicion, mn.nombre as nombre_medicion, mn.fecha_condicion as fecha_medicion,
-vni.nodo, ni.codigo as codigo_nodo, ni.nombre as nombre_nodo,
-vni.respuestas
-from valor_nodo_indice vni
-inner join medicion_nodo mn on mn.id=vni.medicion
-inner join nodo_indice ni on ni.id=vni.nodo
-where vni.tipo_nodo<>3 and mn.condicion=3
-order by mn.codigo, ni.codigo;]]>
+		<![CDATA[select * from medicion_nodo$chart1 order by codigo_medicion, codigo_nodo;]]>
 	</queryString>
 	<field name="id" class="java.lang.Long"/>
 	<field name="medicion" class="java.lang.Long"/>
@@ -189,7 +178,7 @@ order by mn.codigo, ni.codigo;]]>
 				<reportElement key="frame" style="ph-band1" x="0" y="0" width="960" height="32" uuid="b617c312-5f49-4824-9ff0-61b1494fc1e1"/>
 				<image onErrorType="Icon">
 					<reportElement key="image-1" x="0" y="0" width="70" height="30" uuid="e0312a86-5c57-4a38-8a23-c41ebae65c79"/>
-					<imageExpression><![CDATA["pcp1ap1011.jpg"]]></imageExpression>
+					<imageExpression><![CDATA[$P{PAGE_HEADER_IMAGE_1}]]></imageExpression>
 				</image>
 				<staticText>
 					<reportElement key="staticText" style="ph-text1" x="160" y="0" width="640" height="32" uuid="6d479700-4aa9-436b-8c24-10577cf037cb"/>
@@ -253,7 +242,7 @@ order by mn.codigo, ni.codigo;]]>
 					</plot>
 					<itemLabel/>
 					<categoryAxisFormat>
-						<axisFormat verticalTickLabels="true"/>
+						<axisFormat verticalTickLabels="false"/>
 					</categoryAxisFormat>
 					<valueAxisFormat>
 						<axisFormat verticalTickLabels="true"/>

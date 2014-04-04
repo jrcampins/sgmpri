@@ -245,4 +245,29 @@ public class MedicionNodo extends meta.entidad.base.PersistentEntityBase {
 
     }
 
+    protected Chart1 chart1;
+
+    @OperationClass(access = OperationAccess.RESTRICTED)
+    @ReportOperationClass()
+    public class Chart1 extends ReportOperation {
+
+        @Override
+        protected void settleAttributes() {
+            super.settleAttributes();
+            setDefaultLabel("distribución de frecuencias absolutas por rango");
+            setDefaultShortLabel("distribución de frecuencias");
+
+        }
+
+        @InstanceReference
+        protected MedicionNodo medicion;
+
+        @Override
+        protected void settleFilters() {
+            super.settleFilters();
+            medicion.setSearchQueryFilter(medicion.terminada);
+        }
+
+    }
+
 }
