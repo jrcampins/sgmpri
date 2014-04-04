@@ -1,12 +1,12 @@
 drop view if exists seudo_fila_matriz_razon cascade;
 create view seudo_fila_matriz_razon as
-            select *
-            from razon_nodo_indice$crosstab()
-            as fila_matriz_razon (id bigint, version bigint, codigo character varying, nodo bigint, fila integer, dimension integer,
-            c01 integer, c02 integer, c03 integer, c04 integer, c05 integer, c06 integer, c07 integer, c08 integer, c09 integer, c10 integer,
-            c11 integer, c12 integer, c13 integer, c14 integer, c15 integer, c16 integer, c17 integer, c18 integer, c19 integer, c20 integer,
-            claves character varying, etiquetas character varying)
-            order by nodo, fila;
+select *
+from razon_nodo_indice$crosstab()
+as fila_matriz_razon (id bigint, version bigint, codigo character varying, nodo bigint, fila integer, dimension integer,
+c01 integer, c02 integer, c03 integer, c04 integer, c05 integer, c06 integer, c07 integer, c08 integer, c09 integer, c10 integer,
+c11 integer, c12 integer, c13 integer, c14 integer, c15 integer, c16 integer, c17 integer, c18 integer, c19 integer, c20 integer,
+claves character varying, etiquetas character varying)
+order by nodo, fila;
 
 drop function if exists seudo_fila_matriz_razon_instead() cascade;
 create or replace function seudo_fila_matriz_razon_instead() returns trigger as $$
