@@ -46,12 +46,15 @@ begin
         _respuestas := _respuestas + 1;
         _rangos  := case when _pdq.rango_minimo = 0 then _pdq.rango_maximo + 1 else _pdq.rango_maximo end;
         _ordinal := case when _pdq.rango_minimo = 0 then _pdq.rango + 1 else _pdq.rango end;
-        _frecuencia[_ordinal] := _frecuencia[_ordinal] + 1;
+        if _ordinal between 1 and 9 then
+            _frecuencia[_ordinal] := _frecuencia[_ordinal] + 1;
+        end if;
         _suma_n_1 := _suma_n_1 + _pdq.peso * ((_pdq.rango_maximo - _pdq.rango)^2);
         _suma_d_1 := _suma_d_1 + _pdq.peso * ((_pdq.rango_maximo - _pdq.rango_minimo)^2);
         _suma_n_2 := _suma_n_2 + _pdq.peso * _pdq.rango;
         _suma_d_2 := _suma_d_2 + _pdq.peso * _pdq.rango_maximo;
     end loop;
+    _rangos := coalesce(_rangos, 0);
     if _rangos < 9 then
         for i in (_rangos+1)..9 loop
             _frecuencia[i] := null;
