@@ -4,6 +4,9 @@ call variables
 
 setlocal EnableDelayedExpansion
 
+call:copy-dot-project "%project_source_dir%\development\resources\projects\adalid.project"      "%adalid_dir%\.project"
+call:copy-dot-project "%project_source_dir%\development\resources\projects\third-party.project" "%third_party_dir%\.project"
+
 set log0="%~dpn0.log"
 if exist %log0% del %log0%
 
@@ -302,4 +305,17 @@ echo replace "%findstring%" with "%replacestring%" in "%wildcard%"
 echo %replacer% -r "%wildcard%" "%findstring%" "%replacestring%" 1>>%log0% 2>nul
 call %replacer% -r "%wildcard%" "%findstring%" "%replacestring%" 1>>%log0% 2>nul
 echo.>>%log0%
+goto:eof
+
+:copy-dot-project
+if not exist "%~f2" (
+    if exist "%~f1" (
+        if "%USERDOMAIN%" == "JRCG8700" echo %~nx1
+        type "%~f1">"%~f2"
+    )
+)
+if exist "%~f2" if "%USERDOMAIN%" == "JRCG8700" (
+    type "%~f2"
+    echo.
+)
 goto:eof
