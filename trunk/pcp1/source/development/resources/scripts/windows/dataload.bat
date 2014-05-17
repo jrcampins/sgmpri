@@ -1,6 +1,5 @@
 @echo off
 cd /d "%~dp0"
-call xcopy-database
 setlocal
 call variables
 call:set-variables
