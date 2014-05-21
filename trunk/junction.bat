@@ -17,8 +17,13 @@ set source_workspace=%USERPROFILE%\workspace
 call:junction third-party
 if defined does_not_exist goto:eof
 if defined already_exists goto:eof
-set source_workspace=%USERPROFILE%\Projects\adalid\workspace
-call:junction adalid
+if not exist adalid md adalid
+cd adalid
+set source_workspace=%USERPROFILE%\Projects\adalid\workspace\adalid
+call:junction lib
+if defined does_not_exist goto:eof
+if defined already_exists goto:eof
+call:junction source
 if defined does_not_exist goto:eof
 if defined already_exists goto:eof
 echo.
