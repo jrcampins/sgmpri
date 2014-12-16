@@ -15,9 +15,8 @@ import org.apache.commons.collections.ExtendedProperties;
  */
 public class I18NMerger {
 
-    /**
-     * @param args the command line arguments
-     */
+//  add the following line to private.properties file in meta\nbproject\private folder
+//  meta.util.I18NMerger.args=pcp1ap101
     public static void main(String[] args) {
         if (args.length == 0) {
             ExtendedProperties properties = PropertiesGetter.getPrivateProperties();

@@ -79,6 +79,8 @@ public class SQLWriter {
     };
     // </editor-fold>
 
+//  add the following line to private.properties file in meta\nbproject\private folder
+//  meta.util.SQLWriter.args=postgresql, localhost, 5432, postgres, postgres, pcp1ap101, public
     public static void main(String[] args) {
         if (args.length == 0) {
             ExtendedProperties properties = PropertiesGetter.getPrivateProperties();
@@ -89,6 +91,7 @@ public class SQLWriter {
 //          writer.setSelectTemplatesPath("templates/meta/java/sql");
             EntidadesComunes.setAlertLoggingLevel(LoggingLevel.OFF);
             EntidadesComunes entidadesComunes = new EntidadesComunes();
+            entidadesComunes.setUserEntityClass(meta.entidad.comun.control.acceso.Usuario.class);
             if (entidadesComunes.build()) {
                 writer.setTablesExcludeSet(TABLAS_EXCLUIDAS);
                 writer.setTablesInheritMap(entidadesComunes.getTablesMap());

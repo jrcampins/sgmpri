@@ -54,7 +54,12 @@ call %JAVA_EXE% %JAVA_OPTIONS% 1>>%LOG_FILE% 2>&1
 echo.
 set siono=N
 set /p siono="abrir %LOG_FILE% (S/N) ? [%siono%] "
-if /i "%siono%" == "S" start /d %SystemRoot% notepad %LOG_FILE%
+if /i "%siono%" == "S" (
+    start /d %SystemRoot% notepad %LOG_FILE%
+    echo.
+    pause
+)
+echo.
 goto:eof
 
 :add-to-classpath

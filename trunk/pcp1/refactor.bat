@@ -30,6 +30,7 @@ set old_project_code
 set old_project_path=C:\workspace\
 set old_project_path
 call:setNewProjectCode
+if defined bad_project_code goto:eof
 call:setNewProjectPath
 echo.
 if /i "%old_project_path%" == "%new_project_path%" (
@@ -84,7 +85,11 @@ call:replaceOldProjectPath
 echo.
 set yesOrNo=N
 set /p yesOrNo="open log file ? (Y/N) [%yesOrNo%] "
-if /i "%yesOrNo%" == "Y" start /d %SystemRoot% notepad %log0%
+if /i "%yesOrNo%" == "Y" (
+    start /d %SystemRoot% notepad %log0%
+    echo.
+    pause
+)
 echo.
 if exist %bat1% del %bat1%
 if exist %bat2% del %bat2%
@@ -95,6 +100,33 @@ endlocal
 goto:eof
 
 :setNewProjectCode
+set bad_project_code=
+set new_project_code=
+set project_first_character=%project:~0,1%
+call:lcase project_first_character lower_character
+call:ucase project_first_character upper_character
+if "%lower_character%" == "%upper_character%" (
+    echo.
+    echo new project code %project% does not start with a letter
+    set bad_project_code=true
+)
+call:check project invalid_characters
+if not "%invalid_characters%" == "" (
+    echo.
+    echo new project code %project% contains invalid characters
+    set bad_project_code=true
+)
+if /i "%project%" == "workspace" (
+    echo.
+    echo new project code cannot be workspace
+    set bad_project_code=true
+)
+if defined bad_project_code (
+    echo.
+    pause
+    echo.
+    goto:eof
+)
 call:lcase project new_project_code
 set new_project_code
 if not "%project%" == "%new_project_code%" (
@@ -266,6 +298,18 @@ if /i not "%findstring%" == "%replacestring%" (
     call:file-suffix-replacer userlibraries
     call:file-suffix-replacer xml
 )
+goto:eof
+
+:check
+rem Syntax: call :check name1 name2
+rem name1 = NAME of variable whose VALUE is to be checked
+rem name2 = NAME of variable to hold the invalid characters found
+rem Notice: Use variable NAMES in the call, not values (pass "by reference")
+set lcab=a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9
+set lcst=!%1!
+for %%x in (%lcab%) do set lcst=!lcst:%%x= !
+for /f "tokens=* delims= " %%x in ("%lcst%") do set lcst=%%x
+set %2=%lcst%
 goto:eof
 
 :lcase

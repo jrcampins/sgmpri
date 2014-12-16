@@ -8,15 +8,23 @@ package meta.util;
 
 import adalid.commons.enums.LoggingLevel;
 import adalid.commons.properties.PropertiesGetter;
+import adalid.commons.util.FilUtils;
 import adalid.util.sql.SqlMerger;
 import meta.proyecto.comun.ConfiguracionBasica;
 import org.apache.commons.collections.ExtendedProperties;
+import org.apache.log4j.Logger;
 
 /**
  * @author Jorge Campins
  */
 public class SQLMerger {
 
+    private static final Logger logger = Logger.getLogger(SqlMerger.class);
+
+    private static final String FILE_SEPARATOR = System.getProperties().getProperty("file.separator");
+
+//  add the following line to private.properties file in meta\nbproject\private folder
+//  meta.util.SQLMerger.args=postgresql, localhost, 5432, postgres, postgres, pcp1ap101, public, former
     public static void main(String[] args) {
         if (args.length == 0) {
             ExtendedProperties properties = PropertiesGetter.getPrivateProperties();
@@ -24,6 +32,12 @@ public class SQLMerger {
         }
         SqlMerger merger = new SqlMerger(args);
         if (merger.isInitialised()) {
+//          Use method setOldDataFolder to specify the absolute path of the folder used by COPY commands.
+//          By default or by specifying a null value, the folder will be a subfolder of the test folder.
+//          PostgreSQL user must be authorized to read and write files in the specified folder.
+            String folder = defaultOldDataFolder(merger);
+            merger.setOldDataFolder(folder);
+            logger.info("oldDataFolder=" + merger.getOldDataFolder());
             ConfiguracionBasica.setAlertLoggingLevel(LoggingLevel.OFF);
             ConfiguracionBasica configuracionBasica = new ConfiguracionBasica();
             if (configuracionBasica.build()) {
@@ -31,6 +45,17 @@ public class SQLMerger {
                 merger.merge();
             }
         }
+    }
+
+    private static String defaultOldDataFolder(SqlMerger merger) {
+        String folder = FilUtils.getWorkspaceFolderPath();
+        folder += FILE_SEPARATOR + merger.getDatabase();
+        folder += FILE_SEPARATOR + "source";
+        folder += FILE_SEPARATOR + "management";
+        folder += FILE_SEPARATOR + "backup";
+        folder += FILE_SEPARATOR + merger.getDbms();
+        folder += FILE_SEPARATOR + merger.getOldSchema();
+        return folder;
     }
 
 }
