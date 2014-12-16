@@ -25,8 +25,9 @@ echo.
 goto:eof
 
 :make-postgresql-subdirs
-call:make-subdir resources\database\postgresql\custom-made\functions
+call:make-subdir resources\database\postgresql\custom-made
 call:make-subdir resources\database\postgresql\data\custom-made
+call:make-subdir resources\database\postgresql\data-generation\custom-made
 call:make-subdir resources\database\postgresql\data-migration\custom-made
 call:make-subdir resources\database\postgresql\functions\custom-made
 call:make-subdir resources\database\postgresql\sequences\custom-made
@@ -35,11 +36,11 @@ call:make-subdir resources\database\postgresql\triggers\custom-made
 call:make-subdir resources\database\postgresql\util\custom-made
 call:make-subdir resources\database\postgresql\views\custom-made
 call:make-subdir resources\database\postgresql\views\zymurgy\custom-made
+call:make-subdir resources\database\postgresql\wrap-up\custom-made
 goto:eof
 
 :make-jasper-subdirs
-call:make-subdir resources\reporting\jasper\reports\custom-made\resources
-call:make-subdir resources\reporting\jasper\reports\custom-made\subreports\resources
+call:make-subdir resources\reporting\jasper\reports\custom-made
 goto:eof
 
 :make-subdir
